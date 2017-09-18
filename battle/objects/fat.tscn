@@ -1,0 +1,88 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://battle/pics/fat.png" type="Texture" id=1]
+[ext_resource path="res://battle/scripts/fat.gd" type="Script" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 45.9238, 20.2781, 10.8112, -66.5582, 11.7865, -93.3503, 35.1949, -95.3009, 54.7019, -51.4102, 60.554, 16.3767 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 42.5101, 61.7305, -9.18352, 92.9116, -59.9017, 92.424, -67.7046, 62.1881, -48.6852, 38.7797, 45.9238, 20.2781, 74.209, 40.7605 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 54.7019, -51.4102, 76.6473, -37.2676, 60.554, 16.3767 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -71.606, 22.6864, -70.1429, -24.6181, 10.8112, -66.5582, 45.9238, 20.2781, -56.488, 28.0508 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -48.6852, 38.7797, -56.488, 28.0508, 45.9238, 20.2781 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 42.5101, 61.7305, 74.209, 40.7605, 65.4308, 70.9963, 45.9238, 70.021 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 45.9238, 70.021, 65.4308, 70.9963, 65.4308, 70.9963 )
+
+[node name="fat" type="Sprite"]
+
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+flippy = false
+walky = false
+health = 50
+
+[node name="hitbox" type="Area2D" parent="."]
+
+visibility/visible = false
+material/use_parent = true
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 3 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 4 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 5 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 6 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+shapes/6/shape = SubResource( 7 )
+shapes/6/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/6/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hitbox"]
+
+visibility/behind_parent = true
+build_mode = 0
+polygon = Vector2Array( -9.18352, 92.9116, -59.9017, 92.424, -67.7046, 62.1881, -48.6852, 38.7797, -56.488, 28.0508, -71.606, 22.6864, -70.1429, -24.6181, 10.8112, -66.5582, 11.7865, -93.3503, 35.1949, -95.3009, 54.7019, -51.4102, 76.6473, -37.2676, 60.554, 16.3767, 45.9238, 20.2781, 74.209, 40.7605, 65.4308, 70.9963, 65.4308, 70.9963, 45.9238, 70.021, 42.5101, 61.7305 )
+shape_range = Vector2( 0, 6 )
+trigger = false
+
+

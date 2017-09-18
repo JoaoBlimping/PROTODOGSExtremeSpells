@@ -1,0 +1,80 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://menu/pics/background.png" type="Texture" id=1]
+[ext_resource path="res://menu/scripts/gameover.gd" type="Script" id=2]
+
+[node name="gameover" type="Sprite"]
+
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 1024, 600 )
+
+[node name="Panel" type="Panel" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 654.0
+margin/top = 344.0
+margin/right = 916.0
+margin/bottom = 518.0
+
+[node name="Button" type="Button" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 132.0
+margin/top = 65.0
+margin/right = 251.0
+margin/bottom = 153.0
+disabled = true
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Try Again"
+flat = false
+script/script = ExtResource( 2 )
+
+[node name="CheckBox" type="CheckBox" parent="Panel/Button"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = -108.0
+margin/top = 20.0
+margin/right = -44.0
+margin/bottom = 43.0
+toggle_mode = true
+enabled_focus_mode = 2
+shortcut = null
+text = "I suck"
+flat = false
+align = 0
+
+[node name="Label" type="Label" parent="Panel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 18.0
+margin/top = 5.0
+margin/right = 251.0
+margin/bottom = 56.0
+text = "Game Over
+Tick the box to acknowledge that you suck before trying again"
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="button_down" from="Panel/Button" to="Panel/Button" method="_on_Button_button_down"]
+
+[connection signal="toggled" from="Panel/Button/CheckBox" to="Panel/Button" method="_on_CheckBox_toggled"]
+
+
