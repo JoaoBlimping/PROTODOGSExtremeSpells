@@ -1,0 +1,26 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://things/theme.tres" type="Theme" id=1]
+[ext_resource path="res://pool/pics/pissBar.png" type="Texture" id=2]
+
+[node name="piss" type="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 160.0
+margin/bottom = 53.0
+
+[node name="bar" type="Sprite" parent="."]
+
+transform/pos = Vector2( 19.4121, 19.0886 )
+texture = ExtResource( 2 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 120, 16 )
+
+

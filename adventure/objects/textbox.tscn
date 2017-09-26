@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://things/theme.tres" type="Theme" id=1]
+[ext_resource path="res://adventure/scripts/guiElement.gd" type="Script" id=2]
+
+[node name="textbox" type="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 279.0
+margin/top = 413.0
+margin/right = 731.0
+margin/bottom = 585.0
+script/script = ExtResource( 2 )
+
+[node name="text" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 31.0
+margin/top = 38.0
+margin/right = 440.0
+margin/bottom = 145.0
+text = "Hello there,
+My name is Dany Burton, and in accordance with popular opinion, I am the greatest in the damn world.
+If you disagree, feel free to kill yourself
+Kindest Regards,
+Dany Burton"
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="next" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 174.0
+margin/top = 148.0
+margin/right = 252.0
+margin/bottom = 177.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "..."
+flat = false
+
+[node name="name" type="Label" parent="."]
+
+rect/scale = Vector2( 1.2, 1.2 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 24.0
+margin/top = 20.0
+margin/right = 126.0
+margin/bottom = 34.0
+text = "Purple Hat Man:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="pressed" from="next" to="." method="destroy" binds= [ "" ]]
+
+

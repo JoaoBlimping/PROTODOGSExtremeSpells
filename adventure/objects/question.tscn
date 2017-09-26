@@ -1,0 +1,122 @@
+[gd_scene load_steps=3 format=1]
+
+[ext_resource path="res://things/theme.tres" type="Theme" id=1]
+[ext_resource path="res://adventure/scripts/guiElement.gd" type="Script" id=2]
+
+[node name="textbox" type="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+theme/theme = ExtResource( 1 )
+margin/left = 279.0
+margin/top = 413.0
+margin/right = 731.0
+margin/bottom = 585.0
+script/script = ExtResource( 2 )
+
+[node name="text" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 33.0
+margin/top = 35.0
+margin/right = 451.0
+margin/bottom = 73.0
+text = "What is your blood type?"
+autowrap = true
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[node name="a" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 23.0
+margin/top = 73.0
+margin/right = 230.0
+margin/bottom = 102.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "..."
+flat = false
+
+[node name="c" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 24.0
+margin/top = 120.0
+margin/right = 228.0
+margin/bottom = 149.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "..."
+flat = false
+
+[node name="b" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 249.0
+margin/top = 73.0
+margin/right = 427.0
+margin/bottom = 102.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "..."
+flat = false
+
+[node name="d" type="Button" parent="."]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 250.0
+margin/top = 120.0
+margin/right = 424.0
+margin/bottom = 149.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "..."
+flat = false
+
+[node name="name" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 26.0
+margin/top = 19.0
+margin/right = 128.0
+margin/bottom = 33.0
+text = "Purple Hat Man:"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="pressed" from="a" to="." method="destroy" binds= [ "a" ]]
+
+[connection signal="pressed" from="c" to="." method="destroy" binds= [ "b" ]]
+
+[connection signal="pressed" from="b" to="." method="destroy" binds= [ "c" ]]
+
+[connection signal="pressed" from="d" to="." method="destroy" binds= [ "d" ]]
+
+

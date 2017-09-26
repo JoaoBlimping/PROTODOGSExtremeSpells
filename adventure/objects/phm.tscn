@@ -1,0 +1,77 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=1]
+[ext_resource path="res://adventure/pics/phm.png" type="Texture" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 75.1526, -9.70184, 76.6157, 86.8579, 52.2319, 25.8985 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -51.643, 82.9565, -78.9528, 143.428, -82.3665, 44.9178 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -26.7715, -84.3162, 35.6509, -196.969, 54.1826, -58.4694, -42.8648, -15.5539 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 15.6562, 146.842, -12.1413, 189.758, -49.2046, 191.708, -24.8208, 93.6854, 52.2319, 25.8985 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -82.3665, 44.9178, -42.8648, -15.5539, 54.1826, -58.4694, 75.1526, -9.70184, 52.2319, 25.8985, -24.8208, 93.6854, -51.643, 82.9565 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 52.2319, 25.8985, 72.2266, 187.807, 43.4537, 194.634, 15.6562, 146.842 )
+
+[node name="phm" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 3 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 4 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 5 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 6 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+realName = "Purple Hat Man"
+autorun = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( -26.7715, -84.3162, 35.6509, -196.969, 54.1826, -58.4694, 75.1526, -9.70184, 76.6157, 86.8579, 52.2319, 25.8985, 72.2266, 187.807, 43.4537, 194.634, 15.6562, 146.842, -12.1413, 189.758, -49.2046, 191.708, -24.8208, 93.6854, -51.643, 82.9565, -78.9528, 143.428, -82.3665, 44.9178, -42.8648, -15.5539 )
+shape_range = Vector2( 0, 5 )
+trigger = false
+
+[node name="sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+hframes = 2
+
+

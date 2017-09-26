@@ -1,0 +1,69 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://pool/pics/mod.png" type="Texture" id=1]
+[ext_resource path="res://pool/pics/mod2.png" type="Texture" id=2]
+[ext_resource path="res://pool/pics/mod3.png" type="Texture" id=3]
+[ext_resource path="res://pool/pics/mod4.png" type="Texture" id=4]
+[ext_resource path="res://pool/objects/fogle.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../scripts/pool.gd\"
+
+onready var bather = load(\"res://pool/objects/bather.tscn\")
+var timer = 1
+var counter = 0
+
+func _ready():
+	set_process(true)
+
+func _process(delta):
+	timer -= delta
+	if (timer <= 0):
+		counter += 1
+		timer += 1 -  counter / 20
+		for i in range(counter):
+			var ib = bather.instance()
+			var bounds = get_viewport().get_rect().size
+			var pos = Vector2(randf() * bounds.x,0)
+			ib.set_pos(pos)
+			add_child(ib)
+		if (counter > 7): counter = 0
+		
+		
+		
+	
+"
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[node name="pool" type="Node2D"]
+
+script/script = SubResource( 1 )
+requirement = 50
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+transform/scale = Vector2( 2.05282, 1.51332 )
+frames = SubResource( 2 )
+animation = "default"
+playing = true
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="fogle" parent="." instance=ExtResource( 5 )]
+
+[node name="fiends" type="Node2D" parent="."]
+
+[node name="piss" type="Node2D" parent="."]
+
+

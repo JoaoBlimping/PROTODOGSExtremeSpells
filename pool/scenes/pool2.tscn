@@ -1,0 +1,46 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://pool/pics/mod.png" type="Texture" id=1]
+[ext_resource path="res://pool/objects/fogle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://pool/pics/bather2.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../scripts/pool.gd\"
+
+func _ready():
+	set_process(true)
+
+func _process(delta):
+	pass
+		
+		
+		
+	
+"
+
+[node name="pool" type="Node2D"]
+
+script/script = SubResource( 1 )
+requirement = 50
+
+[node name="mod" type="Sprite" parent="."]
+
+transform/scale = Vector2( 2.05282, 1.51332 )
+texture = ExtResource( 1 )
+centered = false
+region_rect = Rect2( 0, 0, 1024, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="fogle" parent="." instance=ExtResource( 2 )]
+
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="cloner" type="Sprite" parent="enemies"]
+
+transform/pos = Vector2( 455.493, 105.586 )
+texture = ExtResource( 3 )
+
+

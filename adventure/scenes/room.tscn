@@ -1,0 +1,215 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://adventure/pics/blueRoom.png" type="Texture" id=1]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=2]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=3]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/scripts/item.gd" type="Script" id=5]
+[ext_resource path="res://adventure/pics/key.png" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../scripts/room.gd\"
+
+onready var global = get_node(\"/root/global\")
+
+func phm():
+	say(\"you are\\na fool\");yield()
+	say(\"I'm not joking, I will kill you\");yield()
+	
+	ask(\"do you think I am joking?\",\"yeah\",\"nah\");yield()
+	if (value == \"a\"):
+		pose(ANGRY)
+		say(\"idiot\");yield()
+		pose(NORMAL)
+	else: say(\"correct\")
+	
+	
+func aini():
+	say(\"It's time for piss.\\nGet in the bath.\");yield()
+	say(\"If you go out and come back I will be gone.\\nAs a test\");yield()
+	global.setSwitch(\"ainiGo\",true)
+
+
+func vase():
+	pose(ANGRY,\"phm\")
+	say(\"Don't FUCKING TOUCH THAT\",\"phm\");yield()
+	pose(ANGRY,\"aini\")
+	say(\"STOP YELLING\",\"aini\");yield()
+	pose(NORMAL,\"aini\")
+	say(\"That's it!\\nIt's time to battle!\",\"phm\");yield()
+	get_tree().change_scene(\"res://battle/scenes/test.tscn\")
+
+
+func door():
+	if (global.getSwitch(\"Extreme Key\")):
+		global.setSwitch(\"Extreme Key\",false)
+		say(\"You unlock the door!\\nHowever, the key snaps and is no good\");yield()
+		global.drive(\"level\",\"kempsey\")
+	else:
+		say(\"Locked.\");yield()
+
+func window():
+	say(\"Escaping through the window?\\nGood idea!\",\"phm\");yield()
+	global.drive(\"level\",\"kempsey\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -13.6263, -20.6667, 23.8635, -19.9316, 18.7179, -10.3754, -9.95078, -11.1105 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 18.7179, -10.3754, 29.7443, 24.909, 4.7511, 50.6373, -23.1825, 19.7634, -9.95078, -11.1105 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -12.3758, -129.666, 52.3124, -134.812, 8.94196, 168.046, -66.7726, 113.649 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 0.578003, -6.92606, 5.35242, -8.11969, 7.39862, -3.68628, 0.663208, 8.84662, -7.69202, 4.58371 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -74.0359, -53.3749, 59.751, -51.1696, 66.3669, 59.8295, -45.3673, 63.505 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+[node name="phm" parent="actives" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 361.038, 384.036 )
+birthSwitch = null
+deathSwitch = null
+
+[node name="vase" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 511.967, 300.796 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 3 )
+realName = "Inanimate Object"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/vase"]
+
+build_mode = 0
+polygon = Vector2Array( -13.6263, -20.6667, 23.8635, -19.9316, 18.7179, -10.3754, 29.7443, 24.909, 4.7511, 50.6373, -23.1825, 19.7634, -9.95078, -11.1105 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="door" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 944.132, 384.282 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 3 )
+realName = "Door"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/door"]
+
+build_mode = 0
+polygon = Vector2Array( -12.3758, -129.666, 52.3124, -134.812, 8.94196, 168.046, -66.7726, 113.649 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="aini" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 724.65, 406.429 )
+birthSwitch = null
+deathSwitch = "ainiGo"
+
+[node name="key" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 572.046, 334.434 )
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 5 )
+realName = "Extreme Key"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/key"]
+
+build_mode = 0
+polygon = Vector2Array( -7.69202, 4.58371, 0.663208, 8.84662, 7.39862, -3.68628, 5.35242, -8.11969, 0.578003, -6.92606 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/key"]
+
+texture = ExtResource( 6 )
+
+[node name="window" type="Area2D" parent="actives"]
+
+transform/pos = Vector2( 377.838, 168.336 )
+input/pickable = true
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 3 )
+realName = "Window"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/window"]
+
+build_mode = 0
+polygon = Vector2Array( -74.0359, -53.3749, 59.751, -51.1696, 66.3669, 59.8295, -45.3673, 63.505 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="gui" type="Node2D" parent="."]
+
+

@@ -1,17 +1,23 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://overworld/scripts/bus.gd" type="Script" id=1]
 [ext_resource path="res://overworld/pics/topBus.png" type="Texture" id=2]
+[ext_resource path="res://overworld/pics/blade.png" type="Texture" id=3]
+[ext_resource path="res://overworld/pics/blood.png" type="Texture" id=4]
+[ext_resource path="res://overworld/pics/compass.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 13.2435, 39.2434 )
 
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -0.446365, -1.09467, 97.2683, -19.3665, 90.9129, -0.697456 )
+
 [node name="bus" type="RigidBody2D"]
 
-editor/display_folded = true
-transform/pos = Vector2( 5534.09, 681.238 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 0.883702, 0, -4.91284 )
@@ -47,7 +53,7 @@ shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="camera" type="Camera2D" parent="."]
 
 anchor_mode = 1
 rotating = true
@@ -55,8 +61,8 @@ current = true
 zoom = Vector2( 1, 1 )
 limit/left = 0
 limit/top = 0
-limit/right = 10000000
-limit/bottom = 10000000
+limit/right = 0
+limit/bottom = 0
 drag_margin/h_enabled = false
 drag_margin/v_enabled = false
 smoothing/enable = false
@@ -65,5 +71,84 @@ drag_margin/left = 0.2
 drag_margin/top = 0.2
 drag_margin/right = 0.2
 drag_margin/bottom = 0.2
+
+[node name="blade" type="StaticBody2D" parent="."]
+
+editor/display_folded = true
+transform/rot = 139.559
+transform/scale = Vector2( 1.6, 1 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 0
+collision/mask = 2
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="Sprite" type="Sprite" parent="blade"]
+
+texture = ExtResource( 3 )
+offset = Vector2( 48.5093, -9.40966 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="blade"]
+
+build_mode = 0
+polygon = Vector2Array( -0.446365, -1.09467, 97.2683, -19.3665, 90.9129, -0.697456 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="particle" type="Particles2D" parent="blade"]
+
+transform/pos = Vector2( 68.0655, -8.17393 )
+config/amount = 30
+config/lifetime = 0.5
+config/emit_timeout = 0.4
+config/emitting = false
+config/process_mode = 1
+config/half_extents = Vector2( 30, 10 )
+config/local_space = false
+config/texture = ExtResource( 4 )
+config/h_frames = 3
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 30.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+
+[node name="compass" type="Sprite" parent="."]
+
+transform/pos = Vector2( 95.9014, -48.1869 )
+texture = ExtResource( 5 )
+offset = Vector2( 0.849167, 0.490135 )
+
+[node name="kills" type="Label" parent="."]
+
+rect/rotation = 0.263962
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -329.0
+margin/top = -188.0
+margin/right = -289.0
+margin/bottom = -174.0
+text = "100"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 

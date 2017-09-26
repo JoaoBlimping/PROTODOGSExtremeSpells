@@ -1,0 +1,74 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://pool/pics/fogle.png" type="Texture" id=1]
+[ext_resource path="res://pool/scripts/player.gd" type="Script" id=2]
+[ext_resource path="res://pool/sounds/fuck.wav" type="Sample" id=3]
+[ext_resource path="res://pool/sounds/pisse.wav" type="Sample" id=4]
+
+[sub_resource type="CircleShape2D" id=1]
+
+custom_solver_bias = 0.0
+radius = 15.2374
+
+[sub_resource type="SampleLibrary" id=2]
+
+samples/fuck = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 1,
+"sample": ExtResource( 3 )
+}
+samples/pisse = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+
+[node name="fogle" type="Sprite"]
+
+transform/pos = Vector2( 512.734, 299.918 )
+transform/scale = Vector2( 0.7, 0.7 )
+texture = ExtResource( 1 )
+offset = Vector2( -2.54869, 38.5311 )
+script/script = ExtResource( 2 )
+
+[node name="body" type="Area2D" parent="."]
+
+transform/pos = Vector2( 1.01923, -8.83362 )
+transform/scale = Vector2( 1.42857, 1.42857 )
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionShape2D" parent="body"]
+
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
+
+[node name="sound" type="SamplePlayer" parent="."]
+
+config/polyphony = 2
+config/samples = SubResource( 2 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[connection signal="body_enter" from="body" to="." method="_on_body_body_enter"]
+
+
