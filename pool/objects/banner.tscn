@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://pool/pics/winBanner.png" type="Texture" id=1]
+
+[node name="winBanner" type="Sprite"]
+
+transform/pos = Vector2( 458.686, 201.624 )
+texture = ExtResource( 1 )
+
+

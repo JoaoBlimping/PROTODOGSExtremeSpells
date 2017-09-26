@@ -41,7 +41,7 @@ animations = [ {
 "frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
-"speed": 8.0
+"speed": 10.0
 } ]
 
 [node name="pool" type="Node2D"]
@@ -54,6 +54,7 @@ requirement = 50
 transform/scale = Vector2( 2.05282, 1.51332 )
 frames = SubResource( 2 )
 animation = "default"
+frame = 3
 playing = true
 centered = false
 __meta__ = {
