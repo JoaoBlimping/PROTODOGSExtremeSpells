@@ -32,13 +32,16 @@ func aini():
 
 
 func vase():
-	pose(ANGRY,\"phm\")
-	say(\"Don't FUCKING TOUCH THAT\",\"phm\");yield()
-	pose(ANGRY,\"aini\")
-	say(\"STOP YELLING\",\"aini\");yield()
-	pose(NORMAL,\"aini\")
-	say(\"That's it!\\nIt's time to battle!\",\"phm\");yield()
-	get_tree().change_scene(\"res://battle/scenes/test.tscn\")
+	if (global.battled(\"test\")):
+		say(\"Don't start this shit again.\",\"phm\");yield()
+	else:
+		pose(ANGRY,\"phm\")
+		say(\"Don't FUCKING TOUCH THAT\",\"phm\");yield()
+		pose(ANGRY,\"aini\")
+		say(\"STOP YELLING\",\"aini\");yield()
+		pose(NORMAL,\"aini\")
+		say(\"That's it!\\nIt's time to battle!\",\"phm\");yield()
+		global.battle(\"test\")
 
 
 func door():
@@ -91,6 +94,10 @@ __meta__ = {
 }
 
 [node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="phm" parent="actives" instance=ExtResource( 2 )]
 
@@ -188,6 +195,7 @@ texture = ExtResource( 6 )
 
 [node name="window" type="Area2D" parent="actives"]
 
+editor/display_folded = true
 transform/pos = Vector2( 377.838, 168.336 )
 input/pickable = true
 shapes/0/shape = SubResource( 6 )
@@ -210,6 +218,16 @@ polygon = Vector2Array( -74.0359, -53.3749, 59.751, -51.1696, 66.3669, 59.8295, 
 shape_range = Vector2( 0, 0 )
 trigger = false
 
+[node name="crap" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
 [node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
 
 

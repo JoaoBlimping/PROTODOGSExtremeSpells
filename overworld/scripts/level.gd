@@ -5,7 +5,7 @@ onready var sound = get_node("sound")
 onready var tint = get_node("tint")
 onready var player = get_node("bus")
 onready var signs = get_node("signs").get_children()
-onready var car = load("res://overworld/objects/bug.tscn")
+onready var bugs = [preload("res://overworld/objects/bug1.tscn"),preload("res://overworld/objects/bug2.tscn")]
 
 const talkFile = "res://overworld/songs/radio%d.ogg"
 const songFile = "res://overworld/songs/song%d.ogg"
@@ -32,7 +32,7 @@ func _ready():
 	#add cars
 	var bounds = get_node("ground").get_region_rect()
 	for c in range(N_FIENDS):
-		var ib = car.instance()
+		var ib = bugs[randi() % 2].instance()
 		var angle = randf() * PI * 2
 		ib.set_pos(Vector2(randf() * bounds.size.x,randf() * bounds.size.y))
 		add_child(ib)
@@ -61,10 +61,11 @@ func _process(delta):
 
 func play():
 	if (talking):
-		var num = (randi() % talks) + 1
+		var num = (randi() % songs) + 1
+		print(num)
 		radio.set_stream(load(songFile % num))
 	else:
-		var num = (randi() % songs) + 1
+		var num = (randi() % talks) + 1
 		radio.set_stream(load(talkFile % num))
 	talking = !talking
 	radio.play()

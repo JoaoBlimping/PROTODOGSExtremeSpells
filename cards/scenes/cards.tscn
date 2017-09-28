@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://cards/pics/felt.png" type="Texture" id=1]
+[ext_resource path="res://cards/pics/fish2.png" type="Texture" id=2]
+[ext_resource path="res://cards/pics/fish7.png" type="Texture" id=3]
+[ext_resource path="res://cards/pics/fish9.png" type="Texture" id=4]
+[ext_resource path="res://cards/pics/fish4.png" type="Texture" id=5]
+[ext_resource path="res://cards/pics/back.png" type="Texture" id=6]
+[ext_resource path="res://cards/pics/fish5.png" type="Texture" id=7]
+
+[node name="cards" type="Node2D"]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="felt" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 1024, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="fish2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 75.3888, 501.183 )
+texture = ExtResource( 2 )
+
+[node name="fish7" type="Sprite" parent="."]
+
+transform/pos = Vector2( 194.469, 504.197 )
+texture = ExtResource( 3 )
+
+[node name="fish9" type="Sprite" parent="."]
+
+transform/pos = Vector2( 431.122, 508.719 )
+texture = ExtResource( 4 )
+
+[node name="fish4" type="Sprite" parent="."]
+
+transform/pos = Vector2( 451.699, 296.426 )
+texture = ExtResource( 5 )
+
+[node name="back" type="Sprite" parent="."]
+
+transform/pos = Vector2( 563.242, 299.441 )
+texture = ExtResource( 6 )
+
+[node name="back1" type="Sprite" parent="."]
+
+transform/pos = Vector2( 586.625, 94.0075 )
+texture = ExtResource( 6 )
+
+[node name="back2" type="Sprite" parent="."]
+
+transform/pos = Vector2( 715.229, 92.3373 )
+texture = ExtResource( 6 )
+
+[node name="back3" type="Sprite" parent="."]
+
+transform/pos = Vector2( 842.164, 88.997 )
+texture = ExtResource( 6 )
+
+[node name="back4" type="Sprite" parent="."]
+
+transform/pos = Vector2( 957.407, 90.6671 )
+texture = ExtResource( 6 )
+
+[node name="fish5" type="Sprite" parent="."]
+
+transform/pos = Vector2( 310.535, 507.212 )
+texture = ExtResource( 7 )
+
+

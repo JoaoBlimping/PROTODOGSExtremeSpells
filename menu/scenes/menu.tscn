@@ -1,8 +1,32 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://menu/pics/tile.png" type="Texture" id=1]
 [ext_resource path="res://menu/pics/title.png" type="Texture" id=2]
 [ext_resource path="res://things/theme.tres" type="Theme" id=3]
+[ext_resource path="res://menu/songs/theme.ogg" type="AudioStream" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Sprite
+
+onready var global = get_node(\"/root/global\")
+
+
+func newGame():
+	global.enterAdventure(\"pyramid\")
+
+
+func oldGame():
+	pass # replace with function body
+
+
+func instructions():
+	get_tree().change_scene(\"res://menu/scenes/instructions.tscn\")
+
+
+func quit():
+	get_tree().quit()
+"
 
 [node name="back" type="Sprite"]
 
@@ -10,6 +34,7 @@ texture = ExtResource( 1 )
 centered = false
 region = true
 region_rect = Rect2( 0, 0, 1024, 600 )
+script/script = SubResource( 1 )
 
 [node name="title" type="Sprite" parent="."]
 
@@ -19,6 +44,7 @@ centered = false
 
 [node name="Panel" type="Panel" parent="."]
 
+editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
@@ -92,5 +118,24 @@ enabled_focus_mode = 2
 shortcut = null
 text = "Quit"
 flat = false
+
+[node name="StreamPlayer" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 4 )
+stream/play = false
+stream/loop = true
+stream/volume_db = 0.0
+stream/autoplay = true
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
+[connection signal="button_down" from="Panel/Button" to="." method="newGame"]
+
+[connection signal="button_down" from="Panel/Button1" to="." method="oldGame"]
+
+[connection signal="button_down" from="Panel/Button2" to="." method="instructions"]
+
+[connection signal="button_down" from="Panel/Button3" to="." method="quit"]
 
 

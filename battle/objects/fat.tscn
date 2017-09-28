@@ -38,13 +38,14 @@ points = Vector2Array( 42.5101, 61.7305, 74.209, 40.7605, 65.4308, 70.9963, 45.9
 custom_solver_bias = 0.0
 points = Vector2Array( 45.9238, 70.021, 65.4308, 70.9963, 65.4308, 70.9963 )
 
-[node name="fat" type="Sprite"]
+[node name="fat" type="Sprite" groups=[
+"target",
+]]
 
 texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
 flippy = false
 walky = false
-health = 50
 
 [node name="hitbox" type="Area2D" parent="."]
 

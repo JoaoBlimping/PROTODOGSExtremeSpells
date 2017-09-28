@@ -61,6 +61,8 @@ angular_damp = 1.0
 script/script = ExtResource( 1 )
 realName = "Purple Hat Man"
 autorun = false
+birthSwitch = null
+deathSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 

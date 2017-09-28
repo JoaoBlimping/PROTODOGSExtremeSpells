@@ -102,7 +102,6 @@ bounce = 0.0
 
 [node name="collision1" type="CollisionPolygon2D" parent="otherBody"]
 
-transform/scale = Vector2( 1, 1 )
 build_mode = 0
 polygon = Vector2Array( -79.9054, 23.5796, -57.5061, 47.033, -21.4037, 27.0054, 21.0233, 42.8167, 72.1464, 15.674, 78.4709, -26.2259, 61.342, -49.4158, 34.1993, -46.5171, 25.5031, -24.6448, -5.59238, -25.1718, -27.4647, 0.65329, -64.6212, 22.262 )
 shape_range = Vector2( 0, 3 )

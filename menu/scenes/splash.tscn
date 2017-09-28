@@ -1,0 +1,65 @@
+[gd_scene load_steps=4 format=1]
+
+[ext_resource path="res://menu/videos/splash.ogm" type="VideoStream" id=1]
+[ext_resource path="res://menu/pics/logo.png" type="Texture" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends VideoPlayer
+
+onready var eel = get_node(\"eel\")
+
+
+func _ready():
+	set_process(true)
+
+func _process(delta):
+	eel.rotate(delta)
+	if (!is_playing()): get_tree().change_scene(\"res://menu/scenes/menu.tscn\")
+"
+
+[node name="VideoPlayer" type="VideoPlayer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 1024.0
+margin/bottom = 601.0
+stream/audio_track = 0
+stream/stream = ExtResource( 1 )
+stream/volume_db = 0.0
+stream/autoplay = true
+stream/paused = false
+expand = true
+script/script = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="eel" type="Sprite" parent="."]
+
+visibility/blend_mode = 1
+transform/pos = Vector2( 266.209, 273.936 )
+texture = ExtResource( 2 )
+
+[node name="Label" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 235.0
+margin/top = 547.0
+margin/right = 670.0
+margin/bottom = 595.0
+text = "The fun never ends!
+Wipe on over to http://www.danyburton.net for more wonderful content.
+100% endorsed and funded by the Australian Government, Canberra"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+

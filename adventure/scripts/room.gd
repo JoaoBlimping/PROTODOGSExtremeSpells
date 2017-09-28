@@ -35,7 +35,7 @@ func getActive(name):
 
 func pose(n,name = null):
 	var owner = getActive(name)
-	owner.get_node("sprite").set_frame(n)
+	if (owner != null): owner.get_node("sprite").set_frame(n)
 
 func give(item):
 	get_node("/root/global").setSwitch(item,true)
@@ -43,7 +43,9 @@ func give(item):
 
 func say(text,name = null):
 	var ib = textbox.instance()
-	ib.get_node("name").set_text(getActive(name).realName)
+	var active = getActive(name)
+	if (active == null): return
+	ib.get_node("name").set_text(active.realName)
 	ib.get_node("text").set_text(text)
 	guiNode.add_child(ib)
 	gui = true

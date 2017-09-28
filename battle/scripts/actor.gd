@@ -27,6 +27,8 @@ func _process(delta):
 	if (activity.size() == 0):
 		if (routines.size() == 0):
 			queue_free()
+			if (is_in_group("target")):
+				get_node("/root/global").finishBattle()
 		else:
 			activity.push_front(call(routines[0]))
 			routines.pop_front()
