@@ -1,9 +1,20 @@
 # League of Scumbags A: PROTODOGS Extreme Spells
 
-## Storyline of the Game
+## Little Details about the game
+
+The moral of the story is that you need to figure out how to go hyper power at will.
+
+## Things yet to be added
+
+- proper inventory that lets you open it up and use items, to open it in adventure mode you will have to press right click / shift, and then select the item from a list. Normal items like keys and situational shit will not go into your inventory
+- record some like minute long radio segments where I just talk about complete shit.
+
+## Main Story
+
 You wake up in the middle of the night in this random room and PHM and Aini are standing there, and the phm is like
 ```
-alright it's time to get out of this hell hole, the cops have stopped patrolling the streets for some reason.
+Oi! it's time to get out of this hell hole, the cops have stopped
+patrolling the streets for some reason.
 I can't wait to get out of this fucking dump.
 Thanks for letting us stay here though, Travongle
 ```
@@ -42,7 +53,7 @@ Well stealing a car does sound pretty fun,
 we'll just have to actually find one.
 ```
 
-Ok, you are now free to click around. basically you just have to go to the back yard, then go through a hole in the fence to get to the special ed school, then steal their bus.
+**Ok, you are now free to click around. basically you just have to go to the back yard, then go through a hole in the fence to get to the special ed school, then steal their bus.**
 
 Before you leave, travongle says
 
@@ -50,27 +61,36 @@ Before you leave, travongle says
 Alright, to get out to the bush we just want to take the road west, once we get out to the bush I can give you closer directions.
 ```
 
+**Driving bit where you only have the choice of driving to the bush**
 
+Ok so now you have gotten to the encampment of the alains, and there are a couple hanging around but basically they all just say that you've gotta go speak to the cheif in the main hut.
 
-You are in now
+Once you go in there he starts talking
 
+```
+you've put us all in a lot of danger coming here like this.
+We know something is happening here in the bush. At the very least you could tell us what it is.
+```
 
+phm says ```something's happening?```
+```I guess we noticed all the cops are gone, is it related to that?```
 
+The chief says:
 
+```
+Oh, I guess so, we know nothing about that though.
+Well you know since you're putting out on a limb hard
+coming out here, I think you can check it out for us.
+```
 
-A: PROTO DOGS extreme spell
-This one proceeds from the original.
+```
+I sense it coming from the south. There's a fire trail you
+can follow down to about the right spot.
+```
 
-the moral of the game is that you need to learn to turn into a
-dog.
+```see you```
 
-storyline:
-After the pyramid you would expect a lot of cops to be around, but oddly enough, there are none. So what is going on you ask?
-apparantly they are busy on something more important.
-in a back alley you meet this dirty hippie who invites you to his house and you hang out and he says about how there are some alains out in the bush who know what's up, but by this point there are a couple of cops around, so you have to engage in a master plan.
-Just behind this dude's house a ways there is a bus depot, and you must break into the bus depot and quickly steal one of the buses without anybody catching you. (if the alarm gets raised then maybe it just means there'll be more cops in the next section.
-
-ok you now enter driving mode and you are driving around in the scumbag mobile. I think what this will consist of is driving around at ridiculous speed avoiding police cars and running destroying various things like rubbish bins and stuff
+Ok then you can leave and now when you talk to the village people they say other stuff and maybe one of them gives you a shitty book where you can mark down all of the animals you've run over.
 
 ok so anyway you get to the alain village in the bush and they say you should go see the cheif but you can talk to all the people there also (they just talk a bit of trash and imply there is heavy shit going on) so you go see the leader of the alains and he says that there is serious stuff going on outside the village according to his antennas and you should go check it out now, and he also sends an alain named Katarom with you.
 
@@ -106,7 +126,6 @@ what happens in bellingen:
 
 what happens in agara:
 
-
 each town will have some fun activities beside their battles and shit:
 in kempsey your hotel has a pool and you can do a cool swimming minigame where there are a lot of women in bikinis and you have to piss on them sneakily
 in bellingen you can do a cool curing cancer minigame
@@ -114,15 +133,6 @@ in agara you have to hide in your room so I'll make sure you can enjoy plenty of
 
 
 
-never mention the cicada at all, just don't go there
+## Side Quests
 
-
-
-
-
-
-
-
-```
-
-```
+### 
