@@ -2,7 +2,9 @@ extends Node
 
 onready var textbox = preload("res://adventure/objects/textbox.tscn")
 onready var question = preload("res://adventure/objects/question.tscn")
+onready var inventory = preload("res://adventure/objects/inventory.tscn")
 onready var guiNode = get_node("gui")
+onready var global = get_node("/root/global")
 
 const NORMAL = 0
 const ANGRY = 1
@@ -14,6 +16,7 @@ var value = null
 
 func _ready():
 	set_process(true)
+	set_process_input(true)
 
 func _process(delta):
 	if (!gui && running != null):
@@ -22,17 +25,24 @@ func _process(delta):
 		else:
 			running = null
 
+func _input(event):
+	if (event.is_action_pressed("ui_select") && !gui):
+		var ib = inventory.instance()
+		guiNode.add_child(ib)
+		gui = true
+
 func run(code,owner):
 	caller = owner
 	running = call(code)
-
 
 func getActive(name):
 	if (name != null):
 		return get_node("actives/%s" % name)
 	return caller
-	
 
+##########################################################################################
+######################## Functions for using in script ###################################
+##########################################################################################
 func pose(n,name = null):
 	var owner = getActive(name)
 	if (owner != null): owner.get_node("sprite").set_frame(n)
@@ -64,4 +74,9 @@ func ask(text,a1,a2,a3 = null,a4 = null,name = null):
 	else: ib.get_node("d").set_text(a4)
 	guiNode.add_child(ib)
 	gui = true
-	
+
+##########################################################################################
+############################### Item Functions ###########################################
+##########################################################################################
+func bag_of_piss():
+	say("ok it's working so far");yield()

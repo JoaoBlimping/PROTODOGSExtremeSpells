@@ -1,5 +1,6 @@
 extends Node
 
+var inventory = []
 var switches = {}
 var town = null
 var area = null
@@ -19,6 +20,12 @@ func getSwitch(name):
 
 func hasSwitch(name):
 	return switches.has(name)
+
+func addToInvetory(name):
+	inventory.push_back(name)
+
+func inInventory(name):
+	return inventory.count(name) > 0
 
 func drive(map,from):
 	town = from

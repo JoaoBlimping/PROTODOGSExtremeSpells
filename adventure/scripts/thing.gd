@@ -16,5 +16,5 @@ func _ready():
 	elif (autorun): room.call_deferred("run",get_name(),self)
 
 func click(viewport,event,shape_idx):
-	if (event.is_action_pressed("ui_accept") && room.running == null):
+	if (event.is_action_pressed("ui_accept") && room.running == null && !room.gui):
 		room.run(get_name(),self)

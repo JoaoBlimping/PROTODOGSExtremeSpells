@@ -5,8 +5,8 @@
 The moral of the story is that you need to figure out how to go hyper power at will.
 
 ## Things yet to be added
-
-- proper inventory that lets you open it up and use items, to open it in adventure mode you will have to press right click / shift, and then select the item from a list. Normal items like keys and situational shit will not go into your inventory
+- instead of having a proper inventory system, special items you get will still get added
+  to a special list in the adventure view
 - record some like minute long radio segments where I just talk about complete shit.
 
 ## Main Story

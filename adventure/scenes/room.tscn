@@ -11,8 +11,6 @@
 
 script/source = "extends \"../scripts/room.gd\"
 
-onready var global = get_node(\"/root/global\")
-
 func phm():
 	say(\"you are\\na fool\");yield()
 	say(\"I'm not joking, I will kill you\");yield()
@@ -29,6 +27,7 @@ func aini():
 	say(\"It's time for piss.\\nGet in the bath.\");yield()
 	say(\"If you go out and come back I will be gone.\\nAs a test\");yield()
 	global.setSwitch(\"ainiGo\",true)
+	global.addToInvetory(\"bag of piss\")
 
 
 func vase():
@@ -102,8 +101,6 @@ __meta__ = {
 [node name="phm" parent="actives" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 361.038, 384.036 )
-birthSwitch = null
-deathSwitch = null
 
 [node name="vase" type="Area2D" parent="actives"]
 
@@ -217,12 +214,6 @@ build_mode = 0
 polygon = Vector2Array( -74.0359, -53.3749, 59.751, -51.1696, 66.3669, 59.8295, -45.3673, 63.505 )
 shape_range = Vector2( 0, 0 )
 trigger = false
-
-[node name="crap" type="Node2D" parent="."]
-
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="gui" type="Node2D" parent="."]
 

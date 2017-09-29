@@ -3,11 +3,9 @@
 [ext_resource path="res://adventure/pics/cicada.png" type="Texture" id=1]
 [ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
 
-[sub_resource type="GDScript" id=7]
+[sub_resource type="GDScript" id=1]
 
 script/source = "extends \"../scripts/room.gd\"
-
-onready var global = get_node(\"/root/global\")
 
 func runner():
 	say(\"I got out the top of the pyramid all good\");yield()
@@ -27,14 +25,14 @@ func runner():
 	say(\"\"\"Anyway, see you. You're about to wake up.\"\"\");yield()
 	global.enterAdventure(\"room\")"
 
-[sub_resource type="ConvexPolygonShape2D" id=6]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -74.0359, -53.3749, 59.751, -51.1696, 66.3669, 59.8295, -45.3673, 63.505 )
 
 [node name="room" type="Node2D"]
 
-script/script = SubResource( 7 )
+script/script = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -57,7 +55,7 @@ __meta__ = {
 
 transform/pos = Vector2( 841.774, 148.647 )
 input/pickable = true
-shapes/0/shape = SubResource( 6 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
