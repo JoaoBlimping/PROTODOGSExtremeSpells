@@ -1,3 +1,63 @@
+# League of Scumbags A: PROTODOGS Extreme Spells
+
+## Storyline of the Game
+You wake up in the middle of the night in this random room and PHM and Aini are standing there, and the phm is like
+```
+alright it's time to get out of this hell hole, the cops have stopped patrolling the streets for some reason.
+I can't wait to get out of this fucking dump.
+Thanks for letting us stay here though, Travongle
+```
+Then tavongle says
+
+```
+Yeah all good man, uh so do you know where we're going?
+```
+
+Aini says ```You're coming with us?```, and phm is like
+
+```
+Well we can't really leave Travongle here now he's kept us hidden from the cops for three days, they'll find out eventually.
+No clue where we should go though, I guess we can just figure it out.
+```
+
+Travongle then says:
+
+```
+Don't worry cunts, I know a spot in the bush.
+I used to grow weed out there before I got too paranoid for that shit.
+Anyway, there's an alain village, so I reckon they'll let us stay
+for a while til we can all figure something out.
+```
+
+```
+Don't have a car though, lol
+Most of the time if somebody parks their car around here someone lights
+it on fire anyway.
+```
+
+Then Aini Says:
+
+```
+Well stealing a car does sound pretty fun,
+we'll just have to actually find one.
+```
+
+Ok, you are now free to click around. basically you just have to go to the back yard, then go through a hole in the fence to get to the special ed school, then steal their bus.
+
+Before you leave, travongle says
+
+```
+Alright, to get out to the bush we just want to take the road west, once we get out to the bush I can give you closer directions.
+```
+
+
+
+You are in now
+
+
+
+
+
 A: PROTO DOGS extreme spell
 This one proceeds from the original.
 
@@ -63,3 +123,6 @@ never mention the cicada at all, just don't go there
 
 
 
+```
+
+```
