@@ -1,0 +1,114 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://adventure/pics/startRooms/6.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func backDoor():
+	global.enterAdventure(\"start/5\")
+
+func over():
+	if (global.getSwitch(\"Rug\")):
+		say(\"You use the rug to climb over the pointy fence, and now it is wrecked.\")
+		yield()
+		global.setSwitch(\"Rug\",false)
+		global.enterAdventure(\"start/7\")
+	else:
+		say(\"Mate, that fence looks sharp as fuck, I'm not going over that\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -338.765, -110.785, 724.239, -147.785, 731.239, 227.217, 550.239, 238.217 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -324.872, 298.106, -338.765, -110.785, 550.239, 238.217, 486.238, 312.217 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -0.801239, 598.358, 0.52562, 574.474, 1022.86, 582.435, 1024.85, 599.685 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="over" type="Area2D" parent="actives"]
+
+transform/pos = Vector2( 312.887, 107.47 )
+input/pickable = true
+shapes/0/shape = SubResource( 10 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 11 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/over"]
+
+build_mode = 0
+polygon = Vector2Array( -324.872, 298.106, 486.238, 312.217, 550.239, 238.217, 731.239, 227.217, 724.239, -147.785, -338.765, -110.785 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="backDoor" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 9 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/backDoor"]
+
+build_mode = 0
+polygon = Vector2Array( -0.801239, 598.358, 0.52562, 574.474, 1022.86, 582.435, 1024.85, 599.685 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

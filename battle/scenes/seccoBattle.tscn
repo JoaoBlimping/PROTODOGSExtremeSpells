@@ -1,0 +1,90 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://battle/scripts/level.gd" type="Script" id=1]
+[ext_resource path="res://battle/pics/concrete.png" type="Texture" id=2]
+[ext_resource path="res://battle/objects/player.tscn" type="PackedScene" id=3]
+[ext_resource path="res://battle/objects/secco.tscn" type="PackedScene" id=4]
+[ext_resource path="res://battle/objects/hud.tscn" type="PackedScene" id=5]
+[ext_resource path="res://battle/scripts/bulletManager.gd" type="Script" id=6]
+[ext_resource path="res://battle/sounds/shot.wav" type="Sample" id=7]
+[ext_resource path="res://menu/songs/theme.ogg" type="AudioStream" id=8]
+
+[sub_resource type="SampleLibrary" id=1]
+
+samples/shot = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 7 )
+}
+
+[node name="level" type="Node2D"]
+
+script/script = ExtResource( 1 )
+song = "battle"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 1024, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actors" type="Node2D" parent="."]
+
+[node name="player" parent="actors" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 645.142, 465.768 )
+target = true
+
+[node name="secco" parent="actors" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 518.56, 62.0499 )
+
+[node name="hud" parent="." instance=ExtResource( 5 )]
+
+[node name="bullets" type="Node2D" parent="."]
+
+script/script = ExtResource( 6 )
+
+[node name="bulletSounds" type="SamplePlayer" parent="."]
+
+config/polyphony = 5
+config/samples = SubResource( 1 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[node name="music" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 8 )
+stream/play = false
+stream/loop = true
+stream/volume_db = 0.0
+stream/autoplay = true
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
+[node name="lifezone" type="Position2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 255.991, -0.106253 )
+
+[node name="corner" type="Position2D" parent="lifezone"]
+
+transform/pos = Vector2( 512.051, 599.997 )
+
+

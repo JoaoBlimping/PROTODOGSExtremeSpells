@@ -1,0 +1,179 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://battle/pics/secco.png" type="Texture" id=1]
+[ext_resource path="res://battle/pics/angry.png" type="Texture" id=2]
+[ext_resource path="res://battle/sounds/enough.wav" type="Sample" id=3]
+[ext_resource path="res://battle/sounds/seccoDie.wav" type="Sample" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../scripts/actor.gd\"
+
+onready var bullet = preload(\"res://battle/objects/lightBullet.tscn\")
+onready var player = get_node(\"/root/level/actors/player\")
+onready var particles = get_node(\"particles\")
+
+
+func _ready():
+	routines.push_back(\"firstAttack\")
+	routines.push_back(\"finalAttack\")
+	routines.push_back(\"death\")
+
+
+func firstAttack():
+	health = 100
+	var angle = 0
+	
+	while (true):
+		yielding(\"wait\",0.4);yield()
+		shoot(bullet,get_pos().angle_to_point(player.get_pos()))
+		yielding(\"wait\",0.2);yield()
+		angle += 0.6
+		shoot(bullet,get_pos().angle_to_point(player.get_pos()) + sin(angle))
+
+
+func finalAttack():
+	health = 10000
+	particles.set_emitting(true)
+	yielding(\"waitSound\",\"enough\");yield()
+	
+	health = 100
+	while (true):
+		yielding(\"wait\",1.5);yield()
+		for row in range(4):
+			for i in range(5):
+				shoot(bullet,get_pos().angle_to_point(player.get_pos()) + float(i - 2) / (row + 2))
+			yielding(\"wait\",0.25);yield()
+
+
+func death():
+	health = 100
+	sound.play(\"seccoDie\")
+	for i in range(20):
+		set_scale(Vector2(1,1) / i)
+		particles.set_global_scale(Vector2(1,1))
+		yielding(\"wait\",0.3);yield()
+	"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -4.32544, -44.7422, 36.456, -35.2981, 18.4263, -28.6443, -13.3403, -23.0637 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 20.7873, 35.5328, 40.5341, 50.9868, -15.7013, 49.0551, -19.9941, 44.7623 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -13.3403, -23.0637, 18.4263, -28.6443, 41.1781, 18.791, 21.2166, 21.5813, -40.5994, 8.91757 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -19.9941, 44.7623, -40.5994, 8.91757, 21.2166, 21.5813, 20.7873, 35.5328 )
+
+[sub_resource type="SampleLibrary" id=6]
+
+samples/enough = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 3 )
+}
+samples/seccoDie = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+
+[node name="secco" type="Sprite"]
+
+texture = ExtResource( 1 )
+script/script = SubResource( 1 )
+flippy = true
+walky = false
+target = true
+
+[node name="hitbox" type="Area2D" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
+material/use_parent = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 4 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 5 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hitbox"]
+
+visibility/behind_parent = true
+build_mode = 0
+polygon = Vector2Array( -19.9941, 44.7623, -40.5994, 8.91757, -13.3403, -23.0637, -4.32544, -44.7422, 36.456, -35.2981, 18.4263, -28.6443, 41.1781, 18.791, 21.2166, 21.5813, 20.7873, 35.5328, 40.5341, 50.9868, -15.7013, 49.0551 )
+shape_range = Vector2( 0, 3 )
+trigger = false
+
+[node name="particles" type="Particles2D" parent="."]
+
+visibility/behind_parent = true
+config/amount = 13
+config/lifetime = 1.1
+config/emitting = false
+config/process_mode = 1
+config/texture = ExtResource( 2 )
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 40.0
+params/spin_velocity = 1.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 30.26
+params/tangential_accel = 25.6
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 2.0
+params/hue_variation = 1.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/linear_velocity = 0.05
+randomness/spin_velocity = 1.0
+randomness/radial_accel = 0.74
+randomness/initial_size = 0.3
+randomness/hue_variation = 1.0
+
+[node name="sound" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 6 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+

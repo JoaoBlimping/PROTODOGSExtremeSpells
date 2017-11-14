@@ -7,10 +7,12 @@
 
 script/source = "extends VideoPlayer
 
+onready var global = get_node(\"/root/global\")
 onready var eel = get_node(\"eel\")
 
-
 func _ready():
+	global.preloadSongs()
+	global.preloadMice()
 	set_process(true)
 
 func _process(delta):

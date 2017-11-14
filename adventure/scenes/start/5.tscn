@@ -1,0 +1,147 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://adventure/pics/startRooms/5.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func backDoor():
+	global.enterAdventure(\"start/2\")
+
+func rubbish():
+	global.enterAdventure(\"start/6\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -210.138, 286.752, -190.979, 246.636, -178.405, 302.917 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -196.367, 447.812, -167.628, 471.762, -193.374, 480.144, -231.094, 449.608, -273.605, 401.709 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -56.2625, 402.907, -49.6764, 417.875, -140.685, 426.856, -108.353, 405.302 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -178.405, 302.917, -140.685, 426.856, -137.691, 438.831, -196.367, 447.812, -273.605, 401.709, -255.044, 350.817, -210.138, 286.752 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -284.382, 314.294, -270.012, 269.987, -210.138, 286.752, -255.044, 350.817 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -284.981, 462.781, -307.733, 459.188, -308.93, 414.882, -273.605, 401.709, -231.094, 449.608 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -149.067, 300.523, -108.353, 405.302, -140.685, 426.856, -178.405, 302.917 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -0.801239, 598.358, 0.52562, 574.474, 1022.86, 582.435, 1024.85, 599.685 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="rubbish" type="Area2D" parent="actives"]
+
+transform/pos = Vector2( 312.887, 107.47 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 4 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 5 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 6 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 7 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+shapes/6/shape = SubResource( 8 )
+shapes/6/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/6/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/rubbish"]
+
+build_mode = 0
+polygon = Vector2Array( -284.981, 462.781, -231.094, 449.608, -193.374, 480.144, -167.628, 471.762, -196.367, 447.812, -137.691, 438.831, -140.685, 426.856, -49.6764, 417.875, -56.2625, 402.907, -108.353, 405.302, -149.067, 300.523, -178.405, 302.917, -190.979, 246.636, -210.138, 286.752, -270.012, 269.987, -284.382, 314.294, -255.044, 350.817, -273.605, 401.709, -308.93, 414.882, -307.733, 459.188 )
+shape_range = Vector2( 0, 6 )
+trigger = false
+
+[node name="backDoor" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 9 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/backDoor"]
+
+build_mode = 0
+polygon = Vector2Array( -0.801239, 598.358, 0.52562, 574.474, 1022.86, 582.435, 1024.85, 599.685 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

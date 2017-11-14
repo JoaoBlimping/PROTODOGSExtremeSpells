@@ -1,14 +1,14 @@
 extends Node2D
 
-onready var radio = get_node("radio")
+onready var global = get_node("/root/global")
 onready var sound = get_node("sound")
 onready var tint = get_node("tint")
 onready var player = get_node("bus")
 onready var signs = get_node("signs").get_children()
 onready var bugs = [preload("res://overworld/objects/bug1.tscn"),preload("res://overworld/objects/bug2.tscn")]
 
-const talkFile = "res://overworld/songs/radio%d.ogg"
-const songFile = "res://overworld/songs/song%d.ogg"
+const talkFile = "radio%d"
+const songFile = "song%d"
 const talks = 3
 const songs = 4
 const OFFROAD_TIME = 4
@@ -21,13 +21,11 @@ var blood = Color(1,1,1)
 func _ready():
 	set_process(true)
 	
+	
 	#start the radio
+	global.addSongCallback(self,"play")
 	randomize()
-	for i in range(talks):
-		load(talkFile % (i + 1))
-	for i in range(songs):
-		load(songFile % (i + 1))
-	call_deferred("play")
+	play()
 	
 	#add cars
 	var bounds = get_node("ground").get_region_rect()
@@ -43,6 +41,9 @@ func _ready():
 		var exit = get_node("portals/%s/exit" % global.town)
 		player.set_pos(exit.get_global_pos())
 		player.set_rot(exit.get_global_rot())
+		
+func _exit_tree():
+	global.removeSongCallback(self,"play")
 
 func _process(delta):
 	var pos = player.get_pos()
@@ -62,13 +63,11 @@ func _process(delta):
 func play():
 	if (talking):
 		var num = (randi() % songs) + 1
-		print(num)
-		radio.set_stream(load(songFile % num))
+		global.playSong(songFile % num,false)
 	else:
 		var num = (randi() % talks) + 1
-		radio.set_stream(load(talkFile % num))
+		global.playSong(talkFile % num,false)
 	talking = !talking
-	radio.play()
 
 
 func _on_crashZone_body_enter(body):

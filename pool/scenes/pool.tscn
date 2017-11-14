@@ -54,7 +54,6 @@ requirement = 50
 transform/scale = Vector2( 2.05282, 1.51332 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 3
 playing = true
 centered = false
 __meta__ = {

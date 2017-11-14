@@ -1,0 +1,87 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://adventure/pics/startRooms/8.png" type="Texture" id=1]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=2]
+[ext_resource path="res://adventure/objects/travongle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func aini():
+	if (global.battled(\"seccoBattle\")):
+		say(\"\"\"Alright, lets go.
+		It's pretty easy to drive, just use your arrows to
+		steer, and use your main button to activate the blade\"\"\",\"phm\");yield()
+		say(\"What.\\nWhy is there a blade\");yield()
+		say(\"There's a lotta snakes on the road these days\",\"phm\");yield()
+		global.drive(\"level\",\"kempsey\")
+	else:
+		say(\"A bus??\");yield()
+		say(\"Hahaha that's twice as good\",\"phm\");yield()
+		say(\"very true\");yield()
+		global.stopSong()
+		say(\"OI\",\"secco\");yield()
+		say(\"\"\"You're tresspassing.\\nI've already called the cops,
+		now just stay right where you are and I'll detail you
+		until they get here\"\"\",\"secco\");yield()
+		say(\"FUUUUUUUCK\",\"travongle\");yield()
+		say(\"\"\"no you won't you fat cunt
+		use your movement keys to move,
+		one button to shoot and the other to go slow and see your
+		hit box.\"\"\",\"phm\");yield()
+		global.battle(\"seccoBattle\")"
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="aini" parent="actives" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 589.576, 347.399 )
+autorun = true
+
+[node name="travongle" parent="actives" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 898.56, 377.462 )
+
+[node name="phm" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 758.264, 372.451 )
+
+[node name="secco" type="Area2D" parent="actives"]
+
+input/pickable = true
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 5 )
+realName = "Security Guard"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

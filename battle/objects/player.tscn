@@ -26,7 +26,7 @@ tracks/0/keys = {
 [sub_resource type="CircleShape2D" id=2]
 
 custom_solver_bias = 0.0
-radius = 4.28882
+radius = 3.70304
 
 [sub_resource type="SampleLibrary" id=3]
 
@@ -43,11 +43,9 @@ transform/pos = Vector2( 0.0648804, 0.205811 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, 10 )
 hframes = 3
-frame = 1
 script/script = ExtResource( 2 )
 flippy = true
 walky = true
-health = 3
 
 [node name="particles" type="Particles2D" parent="."]
 
@@ -105,6 +103,7 @@ angular_damp = 1.0
 [node name="heart" type="Sprite" parent="hitbox"]
 
 transform/pos = Vector2( 0.627103, 0.547094 )
+transform/scale = Vector2( 0.9, 0.9 )
 texture = ExtResource( 4 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]

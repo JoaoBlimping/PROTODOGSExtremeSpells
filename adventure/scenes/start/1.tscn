@@ -1,0 +1,117 @@
+[gd_scene load_steps=8 format=1]
+
+[ext_resource path="res://adventure/pics/startRooms/1.png" type="Texture" id=1]
+[ext_resource path="res://adventure/objects/travongle.tscn" type="PackedScene" id=2]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=3]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func phm():
+	if (!global.getSwitch(\"firstSpeech\")):
+		say(\"OI!\\nWake UP\");yield()
+		say(\"\"\"it's time to get out of this hell hole, the cops have stopped
+		patrolling the streets for some reason.
+		I can't wait to get out of this fucking dump.
+		Thanks for letting us stay here though, Travongle\"\"\");yield()
+		say(\"Yeah, no worries bro, so, uh,\\nDo you know where we're going?\",\"travongle\");yield()
+		pose(ANGRY,\"aini\")
+		say(\"He's coming with us?\",\"aini\");yield()
+		pose(NORMAL,\"aini\")
+		say(\"\"\"Well we can't really leave Travongle here now he's kept us hidden from the cops
+		for three days, they'll find out eventually.
+		No clue where we should go though, I guess we can just figure it out.\"\"\");yield()
+		say(\"\"\"Don't worry cunts, I know a spot in the bush.
+		I used to grow weed out that way before I got too paranoid for that shit.
+		Anyway, there's an alain village, so I reckon they'll let us stay
+		for a while til we can all figure something out.\"\"\",\"travongle\");yield()
+		say(\"\"\"Don't have a car though, lol
+		Most of the time if somebody parks their car around here
+		someone lights it on fire anyway.\"\"\",\"travongle\");yield()
+		say(\"\"\"Well stealing a car does sound pretty fun,
+		we'll just have to actually find one.\"\"\",\"aini\");yield()
+		global.setSwitch(\"firstSpeech\",true)
+	else:
+		say(\"we need to find a vehicle while there's no cops around\");yield()
+	
+	
+func aini():
+	say(\"We've gotta get going. I want to find a car!\");yield()
+
+
+func travongle():
+	say(\"Hey bro, I need some space right now\");yield()
+
+func door():
+	global.enterAdventure(\"start/2\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 762.344, 555.989, 763.705, 131.551, 789.552, 111.146, 784.11, 585.918 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="travongle" parent="actives" instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 540.07, 440.762 )
+
+[node name="phm" parent="actives" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 658.961, 422.127 )
+autorun = true
+
+[node name="aini" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 312.456, 410.51 )
+deathSwitch = "ainiGo"
+
+[node name="door" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 5 )
+realName = "Inanimate Object"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/door"]
+
+build_mode = 0
+polygon = Vector2Array( 762.344, 555.989, 763.705, 131.551, 789.552, 111.146, 784.11, 585.918 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

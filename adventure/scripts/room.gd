@@ -17,6 +17,7 @@ var value = null
 func _ready():
 	set_process(true)
 	set_process_input(true)
+	global.resetMouse()
 
 func _process(delta):
 	if (!gui && running != null):

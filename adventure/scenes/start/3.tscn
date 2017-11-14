@@ -1,0 +1,139 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://adventure/pics/startRooms/3.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/scripts/item.gd" type="Script" id=3]
+[ext_resource path="res://adventure/pics/rug.png" type="Texture" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func backDoor():
+	global.enterAdventure(\"start/2\")
+
+func rightDoor():
+	global.enterAdventure(\"start/4\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 578.315, 449.411, 580.969, 78.5577, 590.992, 75.4501, 590.92, 463.343 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 31.819, 599.386, 67.5159, 574.633, 900.11, 578.613, 921.506, 600.747 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 107.605, 600.168, 232.251, 570.654, 294.442, 562.748, 349.781, 564.329, 406.175, 583.566, 423.04, 601.486 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="rightDoor" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 312.887, 107.47 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/rightDoor"]
+
+build_mode = 0
+polygon = Vector2Array( 590.92, 463.343, 590.992, 75.4501, 580.969, 78.5577, 578.315, 449.411 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="backDoor" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+monitoring = false
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/backDoor"]
+
+build_mode = 0
+polygon = Vector2Array( 31.819, 599.386, 67.5159, 574.633, 900.11, 578.613, 921.506, 600.747 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="rug" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( -1.31342, 1.41064 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+priority = 1.0
+monitoring = false
+script/script = ExtResource( 3 )
+realName = "Rug"
+autorun = false
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/rug"]
+
+build_mode = 0
+polygon = Vector2Array( 107.605, 600.168, 232.251, 570.654, 294.442, 562.748, 349.781, 564.329, 406.175, 583.566, 423.04, 601.486 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/rug"]
+
+transform/pos = Vector2( 267.32, 575.861 )
+texture = ExtResource( 4 )
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

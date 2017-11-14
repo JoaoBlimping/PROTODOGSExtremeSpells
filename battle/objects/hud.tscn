@@ -55,6 +55,7 @@ __meta__ = {
 
 [node name="leftPanel" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( -768, 0 )
 texture = ExtResource( 1 )
 centered = false
@@ -84,23 +85,10 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
-[node name="Label" type="RichTextLabel" parent="leftPanel"]
+[node name="words" type="Sprite" parent="leftPanel"]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 3
-margin/left = 28.0
-margin/top = 18.0
-margin/right = 237.0
-margin/bottom = 116.0
-bbcode/enabled = false
-bbcode/bbcode = "fuck"
-visible_characters = -1
-percent_visible = 1.0
-__meta__ = {
-"_edit_lock_": true
-}
+transform/pos = Vector2( 27.7214, 16.7843 )
+centered = false
 
 [node name="health" type="Sprite" parent="."]
 
@@ -129,10 +117,12 @@ __meta__ = {
 [node name="aini" parent="friends/heads" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 184.304, 304.625 )
+limit = 13
 
 [node name="phm" parent="friends/heads" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 132.536, 188.967 )
+limit = 11
 
 [node name="corner" type="Position2D" parent="friends"]
 

@@ -1,11 +1,13 @@
 extends Sprite
 
+onready var sound = get_node("sound")
 onready var animation = get_node("animation")
 onready var bullets = get_node("/root/level/bullets")
 onready var bulletSounds = get_node("/root/level/bulletSounds")
 
 export var flippy = false
 export var walky = false
+export var target = true
 
 var velocity = Vector2(0,0)
 var health = 1
@@ -27,8 +29,7 @@ func _process(delta):
 	if (activity.size() == 0):
 		if (routines.size() == 0):
 			queue_free()
-			if (is_in_group("target")):
-				get_node("/root/global").finishBattle()
+			if (target): get_node("/root/global").finishBattle()
 		else:
 			activity.push_front(call(routines[0]))
 			routines.pop_front()
@@ -82,9 +83,19 @@ func die():
 func yielding(function,arg):
 	activity.push_front(call(function,arg))
 	activityOffset += 1
-	
 
+##########################################################################################
+############ YIelding thingies ###########################################################
+##########################################################################################
 func wait(time):
 	var count = 0
-	while (count < time): count += yield()
+	var n = 0
+	while (count + (count / n if (n > 2) else 0) < time):
+		count += yield()
+		n += 1
 
+
+func waitSound(sample):
+	if (sound == null): return
+	sound.play(sample)
+	yielding("wait",sound.get_sample_library().get_sample(sample).get_length()) 

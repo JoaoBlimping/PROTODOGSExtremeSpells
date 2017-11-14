@@ -6,7 +6,7 @@ var velocity = Vector2(0,0)
 
 
 func _ready():
-s	var playerPos = get_node("/root/pool/fogle").get_pos()
+	var playerPos = get_node("/root/pool/fogle").get_pos()
 	var angle = get_pos().angle_to_point(playerPos)
 	velocity.x = -sin(angle) * speed
 	velocity.y = -cos(angle) * speed

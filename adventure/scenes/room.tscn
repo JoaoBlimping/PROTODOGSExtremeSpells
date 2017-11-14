@@ -14,7 +14,6 @@ script/source = "extends \"../scripts/room.gd\"
 func phm():
 	say(\"you are\\na fool\");yield()
 	say(\"I'm not joking, I will kill you\");yield()
-	
 	ask(\"do you think I am joking?\",\"yeah\",\"nah\");yield()
 	if (value == \"a\"):
 		pose(ANGRY)
@@ -40,7 +39,7 @@ func vase():
 		say(\"STOP YELLING\",\"aini\");yield()
 		pose(NORMAL,\"aini\")
 		say(\"That's it!\\nIt's time to battle!\",\"phm\");yield()
-		global.battle(\"test\")
+		global.battle(\"seccoBattle\")
 
 
 func door():
@@ -50,6 +49,7 @@ func door():
 		global.drive(\"level\",\"kempsey\")
 	else:
 		say(\"Locked.\");yield()
+
 
 func window():
 	say(\"Escaping through the window?\\nGood idea!\",\"phm\");yield()
@@ -158,7 +158,6 @@ trigger = false
 [node name="aini" parent="actives" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 724.65, 406.429 )
-birthSwitch = null
 deathSwitch = "ainiGo"
 
 [node name="key" type="Area2D" parent="actives"]

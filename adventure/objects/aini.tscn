@@ -109,6 +109,9 @@ angular_damp = 1.0
 script/script = ExtResource( 1 )
 realName = "Aini"
 autorun = false
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 
