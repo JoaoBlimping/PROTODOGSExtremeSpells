@@ -1,9 +1,13 @@
 extends Sprite
 
+onready var GoodTimer = preload("res://battle/scripts/GoodTimer.gd")
 onready var sound = get_node("sound")
 onready var animation = get_node("animation")
 onready var bullets = get_node("/root/level/bullets")
 onready var bulletSounds = get_node("/root/level/bulletSounds")
+
+const T = "timeout"
+signal bongo
 
 export var flippy = false
 export var walky = false
@@ -14,8 +18,7 @@ var velocity = Vector2(0,0)
 var health = 1
 
 var routines = []
-var activity = []
-var activityOffset = 0
+var finished = false
 
 
 
@@ -26,22 +29,11 @@ func _ready():
 
 
 func _process(delta):
-	#do the activity
-	if (activity.size() == 0):
-		if (routines.size() == 0):
-			queue_free()
-			if (target): get_node("/root/global").finishBattle()
-		else:
-			activity.push_front(call(routines[0]))
-			routines.pop_front()
-		return
-	else:
-		activityOffset = 0
-		var completed = activity[0].resume(delta)
-		activity[activityOffset] = completed
-		
-		if (activityOffset == 0 && (completed == null || !completed.is_valid())):
-			activity.pop_front()
+	var nRoutines = routines.size()
+	if (finished && nRoutines >= 1):
+		routines.pop_front()
+		call(routines.front())
+		finished = false
 	
 	#move
 	set_pos(get_pos() + velocity * delta)
@@ -68,47 +60,40 @@ func shoot(bullet,angle,origin=self):
 	return ib
 
 
+func die():
+	return
+
+
 func hit(body):
 	if (!body.is_in_group("power") && body.owner != self):
 		if (randi() % 5 > 3): bullets.addPowerup(body.get_pos())
 		body.queue_free()
 		health -= 1
-		if (health <= 0): die()
+		if (health == 0): die()
 		return true
 	return false
 
 
-func die():
-	activity.clear()
+func isDone():
+	if (health < 1):
+		finished = true
+		return true
+	else: return false
 
 
-func yielding(function,arg):
-	activity.push_front(call(function,arg))
-	activityOffset += 1
+func createTimer(time):
+	var timer = GoodTimer.new()
+	add_child(timer)
+	timer.set_wait_time(time)
+	timer.start()
+	return timer
 
-##########################################################################################
-############ YIelding thingies ###########################################################
-##########################################################################################
-func wait(time):
-	var count = 0
-	var n = 0
-	while (count + (count / n if (n > 2) else 0) < time):
-		count += yield()
-		n += 1
+func reset():
+	stop()
+	start()
+	return self
 
 
-func waitSound(sample):
-	if (sound == null): return
-	sound.play(sample)
-	yielding("wait",sound.get_sample_library().get_sample(sample).get_length())
-
-
-func moveTo(target):
-	var targetPos = target.get_pos()
-	var angle = get_pos().angle_to_point(targetPos)
-	velocity.x = -sin(angle) * speed
-	velocity.y = -cos(angle) * speed
-	while ((targetPos - get_pos()).length() > velocity.length()):yield()
-	velocity.x = 0
-	velocity.y = 0
-	
+func addRoutine(name):
+	if (routines.size() == 0): call(name)
+	routines.push_back(name)

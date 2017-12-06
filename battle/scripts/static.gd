@@ -1,17 +1,20 @@
 extends "actor.gd"
 
+const TICK = 0.2
+
 export var spin = 5
 export var startHealth = 10
 export var healthDecay = 0
 
 func _ready():
-	routines.push_back("main")
+	addRoutine("main")
 	
 func main():
 	health = startHealth
+	var timer = createTimer(TICK)
 	while (true):
-		var delta = yield()
-		health -= delta * healthDecay
-		rotate(delta * spin)
-		if (health <= 0): die()
+		yield(timer.r(),"timeout")
+		health -= TICK * healthDecay
+		rotate(TICK * spin)
+		if (isDone()): return
 		

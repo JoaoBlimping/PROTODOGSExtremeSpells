@@ -9,11 +9,12 @@ onready var bullet = load("res://battle/objects/fogleBullet.tscn")
 onready var dispenser = get_node("/root/level/hud/friends/dispenser")
 
 
+const TICK = 0.012
 var timer = 0
 
 
 func _ready():
-	routines.push_back("attack")
+	attack()
 
 
 func hit(body):
@@ -29,13 +30,14 @@ func die():
 
 func attack():
 	health = 3
+	var tick = createTimer(TICK)
 	
 	while (true):
-		var delta = yield()
+		yield(tick,"timeout")
 		
 		#shooting
 		if (Input.is_action_pressed("ui_accept")):
-			timer -= delta
+			timer -= TICK
 			if (timer < 0):
 				timer += 0.1
 				shoot(bullet,randf() / 2 - 0.25)

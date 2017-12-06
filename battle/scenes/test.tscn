@@ -76,8 +76,7 @@ autoplay = ""
 
 transform/pos = Vector2( 490.452, 92.8683 )
 transform/scale = Vector2( 0.994638, 0.904363 )
-target = true
-speed = 100
+flippy = true
 
 [node name="player" parent="actors" instance=ExtResource( 6 )]
 
