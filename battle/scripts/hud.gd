@@ -1,7 +1,7 @@
 extends Sprite
 
 onready var health = get_node("health")
-onready var player = get_node("/root/level/actors/player")
+onready var player = null
 onready var heads = get_node("friends/heads")
 onready var cornerPos = get_node("friends/corner").get_pos()
 onready var dispenser = get_node("friends/dispenser")
@@ -12,6 +12,8 @@ func _ready():
 	healthDimensions = health.get_texture().get_size()
 
 func _process(delta):
+	if (player == null): player = get_node("/root/level/actors/player")
+	
 	health.set_region_rect(Rect2(0,0,healthDimensions.x * player.health,healthDimensions.y))
 	
 	for head in heads.get_children():

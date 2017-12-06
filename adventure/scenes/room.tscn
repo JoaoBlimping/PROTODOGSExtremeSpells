@@ -39,7 +39,7 @@ func vase():
 		say(\"STOP YELLING\",\"aini\");yield()
 		pose(NORMAL,\"aini\")
 		say(\"That's it!\\nIt's time to battle!\",\"phm\");yield()
-		global.battle(\"seccoBattle\")
+		global.battle(\"test\")
 
 
 func door():
@@ -120,6 +120,7 @@ angular_damp = 1.0
 script/script = ExtResource( 3 )
 realName = "Inanimate Object"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 
@@ -145,6 +146,7 @@ angular_damp = 1.0
 script/script = ExtResource( 3 )
 realName = "Door"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 
@@ -175,6 +177,7 @@ angular_damp = 1.0
 script/script = ExtResource( 5 )
 realName = "Extreme Key"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 
@@ -204,6 +207,7 @@ angular_damp = 1.0
 script/script = ExtResource( 3 )
 realName = "Window"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 

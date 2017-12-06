@@ -19,17 +19,17 @@ func over():
 	else:
 		say(\"Mate, that fence looks sharp as fuck, I'm not going over that\")"
 
-[sub_resource type="ConvexPolygonShape2D" id=10]
+[sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -338.765, -110.785, 724.239, -147.785, 731.239, 227.217, 550.239, 238.217 )
 
-[sub_resource type="ConvexPolygonShape2D" id=11]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -324.872, 298.106, -338.765, -110.785, 550.239, 238.217, 486.238, 312.217 )
 
-[sub_resource type="ConvexPolygonShape2D" id=9]
+[sub_resource type="ConvexPolygonShape2D" id=4]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -0.801239, 598.358, 0.52562, 574.474, 1022.86, 582.435, 1024.85, 599.685 )
@@ -56,10 +56,10 @@ __meta__ = {
 
 transform/pos = Vector2( 312.887, 107.47 )
 input/pickable = true
-shapes/0/shape = SubResource( 10 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 11 )
+shapes/1/shape = SubResource( 3 )
 shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/1/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -70,6 +70,7 @@ monitoring = false
 script/script = ExtResource( 2 )
 realName = "Inanimate Object"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 
@@ -84,7 +85,7 @@ trigger = false
 
 editor/display_folded = true
 input/pickable = true
-shapes/0/shape = SubResource( 9 )
+shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -95,6 +96,7 @@ monitoring = false
 script/script = ExtResource( 2 )
 realName = "Inanimate Object"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 

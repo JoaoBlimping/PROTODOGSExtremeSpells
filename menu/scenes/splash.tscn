@@ -7,17 +7,20 @@
 
 script/source = "extends VideoPlayer
 
-onready var global = get_node(\"/root/global\")
 onready var eel = get_node(\"eel\")
+onready var global = get_node(\"/root/global\")
+
 
 func _ready():
-	global.preloadSongs()
-	global.preloadMice()
 	set_process(true)
+	global.preloadMice()
+	global.preloadSongs()
 
 func _process(delta):
 	eel.rotate(delta)
-	if (!is_playing()): get_tree().change_scene(\"res://menu/scenes/menu.tscn\")
+	if (!is_playing()):
+		get_tree().change_scene(\"res://menu/scenes/menu.tscn\")
+		
 "
 
 [node name="VideoPlayer" type="VideoPlayer"]

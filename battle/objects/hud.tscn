@@ -47,21 +47,14 @@ samples/phm = {
 transform/pos = Vector2( 768, 0 )
 texture = ExtResource( 1 )
 centered = false
-flip_h = true
 script/script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="leftPanel" type="Sprite" parent="."]
 
-editor/display_folded = true
 transform/pos = Vector2( -768, 0 )
 texture = ExtResource( 1 )
 centered = false
-__meta__ = {
-"_edit_lock_": true
-}
+flip_h = true
 
 [node name="portrait" type="Sprite" parent="leftPanel"]
 
@@ -70,9 +63,6 @@ transform/pos = Vector2( 28.9957, 163.127 )
 texture = ExtResource( 3 )
 centered = false
 hframes = 4
-__meta__ = {
-"_edit_lock_": true
-}
 
 [node name="animation" type="AnimationPlayer" parent="leftPanel/portrait"]
 

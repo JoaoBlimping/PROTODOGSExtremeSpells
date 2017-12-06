@@ -39,13 +39,14 @@ samples/ow = {
 
 [node name="player" type="Sprite"]
 
-transform/pos = Vector2( 0.0648804, 0.205811 )
+transform/pos = Vector2( 515.714, 474.112 )
 texture = ExtResource( 1 )
 offset = Vector2( 0, 10 )
 hframes = 3
 script/script = ExtResource( 2 )
 flippy = true
 walky = true
+target = true
 
 [node name="particles" type="Particles2D" parent="."]
 

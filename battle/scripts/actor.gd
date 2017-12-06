@@ -8,6 +8,7 @@ onready var bulletSounds = get_node("/root/level/bulletSounds")
 export var flippy = false
 export var walky = false
 export var target = true
+export var speed = 100
 
 var velocity = Vector2(0,0)
 var health = 1
@@ -64,6 +65,7 @@ func shoot(bullet,angle,origin=self):
 	ib.set_pos(origin.get_pos())
 	ib.velocity.x = -sin(angle) * ib.speed
 	ib.velocity.y = -cos(angle) * ib.speed
+	return ib
 
 
 func hit(body):
@@ -98,4 +100,15 @@ func wait(time):
 func waitSound(sample):
 	if (sound == null): return
 	sound.play(sample)
-	yielding("wait",sound.get_sample_library().get_sample(sample).get_length()) 
+	yielding("wait",sound.get_sample_library().get_sample(sample).get_length())
+
+
+func moveTo(target):
+	var targetPos = target.get_pos()
+	var angle = get_pos().angle_to_point(targetPos)
+	velocity.x = -sin(angle) * speed
+	velocity.y = -cos(angle) * speed
+	while ((targetPos - get_pos()).length() > velocity.length()):yield()
+	velocity.x = 0
+	velocity.y = 0
+	

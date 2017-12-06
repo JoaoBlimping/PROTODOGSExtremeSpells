@@ -51,7 +51,7 @@ func door():
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 762.344, 555.989, 763.705, 131.551, 789.552, 111.146, 784.11, 585.918 )
+points = Vector2Array( 822.74, 126.234, 854.661, 115.184, 841.156, 495.782, 816.601, 447.901 )
 
 [node name="room" type="Node2D"]
 
@@ -73,16 +73,16 @@ __meta__ = {
 
 [node name="travongle" parent="actives" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 540.07, 440.762 )
+transform/pos = Vector2( 440.623, 336.404 )
 
 [node name="phm" parent="actives" instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 658.961, 422.127 )
+transform/pos = Vector2( 687.199, 311.631 )
 autorun = true
 
 [node name="aini" parent="actives" instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 312.456, 410.51 )
+transform/pos = Vector2( 273.168, 351.579 )
 deathSwitch = "ainiGo"
 
 [node name="door" type="Area2D" parent="actives"]
@@ -98,13 +98,14 @@ angular_damp = 1.0
 script/script = ExtResource( 5 )
 realName = "Inanimate Object"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/door"]
 
 build_mode = 0
-polygon = Vector2Array( 762.344, 555.989, 763.705, 131.551, 789.552, 111.146, 784.11, 585.918 )
+polygon = Vector2Array( 822.74, 126.234, 854.661, 115.184, 841.156, 495.782, 816.601, 447.901 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 

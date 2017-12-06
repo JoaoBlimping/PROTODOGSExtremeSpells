@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=1]
+[gd_scene load_steps=40 format=1]
 
 [ext_resource path="res://overworld/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://overworld/pics/grass.png" type="Texture" id=2]
@@ -8,12 +8,15 @@
 [ext_resource path="res://overworld/pics/kempsey.jpg" type="Texture" id=6]
 [ext_resource path="res://overworld/scripts/portal.gd" type="Script" id=7]
 [ext_resource path="res://overworld/objects/bus.tscn" type="PackedScene" id=8]
-[ext_resource path="res://overworld/pics/sign1.png" type="Texture" id=9]
-[ext_resource path="res://overworld/pics/sign2.png" type="Texture" id=10]
-[ext_resource path="res://overworld/pics/sign3.png" type="Texture" id=11]
-[ext_resource path="res://overworld/pics/sign4.png" type="Texture" id=12]
-[ext_resource path="res://overworld/sounds/crash.wav" type="Sample" id=13]
-[ext_resource path="res://overworld/sounds/splat.wav" type="Sample" id=14]
+[ext_resource path="res://overworld/objects/car.tscn" type="PackedScene" id=9]
+[ext_resource path="res://overworld/objects/armouredCar.tscn" type="PackedScene" id=10]
+[ext_resource path="res://overworld/objects/truck.tscn" type="PackedScene" id=11]
+[ext_resource path="res://overworld/pics/sign1.png" type="Texture" id=12]
+[ext_resource path="res://overworld/pics/sign2.png" type="Texture" id=13]
+[ext_resource path="res://overworld/pics/sign3.png" type="Texture" id=14]
+[ext_resource path="res://overworld/pics/sign4.png" type="Texture" id=15]
+[ext_resource path="res://overworld/sounds/crash.wav" type="Sample" id=16]
+[ext_resource path="res://overworld/sounds/splat.wav" type="Sample" id=17]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -126,13 +129,13 @@ samples/crash = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 13 )
+"sample": ExtResource( 16 )
 }
 samples/splat = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 14 )
+"sample": ExtResource( 17 )
 }
 
 [node name="level" type="Node2D"]
@@ -321,6 +324,32 @@ transform/rot = 180.0
 transform/pos = Vector2( 5538.54, 376.596 )
 transform/rot = 171.875
 
+[node name="enemies" type="Node2D" parent="."]
+
+[node name="car" parent="enemies" instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 5500.75, 1016.01 )
+
+[node name="car1" parent="enemies" instance=ExtResource( 9 )]
+
+transform/pos = Vector2( 5586.07, 889.691 )
+
+[node name="armouredCar" parent="enemies" instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 5461.38, 1153.07 )
+
+[node name="armouredCar1" parent="enemies" instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 5565.01, 1184.53 )
+
+[node name="armouredCar2" parent="enemies" instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 5668.65, 1129.01 )
+
+[node name="armouredCar 2" parent="enemies" instance=ExtResource( 11 )]
+
+transform/pos = Vector2( 5561.4, 2174.07 )
+
 [node name="signs" type="Node2D" parent="."]
 
 editor/display_folded = true
@@ -328,25 +357,53 @@ editor/display_folded = true
 [node name="sign" type="Sprite" parent="signs"]
 
 transform/pos = Vector2( 5938.03, 1422.38 )
-texture = ExtResource( 9 )
+texture = ExtResource( 12 )
 offset = Vector2( -2.44971, -74.2056 )
 
 [node name="sign1" type="Sprite" parent="signs"]
 
 transform/pos = Vector2( 5189, 2010.74 )
-texture = ExtResource( 10 )
+texture = ExtResource( 13 )
 offset = Vector2( 2.68506, -75.3058 )
 
 [node name="sign2" type="Sprite" parent="signs"]
 
 transform/pos = Vector2( 5944.68, 2468.36 )
-texture = ExtResource( 11 )
+texture = ExtResource( 14 )
 offset = Vector2( 3.2666, -69.2937 )
 
 [node name="sign3" type="Sprite" parent="signs"]
 
 transform/pos = Vector2( 7000.63, 2461.71 )
+texture = ExtResource( 15 )
+offset = Vector2( -1.50439, -62.645 )
+
+[node name="signs1" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="sign" type="Sprite" parent="signs1"]
+
+transform/pos = Vector2( 5938.03, 1422.38 )
 texture = ExtResource( 12 )
+offset = Vector2( -2.44971, -74.2056 )
+
+[node name="sign1" type="Sprite" parent="signs1"]
+
+transform/pos = Vector2( 5189, 2010.74 )
+texture = ExtResource( 13 )
+offset = Vector2( 2.68506, -75.3058 )
+
+[node name="sign2" type="Sprite" parent="signs1"]
+
+transform/pos = Vector2( 5944.68, 2468.36 )
+texture = ExtResource( 14 )
+offset = Vector2( 3.2666, -69.2937 )
+
+[node name="sign3" type="Sprite" parent="signs1"]
+
+transform/pos = Vector2( 7000.63, 2461.71 )
+texture = ExtResource( 15 )
 offset = Vector2( -1.50439, -62.645 )
 
 [node name="tint" type="CanvasModulate" parent="."]

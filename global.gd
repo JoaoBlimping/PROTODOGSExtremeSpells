@@ -8,6 +8,7 @@ var inventory = []
 var switches = {}
 var town = null
 var area = null
+var song = null
 
 func restart():
 	switches.clear()
@@ -61,8 +62,7 @@ func preloadMice():
 	while true:
 		var file = dir.get_next()
 		if file == "": break
-		elif not file.begins_with("."):
-			mice[file] = {"pic":load("res://mice/%s" % file),"priority":0}
+		elif not file.begins_with("."): mice[file] = {"pic":load("res://mice/%s" % file),"priority":0}
 	dir.list_dir_end()
 
 func resetMouse():
@@ -93,16 +93,21 @@ func preloadSongs():
 	while true:
 		var file = dir.get_next()
 		if file == "": break
-		elif not file.begins_with("."):load(file)
+		elif not file.begins_with("."): load(file)
 	dir.list_dir_end()
 
 func playSong(name,loop=true):
+	song = name
 	musicPlayer.set_stream(load("res://songs/%s.ogg" % name))
 	musicPlayer.set_loop(loop)
 	musicPlayer.play()
 
 func stopSong():
 	musicPlayer.stop()
+	song = null
+
+func getSong():
+	return song
 
 func addSongCallback(caller,method):
 	musicPlayer.connect("finished",caller,method)

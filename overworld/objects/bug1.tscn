@@ -21,6 +21,8 @@ angular_damp = 1.0
 collision/layers = 3
 collision/mask = 0
 script/script = ExtResource( 1 )
+speed = 1000
+maximum = 500
 
 [node name="Sprite" type="Sprite" parent="."]
 

@@ -54,16 +54,16 @@ __meta__ = {
 
 [node name="aini" parent="actives" instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 589.576, 347.399 )
+transform/pos = Vector2( 265.807, 348.759 )
 autorun = true
 
 [node name="travongle" parent="actives" instance=ExtResource( 3 )]
 
-transform/pos = Vector2( 898.56, 377.462 )
+transform/pos = Vector2( 1010.11, 427.796 )
 
 [node name="phm" parent="actives" instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 758.264, 372.451 )
+transform/pos = Vector2( 392.324, 394.217 )
 
 [node name="secco" type="Area2D" parent="actives"]
 
@@ -75,6 +75,7 @@ angular_damp = 1.0
 script/script = ExtResource( 5 )
 realName = "Security Guard"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 

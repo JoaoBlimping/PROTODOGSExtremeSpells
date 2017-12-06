@@ -12,7 +12,7 @@ const songFile = "song%d"
 const talks = 3
 const songs = 4
 const OFFROAD_TIME = 4
-const N_FIENDS = 1000
+const N_FIENDS = 500
 var talking = false
 var outside = false
 var hurt = 0
@@ -53,7 +53,7 @@ func _process(delta):
 		
 	#hurting
 	if (outside): hurt += delta
-	elif (hurt > 0): hurt -= delta * 0.8
+	elif (hurt > 0): hurt -= delta * 0.8 * 1 / (hurt + 1)
 	blood.g = (OFFROAD_TIME - hurt) / OFFROAD_TIME
 	blood.b = (OFFROAD_TIME - hurt) / OFFROAD_TIME
 	tint.set_color(blood)

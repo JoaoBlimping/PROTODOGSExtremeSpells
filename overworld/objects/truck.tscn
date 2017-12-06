@@ -1,0 +1,139 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://overworld/scripts/car.gd" type="Script" id=1]
+[ext_resource path="res://overworld/pics/enemyBlad.png" type="Texture" id=2]
+[ext_resource path="res://overworld/pics/car.png" type="Texture" id=3]
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 23.3274, -4.17317, 30.1958, -5.24636, 22.8981, 26.7348, -9.94164, 27.1641 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -34.1958, 12.354, -24.1078, -20.7004, -5.64885, -27.3542, 13.2394, -26.0663, 23.3274, -4.17317, -9.94164, 27.1641, -31.1909, 25.0177 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 95.3862, -18.7504, 86.1765, 2.3586, 86.8934, -16.1648 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 71.1403, -18.7418, 95.3862, -18.7504, 86.8934, -16.1648, 71.4179, -14.2461 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 86.8934, -16.1648, 65.6852, 1.92124, 71.4179, -14.2461 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 71.4179, -14.2461, 40.0487, 1.52883, 44.4799, -10.5618, 71.1403, -18.7418 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -7.21125, -1.10736, 71.1403, -18.7418, 44.4799, -10.5618 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 28.5863, 1.59618, -7.21125, -1.10736, 44.4799, -10.5618 )
+
+[sub_resource type="GDScript" id=3]
+
+script/source = "extends Sprite
+
+var angle = 0
+
+
+func _ready():
+	set_process(true)
+
+func _process(delta):
+	angle += delta * -2
+	set_global_rot(angle)"
+
+[node name="armouredCar" type="Area2D"]
+
+input/pickable = false
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 5 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+collision/layers = 3
+collision/mask = 0
+script/script = ExtResource( 1 )
+speed = 60
+maximum = 10
+health = 16
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( -24.1078, -20.7004, -5.64885, -27.3542, 13.2394, -26.0663, 23.3274, -4.17317, 30.1958, -5.24636, 22.8981, 26.7348, -9.94164, 27.1641, -31.1909, 25.0177, -34.1958, 12.354 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="blade" type="Area2D" parent="."]
+
+transform/pos = Vector2( 9.38541, -5.60917 )
+transform/rot = 11.8911
+transform/scale = Vector2( 1.67756, 3.69896 )
+input/pickable = true
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 7 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 8 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 9 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 10 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 11 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="enemyBlad" type="Sprite" parent="blade"]
+
+transform/rot = -1.70755e-06
+transform/scale = Vector2( 1, 1 )
+texture = ExtResource( 2 )
+offset = Vector2( 45.512, -8.75934 )
+script/script = SubResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="blade"]
+
+build_mode = 0
+polygon = Vector2Array( -7.21125, -1.10736, 71.1403, -18.7418, 95.3862, -18.7504, 86.1765, 2.3586, 86.8934, -16.1648, 65.6852, 1.92124, 71.4179, -14.2461, 40.0487, 1.52883, 44.4799, -10.5618, 28.5863, 1.59618 )
+shape_range = Vector2( 0, 5 )
+trigger = false
+
+[node name="sprite" type="Sprite" parent="."]
+
+transform/pos = Vector2( -0.902794, -0.762077 )
+texture = ExtResource( 3 )
+
+[connection signal="body_enter" from="." to="." method="hit"]
+
+

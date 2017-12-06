@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://adventure/pics/startRooms/7.png" type="Texture" id=1]
 [ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
@@ -7,18 +7,13 @@
 
 script/source = "extends \"../../scripts/room.gd\"
 
-func leftDoor():
+func towardBus():
 	global.enterAdventure(\"start/8\")"
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -286.588, -114.785, -287.243, 499.422, -311.588, 491.217 )
-
-[sub_resource type="ConvexPolygonShape2D" id=3]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -328.758, 492.202, -331.588, -125.785, -286.588, -114.785, -311.588, 491.217 )
+points = Vector2Array( 543.557, -44.2106, 914.939, -57.8143, 925.822, 342.135, 562.603, 290.441 )
 
 [node name="room" type="Node2D"]
 
@@ -38,32 +33,28 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="leftDoor" type="Area2D" parent="actives"]
+[node name="towardBus" type="Area2D" parent="actives"]
 
-transform/pos = Vector2( 312.887, 107.47 )
 input/pickable = true
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 3 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/1/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-monitoring = false
 script/script = ExtResource( 2 )
 realName = "Inanimate Object"
 autorun = false
+pointer = "move"
 birthSwitch = null
 deathSwitch = null
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/leftDoor"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/towardBus"]
 
 build_mode = 0
-polygon = Vector2Array( -311.588, 491.217, -287.243, 499.422, -286.588, -114.785, -331.588, -125.785, -328.758, 492.202 )
-shape_range = Vector2( 0, 1 )
+polygon = Vector2Array( 562.603, 290.441, 925.822, 342.135, 914.939, -57.8143, 543.557, -44.2106 )
+shape_range = Vector2( 0, 0 )
 trigger = false
 
 [node name="gui" type="Node2D" parent="."]

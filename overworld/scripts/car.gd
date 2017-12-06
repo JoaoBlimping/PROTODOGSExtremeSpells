@@ -1,18 +1,24 @@
-extends RigidBody2D
+extends "bug.gd"
 
-const SPEED = -300
 var offroad = false
+export var health = 3
+var angle = 0
 
+func control(delta):
+	var angleToPlayer = get_pos().angle_to_point(player.get_pos())
+	angle = angleToPlayer
+	velocity = Vector2(sin(angle),cos(angle)) * -speed
 
-func _ready():
-	var mod = Color(randf(),randf(),randf())
-	get_node("sprite").set_modulate(mod)
-	set_process(true)
-
-func _process(delta):
-	var pos = get_pos()
-	var angular = get_angular_velocity()
-	var rot = get_rot()
-	var spin = clamp(angular + ((randf() *  46) - 23) * delta,-2,2)
-	set_angular_velocity(spin)
-	set_linear_velocity(Vector2(sin(rot),cos(rot)) * (-SPEED if offroad else SPEED))
+func hit(body):
+	level.get_node("sound").play("splat")
+	player.get_node("blade/particle").set_emitting(true)
+	var playerSpeed = player.get_linear_velocity().length()
+	if (body == player):
+		level.hurt += 2
+		player.score += abs(playerSpeed / 10)
+	else:
+		player.score += 5 + abs(playerSpeed / 10)
+	
+	health -= 1
+	if (health == 0):
+		queue_free()

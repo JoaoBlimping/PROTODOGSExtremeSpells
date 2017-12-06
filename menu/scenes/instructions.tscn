@@ -19,6 +19,7 @@ var pitch = 1
 
 func _ready():
 	voice = music.play(\"infowars\")
+	global.stopSong()
 
 
 func back():
