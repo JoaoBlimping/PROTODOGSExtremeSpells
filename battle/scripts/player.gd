@@ -9,7 +9,7 @@ onready var bullet = load("res://battle/objects/fogleBullet.tscn")
 onready var dispenser = get_node("/root/level/hud/friends/dispenser")
 
 
-const TICK = 0.012
+const TICK = 0.011
 var timer = 0
 
 
@@ -35,20 +35,24 @@ func attack():
 	while (true):
 		yield(tick,"timeout")
 		
-		#shooting
-		if (Input.is_action_pressed("ui_accept")):
-			timer -= TICK
-			if (timer < 0):
-				timer += 0.1
-				shoot(bullet,randf() / 2 - 0.25)
-		
 		#strafing
 		var speed = NORMAL_SPEED
+		var spread = 0.4
 		if (Input.is_action_pressed("ui_select")):
+			spread = 0.7
 			speed = STRAFE_SPEED
 			heart.show()
 		else:
 			heart.hide()
+		
+		#shooting
+		if (Input.is_action_pressed("ui_accept")):
+			timer -= TICK
+			if (timer < 0):
+				timer += 0.08
+				shoot(bullet,randf() * spread - spread / 2)
+		
+		
 		
 		#moving
 		velocity.x = 0

@@ -16,6 +16,8 @@ func _ready():
 
 
 func donut():
+	yield(createSoundWaiter(sound).r("jam"),S)
+	animation.play("press")
 	health = 100
 	velocity.x = 0
 	velocity.y = 0
@@ -41,32 +43,37 @@ func donut():
 		if (isDone()): return
 
 func discs():
-	health = 100
+	var tick = createTimer(0.4)
+	yield(createMover().r(get_node("/root/level/fatOrigin")),M)
+	yield(createSoundWaiter(sound).r("piadina"),S)
+	animation.play("press")
 	get_node("/root/level/overBackground/animation").play("dissapear")
-	yielding("moveTo",get_node("/root/level/fatOrigin"));yield()
+	health = 100
 	while (true):
 		var niceBullets = []
 		var meanBullets = []
-		for i in range(6):
-			niceBullets.append(weakref(shoot(bullet2,PI * 2 / 6 * i)))
-			meanBullets.append(weakref(shoot(bullet,PI * 2 / 6 * (i + 0.5))))
-		yielding("wait",0.5);yield()
+		for i in range(5):
+			meanBullets.append(weakref(shoot(bullet,PI * 2 / 5 * i)))
+		for i in range(4):
+			niceBullets.append(weakref(shoot(bullet2,PI * 2 / 4 * (i + 0.5))))
+		yield(tick.r(),T)
 		var angle = get_pos().angle_to_point(player.get_pos())
 		for bullet in meanBullets:
 			var ref = bullet.get_ref()
 			if (!ref): continue
 			ref.retarget(angle)
-		yielding("wait",0.5);yield()
+		yield(tick.r(),T)
 		for bullet in niceBullets:
 			var ref = bullet.get_ref()
 			if (!ref): continue
 			ref.retarget(ref.get_pos().angle_to_point(player.get_pos()))
+		if (isDone()): return
 		
 		
 		
 
 func flirt1():
-	health = 100
+	health = 70
 	var angle = 0
 	var tick = createTimer(0.1)
 	while (true):
@@ -77,7 +84,8 @@ func flirt1():
 		if (isDone()): return
 
 func flirt2():
-	health = 100
+	animation.play("still")
+	health = 80
 	var angle = 0
 	var tick = createTimer(0.05)
 	while (true):
@@ -91,12 +99,14 @@ func flirt2():
 		if (isDone()): return
 
 func flirt3():
+	yield(createSoundWaiter(sound).r("swirl"),S)
 	health = 100
 	var timer = 0
 	var tick = createTimer(0.1)
 	while (true):
 		timer += 0.2
 		var angle = cos(timer) * 2 + timer
+		velocity = Vector2(cos(timer * 2) * 150,0)
 		shoot(bullet,angle)
 		shoot(bullet,angle + PI)
 		shoot(bullet,angle + PI / 2)
@@ -106,3 +116,4 @@ func flirt3():
 		shoot(bullet2,angle + PI * 3 / 4)
 		shoot(bullet2,angle + PI * 7 / 4)
 		yield(tick.r(),T)
+		if (isDone()): return

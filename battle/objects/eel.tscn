@@ -15,9 +15,11 @@ texture = ExtResource( 1 )
 script/script = ExtResource( 2 )
 flippy = false
 walky = false
+target = true
+speed = 100
 spin = 15
-startHealth = 20
-healthDecay = 1
+startHealth = 50
+healthDecay = 10
 
 [node name="hitbox" type="Area2D" parent="."]
 

@@ -2,10 +2,10 @@
 
 [ext_resource path="res://battle/scripts/level.gd" type="Script" id=1]
 [ext_resource path="res://battle/pics/sky2.png" type="Texture" id=2]
-[ext_resource path="res://battle/pics/sky1.png" type="Texture" id=3]
+[ext_resource path="res://battle/pics/metalFloor.png" type="Texture" id=3]
 [ext_resource path="res://battle/objects/hud.tscn" type="PackedScene" id=4]
-[ext_resource path="res://battle/objects/fat.tscn" type="PackedScene" id=5]
-[ext_resource path="res://battle/objects/player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://battle/objects/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://battle/objects/robot.tscn" type="PackedScene" id=6]
 [ext_resource path="res://battle/scripts/bulletManager.gd" type="Script" id=7]
 [ext_resource path="res://battle/sounds/donut.wav" type="Sample" id=8]
 [ext_resource path="res://battle/sounds/jam.wav" type="Sample" id=9]
@@ -93,13 +93,11 @@ autoplay = ""
 
 [node name="actors" type="Node2D" parent="."]
 
-[node name="fat" parent="actors" instance=ExtResource( 5 )]
+[node name="player" parent="actors" instance=ExtResource( 5 )]
 
-transform/pos = Vector2( 490.452, 92.8683 )
-transform/scale = Vector2( 0.994638, 0.904363 )
-flippy = true
+[node name="robot" parent="actors" instance=ExtResource( 6 )]
 
-[node name="player" parent="actors" instance=ExtResource( 6 )]
+transform/pos = Vector2( 537.892, 98.3728 )
 
 [node name="bullets" type="Node2D" parent="."]
 
@@ -141,9 +139,5 @@ transform/pos = Vector2( 255.991, -0.106253 )
 [node name="corner" type="Position2D" parent="lifezone"]
 
 transform/pos = Vector2( 512.051, 599.997 )
-
-[node name="fatOrigin" type="Position2D" parent="."]
-
-transform/pos = Vector2( 494.571, 130.863 )
 
 

@@ -80,6 +80,21 @@ autoplay = ""
 transform/pos = Vector2( 27.7214, 16.7843 )
 centered = false
 
+[node name="Label" type="Label" parent="leftPanel"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 44.0
+margin/top = 45.0
+margin/right = 84.0
+margin/bottom = 59.0
+text = "BATEL"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [node name="health" type="Sprite" parent="."]
 
 transform/pos = Vector2( 37.4916, 49.3063 )

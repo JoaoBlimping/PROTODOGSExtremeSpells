@@ -15,45 +15,49 @@ onready var particles = get_node(\"particles\")
 
 
 func _ready():
-	routines.push_back(\"firstAttack\")
-	routines.push_back(\"finalAttack\")
-	routines.push_back(\"death\")
+	addRoutine(\"firstAttack\")
+	addRoutine(\"finalAttack\")
+	addRoutine(\"death\")
 
 
 func firstAttack():
 	health = 100
 	var angle = 0
+	var timer1 = createTimer(0.4)
+	var timer2 = createTimer(0.2)
 	
 	while (true):
-		yielding(\"wait\",0.4);yield()
+		yield(timer1.r(),T)
 		shoot(bullet,get_pos().angle_to_point(player.get_pos()))
-		yielding(\"wait\",0.2);yield()
+		yield(timer2.r(),T)
 		angle += 0.6
 		shoot(bullet,get_pos().angle_to_point(player.get_pos()) + sin(angle))
+		if (isDone()): return
 
 
 func finalAttack():
-	health = 10000
 	particles.set_emitting(true)
-	yielding(\"waitSound\",\"enough\");yield()
-	
+	var tick1 = createTimer(1.5)
+	var tick2 = createTimer(0.25)
+	yield(createSoundWaiter(sound).r(\"enough\"),S)
 	health = 100
 	while (true):
-		yielding(\"wait\",1.5);yield()
+		yield(tick1.r(),T)
 		for row in range(4):
 			for i in range(5):
 				shoot(bullet,get_pos().angle_to_point(player.get_pos()) + float(i - 2) / (row + 2))
-			yielding(\"wait\",0.25);yield()
+			yield(tick2.r(),T)
+		if (isDone()): return
 
 
 func death():
-	health = 100
 	sound.play(\"seccoDie\")
+	var tick = createTimer(0.3)
 	for i in range(20):
 		set_scale(Vector2(1,1) / i)
 		particles.set_global_scale(Vector2(1,1))
-		yielding(\"wait\",0.3);yield()
-	"
+		yield(tick.r(),T)
+	done()"
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
@@ -97,6 +101,7 @@ script/script = SubResource( 1 )
 flippy = true
 walky = false
 target = true
+speed = 100
 
 [node name="hitbox" type="Area2D" parent="."]
 

@@ -22,7 +22,7 @@ friction = 1.0
 bounce = 0.0
 script/script = ExtResource( 1 )
 speed = 160
-sound = "shot"
+sound = "throw"
 
 [node name="Sprite" type="Sprite" parent="."]
 

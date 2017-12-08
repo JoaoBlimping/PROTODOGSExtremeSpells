@@ -1,12 +1,16 @@
 extends Sprite
 
 onready var GoodTimer = preload("res://battle/scripts/GoodTimer.gd")
+onready var Mover = preload("res://battle/scripts/Mover.gd")
+onready var SoundWaiter = preload("res://battle/scripts/SoundWaiter.gd")
 onready var sound = get_node("sound")
 onready var animation = get_node("animation")
 onready var bullets = get_node("/root/level/bullets")
 onready var bulletSounds = get_node("/root/level/bulletSounds")
 
 const T = "timeout"
+const M = "moved"
+const S = "soundDone"
 signal bongo
 
 export var flippy = false
@@ -29,11 +33,13 @@ func _ready():
 
 
 func _process(delta):
-	var nRoutines = routines.size()
-	if (finished && nRoutines >= 1):
-		routines.pop_front()
-		call(routines.front())
-		finished = false
+	if (finished):
+		if (routines.size() > 1):
+			routines.pop_front()
+			call(routines.front())
+			finished = false
+		else:
+			queue_free()
 	
 	#move
 	set_pos(get_pos() + velocity * delta)
@@ -80,18 +86,28 @@ func isDone():
 		return true
 	else: return false
 
+func done():
+	finished = true
+
 
 func createTimer(time):
 	var timer = GoodTimer.new()
-	add_child(timer)
 	timer.set_wait_time(time)
 	timer.start()
+	add_child(timer)
 	return timer
 
-func reset():
-	stop()
-	start()
-	return self
+func createMover():
+	var mover = Mover.new()
+	mover.dude = self
+	add_child(mover)
+	return mover
+
+func createSoundWaiter(sp):
+	var waiter = SoundWaiter.new()
+	waiter.sp = sp
+	add_child(waiter)
+	return waiter
 
 
 func addRoutine(name):

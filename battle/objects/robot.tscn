@@ -1,0 +1,260 @@
+[gd_scene load_steps=11 format=1]
+
+[ext_resource path="res://battle/pics/robot.png" type="Texture" id=1]
+[ext_resource path="res://battle/sounds/jamdonut.wav" type="Sample" id=2]
+[ext_resource path="res://battle/sounds/piadina.wav" type="Sample" id=3]
+[ext_resource path="res://battle/sounds/strawberryswirl.wav" type="Sample" id=4]
+[ext_resource path="res://battle/pics/lightBullet.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=11]
+
+script/source = "extends \"../scripts/actor.gd\"
+
+onready var bullet = preload(\"res://battle/objects/fatBullet.tscn\")
+onready var bullet2 = preload(\"res://battle/objects/fatBullet2.tscn\")
+onready var jamBullet = preload(\"res://battle/objects/jamBullet.tscn\")
+onready var jam = preload(\"res://battle/objects/jam.tscn\")
+onready var player = get_node(\"/root/level/actors/player\")
+
+func _ready():
+	addRoutine(\"flirt1\")
+	addRoutine(\"donut\")
+	addRoutine(\"flirt2\")
+	addRoutine(\"discs\")
+	addRoutine(\"flirt3\")
+
+
+
+func donut():
+	yield(createSoundWaiter(sound).r(\"jam\"),S)
+	animation.play(\"press\")
+	health = 100
+	velocity.x = 0
+	velocity.y = 0
+	var donuts = []
+	var tick1 = createTimer(2.1)
+	var tick2 = createTimer(0.7)
+	while (true):
+		donuts.append(weakref(shoot(jamBullet,get_pos().angle_to_point(player.get_pos()))))
+		yield(tick1.r(),T)
+		var mainRef = donuts.back().get_ref()
+		if (mainRef): mainRef.damp(0.3)
+		for donut in donuts:
+			var instance = donut.get_ref()
+			if (!instance): continue
+			for i in range(4):
+				shoot(jam,(PI * 2 / 4) * i + PI,instance)
+		yield(tick2.r(),T)
+		for donut in donuts:
+			var instance = donut.get_ref()
+			if (!instance): continue
+			for i in range(4):
+				shoot(jam,(PI * 2 / 4) * i + PI,instance)
+		if (isDone()): return
+
+func discs():
+	var tick = createTimer(0.4)
+	yield(createMover().r(get_node(\"/root/level/fatOrigin\")),M)
+	yield(createSoundWaiter(sound).r(\"piadina\"),S)
+	animation.play(\"press\")
+	get_node(\"/root/level/overBackground/animation\").play(\"dissapear\")
+	health = 100
+	while (true):
+		var niceBullets = []
+		var meanBullets = []
+		for i in range(5):
+			meanBullets.append(weakref(shoot(bullet,PI * 2 / 5 * i)))
+		for i in range(4):
+			niceBullets.append(weakref(shoot(bullet2,PI * 2 / 4 * (i + 0.5))))
+		yield(tick.r(),T)
+		var angle = get_pos().angle_to_point(player.get_pos())
+		for bullet in meanBullets:
+			var ref = bullet.get_ref()
+			if (!ref): continue
+			ref.retarget(angle)
+		yield(tick.r(),T)
+		for bullet in niceBullets:
+			var ref = bullet.get_ref()
+			if (!ref): continue
+			ref.retarget(ref.get_pos().angle_to_point(player.get_pos()))
+		if (isDone()): return
+		
+		
+		
+
+func flirt1():
+	health = 70
+	var angle = 0
+	var tick = createTimer(0.1)
+	while (true):
+		angle += 0.5
+		shoot(bullet2,angle)
+		shoot(bullet,angle + PI)
+		yield(tick.r(),T)
+		if (isDone()): return
+
+func flirt2():
+	animation.play(\"still\")
+	health = 80
+	var angle = 0
+	var tick = createTimer(0.05)
+	while (true):
+		velocity = Vector2(cos(angle / 4) * 100,0)
+		angle -= 0.2
+		shoot(bullet,angle)
+		shoot(bullet,angle + PI)
+		shoot(bullet2,angle + PI / 2)
+		shoot(bullet2,angle + PI * 3 / 2)
+		yield(tick.r(),T)
+		if (isDone()): return
+
+func flirt3():
+	yield(createSoundWaiter(sound).r(\"swirl\"),S)
+	health = 100
+	var timer = 0
+	var tick = createTimer(0.1)
+	while (true):
+		timer += 0.2
+		var angle = cos(timer) * 2 + timer
+		velocity = Vector2(cos(timer * 2) * 150,0)
+		shoot(bullet,angle)
+		shoot(bullet,angle + PI)
+		shoot(bullet,angle + PI / 2)
+		shoot(bullet,angle + PI * 3 / 2)
+		shoot(bullet2,angle + PI / 4)
+		shoot(bullet2,angle + PI * 5 / 4)
+		shoot(bullet2,angle + PI * 3 / 4)
+		shoot(bullet2,angle + PI * 7 / 4)
+		yield(tick.r(),T)
+		if (isDone()): return"
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -66.0941, 89.7188, -69.0201, 41.4388, -59.2666, -79.0173, -31.4691, -88.7708, 81.6719, -6.35349, 35.8303, 81.9159 )
+
+[sub_resource type="SampleLibrary" id=8]
+
+samples/jam = {
+"db": 0.0,
+"pitch": 1.15,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+samples/piadina = {
+"db": 0.0,
+"pitch": 1.15,
+"priority": 0,
+"sample": ExtResource( 3 )
+}
+samples/swirl = {
+"db": 0.0,
+"pitch": 1.15,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+
+[sub_resource type="Animation" id=9]
+
+resource/name = "press"
+length = 0.4
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.1, 0.2, 0.3 ),
+"transitions": FloatArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 2, 3, 4, 3 ]
+}
+
+[sub_resource type="Animation" id=10]
+
+resource/name = "still"
+length = 0.2
+loop = true
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ 0, 1 ]
+}
+
+[node name="robot" type="Sprite" groups=[
+"target",
+]]
+
+texture = ExtResource( 1 )
+script/script = SubResource( 11 )
+flippy = false
+walky = false
+target = true
+speed = 100
+
+[node name="hitbox" type="Area2D" parent="."]
+
+editor/display_folded = true
+visibility/visible = false
+material/use_parent = true
+input/pickable = true
+shapes/0/shape = SubResource( 12 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hitbox"]
+
+visibility/behind_parent = true
+build_mode = 0
+polygon = Vector2Array( -66.0941, 89.7188, -69.0201, 41.4388, -59.2666, -79.0173, -31.4691, -88.7708, 81.6719, -6.35349, 35.8303, 81.9159 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="sound" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 8 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[node name="animation" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/press = SubResource( 9 )
+anims/still = SubResource( 10 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = "still"
+
+[node name="arms" type="Node2D" parent="."]
+
+[node name="left" type="Sprite" parent="arms"]
+
+transform/pos = Vector2( -122.407, 40.9648 )
+texture = ExtResource( 5 )
+
+
