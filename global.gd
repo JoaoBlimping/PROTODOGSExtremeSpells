@@ -9,6 +9,7 @@ var switches = {}
 var town = null
 var area = null
 var song = null
+var filename
 
 func restart():
 	switches.clear()
@@ -32,9 +33,13 @@ func addToInvetory(name):
 func inInventory(name):
 	return inventory.count(name) > 0
 	
-func drive(map,from):
+func drive(map,from=null):
 	town = from
 	get_tree().change_scene("res://overworld/scenes/%s.tscn" % map)
+
+func driveFile(file,from):
+	town = from
+	get_tree().change_scene(file)
 
 func battle(map):
 	setSwitch(map,true)
@@ -114,3 +119,32 @@ func addSongCallback(caller,method):
 
 func removeSongCallback(caller,method):
 	musicPlayer.disconnect("finished",caller,method)
+
+func joinArray(array):
+	var output = ""
+	for i in range(array.size()):
+		output += array[i] + ("@^@" if i != array.size() - 1 else "")
+	return output
+
+func splitArray(string):
+	return string.split("@^@")
+	
+
+func saveGame():
+	var file = File.new()
+	file.open("user://losSave%d.pig" % filename,File.WRITE)
+	file.store_line(area)
+	file.store_line(switches.to_json())
+	file.store_line(joinArray(inventory))
+	file.close()
+
+func loadGame():
+	var file = File.new()
+	file.open("user://losSave%d.pig" % filename,File.READ)
+	area = file.get_line()
+	switches.parse_json(file.get_line())
+	inventory = splitArray(file.get_line())
+	file.close()
+	
+	
+	

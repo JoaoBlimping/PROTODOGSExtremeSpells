@@ -1,0 +1,131 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://adventure/pics/dogRooms/2.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/pics/dogCheif.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func exit():
+	global.enterAdventure(\"dogCamp/1\")
+
+func chief():
+	say(\"\"\"Well stealing a car does sound pretty fun,
+		we'll just have to actually find one.\"\"\");yield()"
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 1026.54, 602.595 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -66.3073, 185.215, -97.1162, 51.2911, -59.3911, 59.4649, -8.4621, 165.095 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -59.3911, 59.4649, -95.8587, -191.407, -68.1935, -193.922, -56.8761, -98.9807 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -56.8761, -98.9807, -16.0071, -143.622, 61.3294, -194.551, 102.827, -172.545, 43.0956, -43.6505, -59.3911, 59.4649 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -8.4621, 165.095, -59.3911, 59.4649, 43.0956, -43.6505, 99.0545, -38.6205, 100.312, 132.4, 82.0782, 192.76, 25.4905, 197.162 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "ambience"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+autorun = false
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 1026.54, 602.595 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="chief" type="Area2D" parent="actives"]
+
+transform/pos = Vector2( 509.618, 312.714 )
+transform/scale = Vector2( 0.7, 0.7 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 5 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 6 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 7 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Cheif Keabebabfeba"
+autorun = false
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="Sprite" type="Sprite" parent="actives/chief"]
+
+texture = ExtResource( 3 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/chief"]
+
+build_mode = 0
+polygon = Vector2Array( 82.0782, 192.76, 25.4905, 197.162, -8.4621, 165.095, -66.3073, 185.215, -97.1162, 51.2911, -59.3911, 59.4649, -95.8587, -191.407, -68.1935, -193.922, -56.8761, -98.9807, -16.0071, -143.622, 61.3294, -194.551, 102.827, -172.545, 43.0956, -43.6505, 99.0545, -38.6205, 100.312, 132.4 )
+shape_range = Vector2( 0, 3 )
+trigger = false
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

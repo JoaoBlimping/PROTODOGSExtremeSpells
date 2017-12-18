@@ -17,7 +17,7 @@ func aini():
 		steer, and use your main button to activate the blade\"\"\",\"phm\");yield()
 		say(\"What.\\nWhy is there a blade\");yield()
 		say(\"There's a lotta snakes on the road these days\",\"phm\");yield()
-		global.drive(\"level\",\"kempsey\")
+		global.drive(\"agara\")
 	else:
 		say(\"A bus??\");yield()
 		say(\"Hahaha that's twice as good\",\"phm\");yield()

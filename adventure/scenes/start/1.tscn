@@ -56,6 +56,7 @@ points = Vector2Array( 822.74, 126.234, 854.661, 115.184, 841.156, 495.782, 816.
 [node name="room" type="Node2D"]
 
 script/script = SubResource( 1 )
+music = "ambience"
 
 [node name="background" type="Sprite" parent="."]
 

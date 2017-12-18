@@ -14,13 +14,17 @@ func _ready():
 	global.playSong(\"theme\")
 
 
-func newGame():
-	global.playSong(\"back\")
+func newGame(file):
 	global.enterAdventure(\"start/1\")
+	global.filename = file
+	global.addToInvetory(\"save_machine\")
+	global.saveGame()
 
 
-func oldGame():
-	pass # replace with function body
+func oldGame(file):
+	global.filename = file
+	global.loadGame()
+	global.enterAdventure(global.area)
 
 
 func instructions():
@@ -33,6 +37,7 @@ func quit():
 
 [node name="back" type="Sprite"]
 
+transform/rot = -0.0484464
 texture = ExtResource( 1 )
 centered = false
 region = true
@@ -47,87 +52,158 @@ centered = false
 
 [node name="Panel" type="Panel" parent="."]
 
-editor/display_folded = true
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
 theme/theme = ExtResource( 3 )
-margin/left = 458.0
-margin/top = 346.0
-margin/right = 658.0
-margin/bottom = 571.0
+margin/left = 272.0
+margin/top = 351.0
+margin/right = 809.0
+margin/bottom = 583.0
 
-[node name="Button" type="Button" parent="Panel"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 22.0
-margin/top = 27.0
-margin/right = 183.0
-margin/bottom = 61.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "New Game"
-flat = false
-
-[node name="Button1" type="Button" parent="Panel"]
+[node name="newA" type="Button" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 20.0
-margin/top = 77.0
-margin/right = 181.0
-margin/bottom = 113.0
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-text = "Old Game"
-flat = false
-
-[node name="Button2" type="Button" parent="Panel"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 2
-margin/left = 21.0
+margin/left = 29.0
 margin/top = 122.0
-margin/right = 182.0
-margin/bottom = 158.0
+margin/right = 186.0
+margin/bottom = 156.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "New Game A"
+flat = false
+
+[node name="newB" type="Button" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 198.0
+margin/top = 121.0
+margin/right = 350.0
+margin/bottom = 155.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "New Game B"
+flat = false
+
+[node name="newC" type="Button" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 363.0
+margin/top = 121.0
+margin/right = 514.0
+margin/bottom = 155.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "New Game C"
+flat = false
+
+[node name="oldA" type="Button" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 28.0
+margin/top = 28.0
+margin/right = 189.0
+margin/bottom = 64.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Old Game A"
+flat = false
+
+[node name="oldB" type="Button" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 198.0
+margin/top = 29.0
+margin/right = 350.0
+margin/bottom = 65.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Old Game B"
+flat = false
+
+[node name="oldC" type="Button" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 362.0
+margin/top = 30.0
+margin/right = 513.0
+margin/bottom = 66.0
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+text = "Old Game C"
+flat = false
+
+[node name="instructions" type="Button" parent="Panel"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 27.0
+margin/top = 72.0
+margin/right = 507.0
+margin/bottom = 108.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Instructions"
 flat = false
 
-[node name="Button3" type="Button" parent="Panel"]
+[node name="quit" type="Button" parent="Panel"]
 
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 20.0
-margin/top = 169.0
-margin/right = 181.0
-margin/bottom = 205.0
+margin/left = 27.0
+margin/top = 167.0
+margin/right = 511.0
+margin/bottom = 203.0
 toggle_mode = false
 enabled_focus_mode = 2
 shortcut = null
 text = "Quit"
 flat = false
 
-[connection signal="button_down" from="Panel/Button" to="." method="newGame"]
+[connection signal="button_down" from="Panel/newA" to="." method="newGame" binds= [ 0 ]]
 
-[connection signal="button_down" from="Panel/Button1" to="." method="oldGame"]
+[connection signal="button_down" from="Panel/newB" to="." method="newGame" binds= [ 1 ]]
 
-[connection signal="button_down" from="Panel/Button2" to="." method="instructions"]
+[connection signal="button_down" from="Panel/newC" to="." method="newGame" binds= [ 2 ]]
 
-[connection signal="button_down" from="Panel/Button3" to="." method="quit"]
+[connection signal="button_down" from="Panel/oldA" to="." method="oldGame" binds= [ 0 ]]
+
+[connection signal="button_down" from="Panel/oldB" to="." method="oldGame" binds= [ 1 ]]
+
+[connection signal="button_down" from="Panel/oldC" to="." method="oldGame" binds= [ 2 ]]
+
+[connection signal="button_down" from="Panel/instructions" to="." method="instructions"]
+
+[connection signal="button_down" from="Panel/quit" to="." method="quit"]
 
 

@@ -9,8 +9,9 @@ onready var bullet = load("res://battle/objects/fogleBullet.tscn")
 onready var dispenser = get_node("/root/level/hud/friends/dispenser")
 
 
-const TICK = 0.011
+const TICK = 0.0105
 var timer = 0
+var hurting = -1
 
 
 func _ready():
@@ -18,10 +19,13 @@ func _ready():
 
 
 func hit(body):
-	if (.hit(body)):
-		sounds.play("ow")
-	else:
-		body.set_pos(dispenser.get_global_pos())
+	if (hurting < 0):
+		if (.hit(body)):
+			sounds.play("ow")
+			hurting = 1
+			set_blend_mode(BLEND_MODE_ADD)
+		else:
+			body.set_pos(dispenser.get_global_pos())
 	
 	
 func die():
@@ -34,6 +38,11 @@ func attack():
 	
 	while (true):
 		yield(tick,"timeout")
+		
+		hurting -= TICK
+		if (hurting < 0):
+			set_blend_mode(BLEND_MODE_MIX)
+		
 		
 		#strafing
 		var speed = NORMAL_SPEED

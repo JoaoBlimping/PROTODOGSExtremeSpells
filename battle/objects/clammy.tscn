@@ -1,0 +1,287 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://battle/pics/clammy.png" type="Texture" id=1]
+[ext_resource path="res://battle/sounds/donut.wav" type="Sample" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../scripts/actor.gd\"
+
+onready var redBullet = preload(\"res://battle/objects/redBullet.tscn\")
+onready var yellowBullet = preload(\"res://battle/objects/yellowBullet.tscn\")
+onready var player = get_node(\"/root/level/actors/player\")
+
+const STAND = 0
+const JUMP = 1
+const HIT = 2
+
+
+func _ready():
+	addRoutine(\"flirt1\")
+	addRoutine(\"splitter\")
+	addRoutine(\"flirt2\")
+	addRoutine(\"drum\")
+	addRoutine(\"flirt3\")
+	addRoutine(\"slam\")
+	
+	
+func slam():
+	health = 100
+	var tick = createTimer(0.1)
+	var mover = createMover()
+	while (true):
+		var playerPos = player.get_pos()
+		set_frame(1)
+		yield(mover.r(player),M)
+		sound.play(\"donut\")
+		set_frame(2)
+		var offset = randf()
+		for i in range(4):
+			for u in range(5):
+				shoot(redBullet,offset + i * PI / 2 + float(u) / 5)
+			yield(tick.r(),T)
+		if (isDone()): return
+
+
+func drum():
+	var xn = 6
+	var yn = 8
+	var width = 512 / xn
+	var height = 600 / yn
+	
+	health = 100
+	var tick1 = createTimer(0.2)
+	var tick2 = createTimer(0.8)
+	set_frame(JUMP)
+	get_node(\"/root/level/overBackground/animation\").play(\"dissapear\")
+	yield(createMover().r(get_node(\"/root/level/clammyOrigin\")),M)
+	set_frame(STAND)
+	while (true):
+		var bullets = []
+		
+		
+		for y in range(yn):
+			for x in range(xn):
+				bullets.append(weakref(shootFrom(yellowBullet,0,Vector2(256 + (x + 0.5) * width,(y + 0.5) * height),0)))
+			yield(tick1.r(),T)
+		yield(tick2.r(),T)
+		
+		for i in range(8):
+			for bulletRef in bullets:
+				var bullet = bulletRef.get_ref()
+				if (!bullet): continue
+				bullet.gravify(randf() * PI * 2,(i + 1) * 20)
+			sound.play(\"donut\")
+			set_frame(HIT)
+			yield(tick2.r(),T)
+			set_frame(STAND)
+			yield(tick1.r(),T)
+			if (isDone()): return
+		yield(tick2.r(),T)
+
+
+func splitter():
+	health = 80
+	var tick1 = createTimer(0.06)
+	var tick2 = createTimer(0.5)
+	var length = 20
+	var space = 30
+	while (true):
+		set_frame(STAND)
+		yield(tick1.r(),T)
+		sound.play(\"donut\")
+		set_frame(HIT)
+		var angle = get_pos().angle_to_point(player.get_pos())
+		var bullets = []
+		for i in range(length):
+			bullets.append(weakref(shootFrom(yellowBullet,0,get_pos() + Vector2(-sin(angle) * i * space,-cos(angle) * i * space),0)))
+			yield(tick1.r(),T)
+		var num = randi()
+		for ref in bullets:
+			num += 1
+			var bullet = ref.get_ref()
+			if (!bullet): continue
+			bullet.gravify(angle + (PI / 2 if (num % 2) else -PI / 2),200)
+		yield(tick2.r(),T)
+		if (isDone()): return
+
+
+func flirt1():
+	health = 70
+	var tick1 = createTimer(0.1)
+	var tick2 = createTimer(0.3)
+	var head = 3
+	var tail = 10
+	var spread = 0.4
+	var halfSpread = float(spread) / 2
+	
+	while (true):
+		var angle = get_pos().angle_to_point(player.get_pos())
+		var diff = float(spread) / head
+		for i in range(head):
+			shoot(yellowBullet,angle + (i + 0.5) * diff - halfSpread)
+		yield(tick1.r(),T)
+		for i in range(tail):
+			shoot(redBullet,angle)
+			yield(tick1.r(),T)
+		yield(tick2.r(),T)
+		if (isDone()): return
+
+func flirt2():
+	health = 70
+	var tick1 = createTimer(0.1)
+	var head = 6
+	var tail = 6
+	var spread = 1
+	var halfSpread = float(spread) / 2
+	
+	while (true):
+		var angle = get_pos().angle_to_point(player.get_pos())
+		var diff = float(spread) / head
+		for i in range(head):
+			shoot(yellowBullet,angle + (i + 0.5) * diff - halfSpread)
+		yield(tick1.r(),T)
+		for i in range(tail):
+			shoot(redBullet,angle)
+			yield(tick1.r(),T)
+		yield(tick1.r(),T)
+		if (isDone()): return
+
+
+func flirt3():
+	health = 70
+	var tick1 = createTimer(0.15)
+	var head = 6
+	var tail = 2
+	var spread = 1
+	var halfSpread = float(spread) / 2
+	
+	while (true):
+		var angle = get_pos().angle_to_point(player.get_pos())
+		var diff = float(spread) / head
+		for i in range(head):
+			shoot(yellowBullet,angle + (i + 0.5) * diff - halfSpread)
+		yield(tick1.r(),T)
+		for i in range(tail):
+			shoot(redBullet,angle)
+			yield(tick1.r(),T)
+		yield(tick1.r(),T)
+		if (isDone()): return
+		
+		
+		
+		
+		
+		
+		
+		
+		"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 16.2677, 24.8813, 83.5626, 72.1172, 52.827, 73.7349, 10.1205, 45.5874 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -30.3212, 45.911, -23.8505, 70.4995, -50.3802, 63.3818, -51.3509, 39.4403, -40.9978, 26.499 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -64.9393, -20.7369, 0.738037, -69.5905, 49.2681, -44.3549, 78.7096, -22.0311, 23.7089, 1.91042, -40.9978, 26.499 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -40.9978, 26.499, 23.7089, 1.91042, 16.2677, 24.8813, -30.3212, 45.911 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -30.3212, 45.911, 16.2677, 24.8813, 10.1205, 45.5874 )
+
+[sub_resource type="SampleLibrary" id=7]
+
+samples/donut = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+
+[node name="clammy" type="Sprite"]
+
+transform/pos = Vector2( -1.52669, 27.4696 )
+transform/scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 1 )
+offset = Vector2( 1.52669, -27.4696 )
+hframes = 3
+script/script = SubResource( 1 )
+flippy = true
+walky = false
+target = true
+speed = 250
+
+[node name="hitbox" type="Area2D" parent="."]
+
+material/use_parent = true
+transform/pos = Vector2( 1.52669, -27.4696 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 4 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 5 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 6 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="hitbox"]
+
+visibility/behind_parent = true
+build_mode = 0
+polygon = Vector2Array( -50.3802, 63.3818, -23.8505, 70.4995, -30.3212, 45.911, 10.1205, 45.5874, 52.827, 73.7349, 83.5626, 72.1172, 16.2677, 24.8813, 23.7089, 1.91042, 78.7096, -22.0311, 49.2681, -44.3549, 0.738037, -69.5905, -64.9393, -20.7369, -40.9978, 26.499, -51.3509, 39.4403 )
+shape_range = Vector2( 0, 4 )
+trigger = false
+
+[node name="sound" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 7 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
+
+[node name="animation" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+

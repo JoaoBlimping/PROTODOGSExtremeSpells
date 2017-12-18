@@ -5,13 +5,12 @@ onready var Mover = preload("res://battle/scripts/Mover.gd")
 onready var SoundWaiter = preload("res://battle/scripts/SoundWaiter.gd")
 onready var sound = get_node("sound")
 onready var animation = get_node("animation")
-onready var bullets = get_node("/root/level/bullets")
-onready var bulletSounds = get_node("/root/level/bulletSounds")
+onready var bullets = get_node("/root/level/bulletStuff/bullets")
+onready var bulletSounds = get_node("/root/level/bulletStuff/bulletSounds")
 
 const T = "timeout"
 const M = "moved"
 const S = "soundDone"
-signal bongo
 
 export var flippy = false
 export var walky = false
@@ -25,13 +24,14 @@ var routines = []
 var finished = false
 
 
-
+# built in function which is used to set up some event thingies
 func _ready():
 	set_process(true)
 	var hitbox = get_node("hitbox")
 	hitbox.connect("body_enter",self,"hit")
 
 
+# built in function which controls routines and animation
 func _process(delta):
 	if (finished):
 		if (routines.size() > 1):
@@ -40,13 +40,13 @@ func _process(delta):
 			finished = false
 		else:
 			queue_free()
-	
+
 	#move
 	set_pos(get_pos() + velocity * delta)
 	if (flippy):
 		if (velocity.x < 0): set_flip_h(true)
 		if (velocity.x > 0): set_flip_h(false)
-	
+
 	#animate
 	if (walky):
 		if (velocity.length() == 0): animation.stop()
@@ -54,22 +54,34 @@ func _process(delta):
 			animation.play("walk")
 
 
+# Fires a copy of a given bullet at a given angle, and also optionally from an origin object.
 func shoot(bullet,angle,origin=self):
+	return shootFrom(bullet,angle,origin.get_global_pos())
+
+
+# Fires a copy of a given object at a given angle from a given vector position and optionally at a
+# given speed, otherwise using the default.
+func shootFrom(bullet,angle,location,speed=null):
 	var ib = bullet.instance()
 	if (ib.sound != null):
 		bulletSounds.play(ib.sound)
 	ib.owner = self
 	bullets.add_child(ib)
-	ib.set_pos(origin.get_pos())
+	ib.set_pos(location)
+	if (speed != null): ib.speed = speed
 	ib.velocity.x = -sin(angle) * ib.speed
 	ib.velocity.y = -cos(angle) * ib.speed
 	return ib
 
 
+# this is basically pointless, but the idea is that subclasses like player use it for stuff
+# actually, player is likely to be the only subclass that will use it and even then it's not really
+# that necessary these days. Whatever.
 func die():
-	return
+	if (target): global.enterAdventure(global.area)
 
 
+# This gets called when an actor is hit by a bullet or powerup which is a kind of bullet anyway
 func hit(body):
 	if (!body.is_in_group("power") && body.owner != self):
 		if (randi() % 5 > 3): bullets.addPowerup(body.get_pos())
@@ -80,16 +92,23 @@ func hit(body):
 	return false
 
 
+# This function checks if the actor is out of health and tells you if they are, and at the same time
+# if they are out of health it sets them to go to their next routine and blanks all bullets if they
+# are a target
 func isDone():
 	if (health < 1):
-		finished = true
+		done()
 		return true
 	else: return false
 
+
+# Ends the given routine and does all the stuff
 func done():
+	if (target): yield(bullets.clear(),"cleared")
 	finished = true
 
 
+# Creates a timer which lets you yield for a given amount of time.
 func createTimer(time):
 	var timer = GoodTimer.new()
 	timer.set_wait_time(time)
@@ -97,12 +116,16 @@ func createTimer(time):
 	add_child(timer)
 	return timer
 
+
+# Creates a mover which lets you yield until the actor has moved somewhere.
 func createMover():
 	var mover = Mover.new()
 	mover.dude = self
 	add_child(mover)
 	return mover
 
+
+# Creates a sound waiter which lets you yield until a sound has played.
 func createSoundWaiter(sp):
 	var waiter = SoundWaiter.new()
 	waiter.sp = sp
@@ -110,6 +133,8 @@ func createSoundWaiter(sp):
 	return waiter
 
 
+# adds a routine for the actor to perform. the name is the string name of the method to call.
+# they are performed in the order that they are added.
 func addRoutine(name):
 	if (routines.size() == 0): call(name)
 	routines.push_back(name)

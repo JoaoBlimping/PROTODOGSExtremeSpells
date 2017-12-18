@@ -9,6 +9,8 @@ onready var global = get_node("/root/global")
 const NORMAL = 0
 const ANGRY = 1
 
+export var music = "ambience"
+
 var running = null
 var gui = false
 var caller = null
@@ -18,6 +20,7 @@ func _ready():
 	set_process(true)
 	set_process_input(true)
 	global.resetMouse()
+	if (global.getSong() != music): global.playSong(music)
 
 func _process(delta):
 	if (!gui && running != null):
@@ -79,5 +82,6 @@ func ask(text,a1,a2,a3 = null,a4 = null,name = null):
 ##########################################################################################
 ############################### Item Functions ###########################################
 ##########################################################################################
-func bag_of_piss():
-	say("ok it's working so far");yield()
+func save_machine():
+	global.saveGame()
+	say("game saved!");yield()
