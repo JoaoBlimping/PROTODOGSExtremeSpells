@@ -18,7 +18,6 @@ func newGame(file):
 	global.enterAdventure(\"start/1\")
 	global.filename = file
 	global.addToInvetory(\"save_machine\")
-	global.saveGame()
 
 
 func oldGame(file):
