@@ -21,7 +21,7 @@ func _ready():
 
 
 func firstAttack():
-	health = 100
+	health = 80
 	var angle = 0
 	var timer1 = createTimer(0.4)
 	var timer2 = createTimer(0.2)
@@ -40,7 +40,7 @@ func finalAttack():
 	var tick1 = createTimer(1.5)
 	var tick2 = createTimer(0.25)
 	yield(createSoundWaiter(sound).r(\"enough\"),S)
-	health = 100
+	health = 80
 	while (true):
 		yield(tick1.r(),T)
 		for row in range(4):

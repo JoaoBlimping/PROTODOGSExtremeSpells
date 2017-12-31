@@ -1,5 +1,6 @@
 extends Node
 
+onready var animator = preload("animator.gd")
 onready var textbox = preload("res://adventure/objects/textbox.tscn")
 onready var question = preload("res://adventure/objects/question.tscn")
 onready var inventory = preload("res://adventure/objects/inventory.tscn")
@@ -11,23 +12,24 @@ const ANGRY = 1
 
 export var music = "ambience"
 
-var running = null
+signal animated
+signal said
+
+const S = "said"
+const A = "animated"
+
 var gui = false
 var caller = null
 var value = null
 
+
 func _ready():
-	set_process(true)
 	set_process_input(true)
 	global.resetMouse()
 	if (global.getSong() != music): global.playSong(music)
+	if (has_method("start")): start()
 
-func _process(delta):
-	if (!gui && running != null):
-		if (running.is_valid()):
-			running = running.resume()
-		else:
-			running = null
+
 
 func _input(event):
 	if (event.is_action_pressed("ui_select") && !gui):
@@ -35,9 +37,11 @@ func _input(event):
 		guiNode.add_child(ib)
 		gui = true
 
+
 func run(code,owner):
 	caller = owner
-	running = call(code)
+	call(code)
+
 
 func getActive(name):
 	if (name != null):
@@ -51,6 +55,7 @@ func pose(n,name = null):
 	var owner = getActive(name)
 	if (owner != null): owner.get_node("sprite").set_frame(n)
 
+
 func give(item):
 	get_node("/root/global").setSwitch(item,true)
 	say("Got %s!" % item)
@@ -58,11 +63,23 @@ func give(item):
 func say(text,name = null):
 	var ib = textbox.instance()
 	var active = getActive(name)
-	if (active == null): return
+	if (active == null): return ib
 	ib.get_node("name").set_text(active.realName)
+	
+	#make he text nicer
+	text = text.replace("\n"," ")
+	text = text.replace("~","\n")
+	
+	#back to work
 	ib.get_node("text").set_text(text)
 	guiNode.add_child(ib)
 	gui = true
+	return ib
+
+
+func battle(name):
+	gui = true
+	global.battle(name)
 
 
 func ask(text,a1,a2,a3 = null,a4 = null,name = null):
@@ -79,9 +96,19 @@ func ask(text,a1,a2,a3 = null,a4 = null,name = null):
 	guiNode.add_child(ib)
 	gui = true
 
+func createAnimator():
+	return animator.new(self)
+	
+	
+
 ##########################################################################################
 ############################### Item Functions ###########################################
 ##########################################################################################
 func save_machine():
 	global.saveGame()
 	say("game saved!");yield()
+
+func tunneler():
+	ask("""If you dig a hole with the tunneler, you might not be able to
+	get back up, will you continue?""","yeah","nah"); yield()
+	if (value == "a"): global.enterAdventure("tunnel/1")

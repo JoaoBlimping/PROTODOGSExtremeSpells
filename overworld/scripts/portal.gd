@@ -11,4 +11,4 @@ func _ready():
 func hit(body):
 	if (body == player):
 		if (driving): get_node("/root/global").driveFile(destination,get_node("/root/level").title)
-		else: get_tree().change_scene(destination)
+		else: global.enterAdventure(destination.right(23).split(".")[0])

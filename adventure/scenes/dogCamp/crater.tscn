@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://adventure/pics/dogRooms/crater.png" type="Texture" id=1]
-[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
-[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=3]
-[ext_resource path="res://battle/pics/robot.png" type="Texture" id=4]
+[ext_resource path="res://adventure/scripts/trog.gd" type="Script" id=2]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=3]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=4]
+[ext_resource path="res://battle/pics/robot.png" type="Texture" id=5]
 
 [sub_resource type="GDScript" id=1]
 
@@ -11,14 +12,20 @@ script/source = "extends \"../../scripts/room.gd\"
 
 onready var anim = get_node(\"animation\")
 
+# ok I've gotta make this whole system asynchronous for it to work
+# should be not too bad
+
 
 func phm():
-	say(\"uhuho the robot is coming\");yield()
-	anim.play(\"enterRobot\")
-	yield(anim,\"finished\")
-	say(\"weeeoeooe\");yield()"
+	if (global.battled(\"firstRobotBattle\")):
+		yield(say(\"nice\"),S)
+	else:
+		yield(say(\"uhuho the robot is coming\"),S)
+		yield(createAnimator().r(\"enterRobot\"),A)
+		yield(say(\"weeeoeooe\"),S)
+		global.battle(\"firstRobotBattle\")"
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 
 resource/name = "enterRobot"
 length = 1.0
@@ -43,6 +50,9 @@ points = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 10
 [node name="room" type="Node2D"]
 
 script/script = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
 music = "ambience"
 
 [node name="animation" type="AnimationPlayer" parent="."]
@@ -50,7 +60,7 @@ music = "ambience"
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/enterRobot = SubResource( 4 )
+anims/enterRobot = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -58,11 +68,56 @@ autoplay = ""
 
 [node name="background" type="Sprite" parent="."]
 
+editor/display_folded = true
 texture = ExtResource( 1 )
 centered = false
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="trog" type="Position2D" parent="background"]
+
+transform/pos = Vector2( 525.456, 289.073 )
+script/script = ExtResource( 2 )
+
+[node name="trog1" type="Position2D" parent="background"]
+
+transform/pos = Vector2( 561.028, 265.608 )
+script/script = ExtResource( 2 )
+
+[node name="trog2" type="Position2D" parent="background"]
+
+transform/pos = Vector2( 477.826, 302.975 )
+script/script = ExtResource( 2 )
+
+[node name="trog3" type="Position2D" parent="background"]
+
+transform/pos = Vector2( 480.841, 266.799 )
+script/script = ExtResource( 2 )
+
+[node name="trog4" type="Position2D" parent="background"]
+
+transform/pos = Vector2( 596.906, 268.306 )
+script/script = ExtResource( 2 )
+
+[node name="trog5" type="Position2D" parent="background"]
+
+transform/pos = Vector2( 542.642, 325.585 )
+script/script = ExtResource( 2 )
+
+[node name="trog6" type="Position2D" parent="background"]
+
+transform/pos = Vector2( 581.007, 312.076 )
+script/script = ExtResource( 2 )
+
+[node name="trog7" type="Position2D" parent="background"]
+
+transform/pos = Vector2( 575.063, 233.184 )
+script/script = ExtResource( 2 )
+
+[node name="offset" type="Position2D" parent="background"]
+
+transform/pos = Vector2( -14.44, -20.7575 )
 
 [node name="actives" type="Node2D" parent="."]
 
@@ -81,9 +136,8 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 2 )
-realName = "Inanimate Object"
-autorun = false
+script/script = ExtResource( 3 )
+realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
@@ -95,10 +149,9 @@ polygon = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 1
 shape_range = Vector2( 0, 0 )
 trigger = false
 
-[node name="phm" parent="actives" instance=ExtResource( 3 )]
+[node name="phm" parent="actives" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 203.921, 347.42 )
-autorun = true
 
 [node name="animated crap" type="Node2D" parent="."]
 
@@ -106,7 +159,7 @@ autorun = true
 
 transform/pos = Vector2( 1115.59, 261.289 )
 transform/scale = Vector2( 2, 2 )
-texture = ExtResource( 4 )
+texture = ExtResource( 5 )
 flip_h = true
 
 [node name="gui" type="Node2D" parent="."]

@@ -10,40 +10,43 @@
 
 script/source = "extends \"../../scripts/room.gd\"
 
-func phm():
-	if (!global.getSwitch(\"firstSpeech\")):
-		say(\"OI!\\nWake UP\");yield()
-		say(\"\"\"it's time to get out of this hell hole, the cops have stopped
+func start():
+	if (!global.hasSwitch(\"firstSpeak\")):
+		yield(say(\"OI!\\nWake UP\",\"aini\"),S)
+		yield(say(\"\"\"it's time to get out of this hell hole, the cops have stopped
 		patrolling the streets for some reason.
 		I can't wait to get out of this fucking dump.
-		Thanks for letting us stay here though, Travongle\"\"\");yield()
-		say(\"Yeah, no worries bro, so, uh,\\nDo you know where we're going?\",\"travongle\");yield()
+		Thanks for letting us stay here though, Travongle\"\"\",\"phm\"),S)
+		yield(say(\"Yeah, no worries bro, so, uh,\\nDo you know where we're going?\",\"travongle\"),S)
 		pose(ANGRY,\"aini\")
-		say(\"He's coming with us?\",\"aini\");yield()
+		yield(say(\"He's coming with us?\",\"aini\"),S)
 		pose(NORMAL,\"aini\")
-		say(\"\"\"Well we can't really leave Travongle here now he's kept us hidden from the cops
+		yield(say(\"\"\"Well we can't really leave Travongle here now he's kept us hidden from the cops
 		for three days, they'll find out eventually.
-		No clue where we should go though, I guess we can just figure it out.\"\"\");yield()
-		say(\"\"\"Don't worry cunts, I know a spot in the bush.
+		No clue where we should go though, I guess we can just figure it out.\"\"\",\"phm\"),S)
+		yield(say(\"\"\"Don't worry cunts, I know a spot in the bush.
 		I used to grow weed out that way before I got too paranoid for that shit.
 		Anyway, there's an alain village, so I reckon they'll let us stay
-		for a while til we can all figure something out.\"\"\",\"travongle\");yield()
-		say(\"\"\"Don't have a car though, lol
+		for a while til we can all figure something out.\"\"\",\"travongle\"),S)
+		yield(say(\"\"\"Don't have a car though, lol
 		Most of the time if somebody parks their car around here
-		someone lights it on fire anyway.\"\"\",\"travongle\");yield()
-		say(\"\"\"Well stealing a car does sound pretty fun,
-		we'll just have to actually find one.\"\"\",\"aini\");yield()
-		global.setSwitch(\"firstSpeech\",true)
-	else:
-		say(\"we need to find a vehicle while there's no cops around\");yield()
+		someone lights it on fire anyway.\"\"\",\"travongle\"),S)
+		yield(say(\"\"\"Well stealing a car does sound pretty fun,
+		we'll just have to actually find one.\"\"\",\"aini\"),S)
+		print(get_tree().get_current_scene().get_name())
+		global.setSwitch(\"firstSpeak\",true)
+	
+
+func phm():
+	say(\"we need to find a vehicle while there's no cops around\")
 	
 	
 func aini():
-	say(\"We've gotta get going. I want to find a car!\");yield()
+	say(\"We've gotta get going. I want to find a car!\")
 
 
 func travongle():
-	say(\"Hey bro, I need some space right now\");yield()
+	say(\"Hey bro, I need some space right now\")
 
 func door():
 	global.enterAdventure(\"start/2\")"
@@ -79,7 +82,6 @@ transform/pos = Vector2( 440.623, 336.404 )
 [node name="phm" parent="actives" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 687.199, 311.631 )
-autorun = true
 
 [node name="aini" parent="actives" instance=ExtResource( 4 )]
 
@@ -98,7 +100,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 5 )
 realName = "Inanimate Object"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null

@@ -69,6 +69,10 @@ editor/display_folded = true
 [node name="robot" parent="actors" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 537.892, 98.3728 )
+flippy = false
+walky = false
+target = true
+speed = 100
 
 [node name="bulletStuff" parent="." instance=ExtResource( 7 )]
 

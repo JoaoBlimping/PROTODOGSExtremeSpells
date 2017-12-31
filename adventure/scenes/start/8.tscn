@@ -10,33 +10,35 @@
 
 script/source = "extends \"../../scripts/room.gd\"
 
-func aini():
+func start():
 	if (global.battled(\"seccoBattle\")):
-		say(\"\"\"Alright, lets go.
+		yield(say(\"\"\"Alright, lets go.
 		It's pretty easy to drive, just use your arrows to
-		steer, and use your main button to activate the blade\"\"\",\"phm\");yield()
-		say(\"What.\\nWhy is there a blade\");yield()
-		say(\"There's a lotta snakes on the road these days\",\"phm\");yield()
+		steer, and use your main button to activate the blade\"\"\",\"phm\"),S)
+		yield(say(\"What.\\nWhy is there a blade\",\"aini\"),S)
+		yield(say(\"There's a lotta snakes on the road these days\",\"phm\"),S)
 		global.drive(\"agara\")
 	else:
-		say(\"A bus??\");yield()
-		say(\"Hahaha that's twice as good\",\"phm\");yield()
-		say(\"very true\");yield()
+		yield(say(\"A bus??\",\"aini\"),S)
+		yield(say(\"Hahaha that's twice as good\",\"phm\"),S)
+		yield(say(\"very true\",\"aini\"),S)
 		global.stopSong()
-		say(\"OI\",\"secco\");yield()
-		say(\"\"\"You're tresspassing.\\nI've already called the cops,
+		yield(say(\"OI\",\"secco\"),S)
+		yield(say(\"\"\"You're tresspassing.\\nI've already called the cops,
 		now just stay right where you are and I'll detail you
-		until they get here\"\"\",\"secco\");yield()
-		say(\"FUUUUUUUCK\",\"travongle\");yield()
-		say(\"\"\"no you won't you fat cunt
-		use your movement keys to move,
+		until they get here\"\"\",\"secco\"),S)
+		yield(say(\"FUUUUUUUCK\",\"travongle\"),S)
+		yield(say(\"\"\"no you won't you fat cunt.
+		~
+		Use your movement keys to move,
 		one button to shoot and the other to go slow and see your
-		hit box.\"\"\",\"phm\");yield()
-		global.battle(\"seccoBattle\")"
+		hit box.\"\"\",\"phm\"),S)
+		battle(\"seccoBattle\")"
 
 [node name="room" type="Node2D"]
 
 script/script = SubResource( 1 )
+music = "ambience"
 
 [node name="background" type="Sprite" parent="."]
 
@@ -55,7 +57,6 @@ __meta__ = {
 [node name="aini" parent="actives" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 265.807, 348.759 )
-autorun = true
 
 [node name="travongle" parent="actives" instance=ExtResource( 3 )]
 
@@ -74,7 +75,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 5 )
 realName = "Security Guard"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null

@@ -29,7 +29,9 @@ func _ready():
 	play()
 	
 	#add cars
-	var bounds = get_node("ground").get_region_rect()
+	var ground = get_node("ground")
+	var bounds = ground.get_region_rect()
+	bounds.pos += ground.get_pos()
 	for c in range(N_FIENDS):
 		var ib = bugs[randi() % 2].instance()
 		var angle = randf() * PI * 2

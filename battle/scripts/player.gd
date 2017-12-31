@@ -7,6 +7,7 @@ onready var sounds = get_node("sounds")
 onready var heart = get_node("hitbox/heart")
 onready var bullet = load("res://battle/objects/fogleBullet.tscn")
 onready var dispenser = get_node("/root/level/hud/friends/dispenser")
+var bounds
 
 
 const TICK = 0.0105
@@ -15,17 +16,20 @@ var hurting = -1
 
 
 func _ready():
+	var lifezone = get_node("/root/level/lifezone")
+	bounds = Rect2(lifezone.get_pos(),lifezone.get_node("corner").get_pos())
 	attack()
 
 
 func hit(body):
-	if (hurting < 0):
+	if (body.is_in_group("power")):
+		body.set_pos(dispenser.get_global_pos())
+	elif (hurting < 0):
 		if (.hit(body)):
 			sounds.play("ow")
 			hurting = 1
 			set_blend_mode(BLEND_MODE_ADD)
-		else:
-			body.set_pos(dispenser.get_global_pos())
+			
 	
 	
 func die():
@@ -62,7 +66,6 @@ func attack():
 				shoot(bullet,randf() * spread - spread / 2)
 		
 		
-		
 		#moving
 		velocity.x = 0
 		velocity.y = 0
@@ -70,3 +73,11 @@ func attack():
 		if (Input.is_action_pressed("ui_right")): velocity.x = speed
 		if (Input.is_action_pressed("ui_up")): velocity.y = -speed
 		if (Input.is_action_pressed("ui_down")): velocity.y = speed
+		
+		var pos = get_pos()
+		
+		if (pos.x < bounds.pos.x): pos.x = bounds.pos.x
+		if (pos.y< bounds.pos.y): pos.y = bounds.pos.y
+		if (pos.x > bounds.pos.x + bounds.size.x): pos.x = bounds.pos.x + bounds.size.x
+		if (pos.y > bounds.pos.y + bounds.size.y): pos.y = bounds.pos.y + bounds.size.y
+		set_pos(pos)

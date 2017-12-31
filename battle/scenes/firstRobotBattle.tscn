@@ -1,0 +1,137 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://battle/scripts/level.gd" type="Script" id=1]
+[ext_resource path="res://battle/pics/cMines.png" type="Texture" id=2]
+[ext_resource path="res://battle/pics/grass.png" type="Texture" id=3]
+[ext_resource path="res://battle/objects/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://battle/objects/shitRobot.tscn" type="PackedScene" id=5]
+[ext_resource path="res://battle/objects/hud.tscn" type="PackedScene" id=6]
+[ext_resource path="res://battle/objects/bulletStuff.tscn" type="PackedScene" id=7]
+[ext_resource path="res://menu/songs/theme.ogg" type="AudioStream" id=8]
+
+[node name="level" type="Node2D"]
+
+script/script = ExtResource( 1 )
+song = "battle"
+
+[node name="background1" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 1024, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 3 )
+centered = false
+region = true
+region_rect = Rect2( 0, 0, 1024, 600 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actors" type="Node2D" parent="."]
+
+[node name="player" parent="actors" instance=ExtResource( 4 )]
+
+[node name="robot" parent="actors" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 499.95, 109.701 )
+
+[node name="hud" parent="." instance=ExtResource( 6 )]
+
+[node name="bulletStuff" parent="." instance=ExtResource( 7 )]
+
+[node name="music" type="StreamPlayer" parent="."]
+
+stream/stream = ExtResource( 8 )
+stream/play = false
+stream/loop = true
+stream/volume_db = 0.0
+stream/autoplay = true
+stream/paused = false
+stream/loop_restart_time = 0.0
+stream/buffering_ms = 500
+
+[node name="lifezone" type="Position2D" parent="."]
+
+editor/display_folded = true
+transform/pos = Vector2( 255.991, -0.106253 )
+
+[node name="corner" type="Position2D" parent="lifezone"]
+
+transform/pos = Vector2( 512.051, 599.997 )
+
+[node name="guns" type="Node2D" parent="."]
+
+editor/display_folded = true
+
+[node name="Position2D" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 279.001, 72.0002 )
+
+[node name="Position2D1" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 420.725, 73.6292 )
+
+[node name="Position2D2" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 568.966, 76.8873 )
+
+[node name="Position2D3" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 711.505, 83.4034 )
+
+[node name="Position2D4" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 707.433, 218.612 )
+
+[node name="Position2D5" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 561.635, 219.426 )
+
+[node name="Position2D6" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 422.354, 212.91 )
+
+[node name="Position2D7" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 279.815, 205.58 )
+
+[node name="Position2D8" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 274.928, 346.49 )
+
+[node name="Position2D9" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 270.856, 484.142 )
+
+[node name="Position2D10" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 415.838, 489.843 )
+
+[node name="Position2D11" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 556.748, 492.287 )
+
+[node name="Position2D12" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 700.916, 498.803 )
+
+[node name="Position2D13" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 700.102, 362.78 )
+
+[node name="Position2D14" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 564.079, 355.449 )
+
+[node name="Position2D15" type="Position2D" parent="guns"]
+
+transform/pos = Vector2( 419.911, 348.933 )
+
+

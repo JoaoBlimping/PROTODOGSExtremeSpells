@@ -2,7 +2,7 @@ extends Node2D
 
 onready var screen = get_viewport().get_rect()
 onready var power = load("res://battle/objects/power.tscn")
-var lifeRect = null
+var lifeRect
 
 signal cleared
 

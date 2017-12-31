@@ -11,6 +11,10 @@ var area = null
 var song = null
 var filename
 
+func _enter_tree():
+	preloadMice()
+	preloadSongs()
+
 func restart():
 	switches.clear()
 	town = null
