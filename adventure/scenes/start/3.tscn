@@ -28,6 +28,7 @@ points = Vector2Array( 470.366, 600.08, 384.628, 570.298, 341.308, 543.223, 311.
 [node name="room" type="Node2D"]
 
 script/script = SubResource( 1 )
+music = "ambience"
 
 [node name="background" type="Sprite" parent="."]
 
@@ -56,7 +57,6 @@ angular_damp = 1.0
 monitoring = false
 script/script = ExtResource( 2 )
 realName = "Inanimate Object"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
@@ -84,7 +84,6 @@ priority = 1.0
 monitoring = false
 script/script = ExtResource( 3 )
 realName = "Rug"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null

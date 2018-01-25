@@ -1,0 +1,270 @@
+[gd_scene load_steps=7 format=1]
+
+[ext_resource path="res://adventure/pics/kempsey/circuit.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/puzzle.gd" type="Script" id=2]
+[ext_resource path="res://adventure/scenes/kempsey/block.tscn" type="PackedScene" id=3]
+[ext_resource path="res://adventure/scenes/kempsey/electroWeird.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/scenes/kempsey/police.tscn" type="PackedScene" id=5]
+[ext_resource path="res://adventure/scenes/kempsey/node.tscn" type="PackedScene" id=6]
+
+[node name="circuit" type="Sprite"]
+
+texture = ExtResource( 1 )
+script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="blockages" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="block" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -120.433, 142.14 )
+
+[node name="block1" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -95.9062, 142.404 )
+
+[node name="block2" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -71.3268, 135.089 )
+
+[node name="block3" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -46.4705, 135.629 )
+
+[node name="block4" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -25.937, 134.548 )
+
+[node name="block5" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 2.70178, 136.71 )
+
+[node name="block6" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 28.6389, 137.79 )
+
+[node name="block7" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 57.2776, 140.492 )
+
+[node name="block8" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 83.755, 139.412 )
+
+[node name="block9" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 112.394, 140.492 )
+
+[node name="block10" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 139.491, 138.7 )
+
+[node name="block11" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -149.697, 138.7 )
+
+[node name="block55" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -146.771, 119.68 )
+
+[node name="block12" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -145.308, 100.174 )
+
+[node name="block22" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 148.757, 117.242 )
+
+[node name="block23" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 149.732, 92.3709 )
+
+[node name="block24" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 146.319, 70.4258 )
+
+[node name="block25" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 147.782, 45.5546 )
+
+[node name="block26" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 148.269, 21.1711 )
+
+[node name="block27" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 149.245, -3.21245 )
+
+[node name="block28" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 150.708, -24.1823 )
+
+[node name="block29" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 152.658, -49.0535 )
+
+[node name="block30" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 154.121, -72.4616 )
+
+[node name="block31" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 153.634, -97.3328 )
+
+[node name="block32" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 149.245, -122.204 )
+
+[node name="block33" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 149.245, -145.124 )
+
+[node name="block34" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -138.481, -153.903 )
+
+[node name="block35" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -112.634, -155.366 )
+
+[node name="block36" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -86.3, -154.39 )
+
+[node name="block37" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -59.9658, -155.853 )
+
+[node name="block38" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -37.533, -154.39 )
+
+[node name="block39" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -19.0015, -154.878 )
+
+[node name="block40" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 6.35736, -157.316 )
+
+[node name="block41" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 32.6916, -156.341 )
+
+[node name="block42" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 63.4148, -154.878 )
+
+[node name="block43" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 87.3106, -154.878 )
+
+[node name="block44" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 111.206, -153.415 )
+
+[node name="block45" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 124.861, -153.903 )
+
+[node name="block46" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -147.746, -132.933 )
+
+[node name="block47" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -149.697, -108.549 )
+
+[node name="block48" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -150.672, -79.7767 )
+
+[node name="block49" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -148.234, -54.4178 )
+
+[node name="block50" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -149.697, -31.0096 )
+
+[node name="block51" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -149.697, -2.23711 )
+
+[node name="block56" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -49.6806, 26.7999 )
+
+[node name="block57" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -83.3779, 8.51738 )
+
+[node name="block60" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -65.4538, 59.0633 )
+
+[node name="block61" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 42.4492, 3.14015 )
+
+[node name="block62" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 41.3738, -113.008 )
+
+[node name="block64" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -117.792, 0.989258 )
+
+[node name="block65" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 128.126, 2.0647 )
+
+[node name="block66" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 128.126, 2.0647 )
+
+[node name="block67" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -8.45522, -136.668 )
+
+[node name="block68" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -2.36101, 107.458 )
+
+[node name="block52" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -151.16, 25.5601 )
+
+[node name="block53" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -150.185, 53.845 )
+
+[node name="block54" parent="blockages" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -149.209, 76.7655 )
+
+[node name="dudes" type="Node2D" parent="."]
+
+[node name="player" parent="dudes" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( -111.442, -93.8554 )
+
+[node name="police" parent="dudes" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 101.42, -99.6724 )
+
+[node name="police1" parent="dudes" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( -52.9159, 97.6417 )
+
+[node name="node" parent="dudes" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 114.511, -45.2784 )
+
+

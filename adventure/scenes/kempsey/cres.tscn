@@ -1,0 +1,257 @@
+[gd_scene load_steps=18 format=1]
+
+[ext_resource path="res://adventure/pics/kempsey/corduroy.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/pics/derro.png" type="Texture" id=3]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func derro():
+	say(\"my house is all broke\")
+
+func trash():
+	if (s(\"foundTrash\")): say(\"you search through the trash and find nothing except trash. It's nice trash though.\")
+	else: 
+		say(\"you search through the trash and find a tunneling device!!\")
+		global.addToInvetory(\"tunneler\")
+		s(\"foundTrash\",true)
+
+func exit():
+	global.enterAdventure(\"kempsey/map\")
+
+func weird():
+	say(\"iiiiieeeeeeeeeeee\")
+	
+func phm():
+	yield(say(\"\"\"there are two main kinds of weirds that you can find. Day weirds and Night weirds.
+	This one is a day weird which is the nice kind usually. They come out of spirits which
+	are inside rocks and things, these ones are coming out of the river I think.\"\"\"),S)
+	yield(say(\"\"\"Some weirds are a lot more advanced than this one, a lot of them can talk
+	and sometimes they even look like us, but they are not so common in this day and age.
+	~
+	These days also most spirits are dead because the large boulders are broken up and hills paved over
+	and old trees get cut down because they are a safety hazard\"\"\"),S)
+	yield(say(\"\"\"Most people in this age don't see them anyway due to a lack of sensitivity due
+	to the distorted notions of the world they are taught and also too many medicines\"\"\"),S)
+"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 891.175, 150.022, 811.336, 110.698, 903.886, 79.3184, 925.733, 98.3845, 950.757, 152.405 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 950.757, 152.405, 925.733, 98.3845, 976.973, 96.3984 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 347.557, 367.061, 569.571, 306.593, 619.209, 414.893, 392.682, 444.676 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -8.83208, -127.921, 19.8467, -121.109, -2.37935, -112.147, -40.3787, -116.449 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 33.1106, 97.566, 78.9966, 132.339, 54.2612, 142.018, -10.6245, 89.3209 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -54.0011, 135.207, -37.8693, 148.112, -55.0766, 157.433, -84.1138, 125.528 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -54.0011, 135.207, -84.1138, 125.528, -31.7751, 106.887, -7.03966, 121.226 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -10.6245, 89.3209, -7.03966, 121.226, -31.7751, 106.887, -85.5477, -9.97925 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -29.4207, -49.5434, -48.1856, -88.3672, -40.3787, -116.449, -2.37935, -112.147, 15.1864, -71.997, -0.586929, -51.9219 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -0.586929, -51.9219, 41.3557, 1.85074, 52.1103, 66.3779, 33.1106, 97.566, -10.6245, 89.3209, -85.5477, -9.97925, -29.4207, -49.5434 )
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -29.4207, -49.5434, -85.5477, -9.97925, -66.548, -49.4125 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="weird" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 4 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Water Weird"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/weird"]
+
+build_mode = 0
+polygon = Vector2Array( 811.336, 110.698, 903.886, 79.3184, 925.733, 98.3845, 976.973, 96.3984, 950.757, 152.405, 891.175, 150.022 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="trash" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "use"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/trash"]
+
+build_mode = 0
+polygon = Vector2Array( 347.557, 367.061, 569.571, 306.593, 619.209, 414.893, 392.682, 444.676 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="derro" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 205.579, 362.717 )
+transform/scale = Vector2( 1.1, 1.1 )
+input/pickable = true
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 7 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 8 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 9 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 10 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 11 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+shapes/6/shape = SubResource( 12 )
+shapes/6/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/6/trigger = false
+shapes/7/shape = SubResource( 13 )
+shapes/7/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/7/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Derreck Corduroy"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/derro"]
+
+build_mode = 0
+polygon = Vector2Array( -40.3787, -116.449, -8.83208, -127.921, 19.8467, -121.109, -2.37935, -112.147, 15.1864, -71.997, -0.586929, -51.9219, 41.3557, 1.85074, 52.1103, 66.3779, 33.1106, 97.566, 78.9966, 132.339, 54.2612, 142.018, -10.6245, 89.3209, -7.03966, 121.226, -54.0011, 135.207, -37.8693, 148.112, -55.0766, 157.433, -84.1138, 125.528, -31.7751, 106.887, -85.5477, -9.97925, -66.548, -49.4125, -29.4207, -49.5434, -48.1856, -88.3672 )
+shape_range = Vector2( 0, 7 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/derro"]
+
+texture = ExtResource( 3 )
+offset = Vector2( 0, 13 )
+
+[node name="phm" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 935.993, 344.998 )
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

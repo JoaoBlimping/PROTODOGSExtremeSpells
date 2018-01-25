@@ -1,0 +1,301 @@
+[gd_scene load_steps=22 format=1]
+
+[ext_resource path="res://adventure/pics/snake/pub.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/pics/snake/george.png" type="Texture" id=3]
+[ext_resource path="res://adventure/pics/snake/angroin.png" type="Texture" id=4]
+[ext_resource path="res://adventure/pics/snake/lmao.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func george():
+	var anim = createAnimator()
+	yield(say(\"before\"),S)
+	yield(anim.r(\"toBubble\"),A)
+	yield(say(\"me yeeyyea\"),S)
+	yield(anim.r(\"fromBubble\"),A)
+	yield(say(\"that was nice\"),S)
+
+func lmao():
+	say(\"dude weed\")
+
+func exit():
+	global.enterAdventure(\"snake/map\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -1.33466, 601.94, -3.77817, 553.884, 1034.72, 554.699, 1029.83, 607.642 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -43.559, -145.694, -84.8717, -165.452, -14.8196, -168.446 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -50.7438, -25.9464, 97.7427, -15.7679, 158.814, 215.943, -82.4768, 87.2147, -151.331, -10.978 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 10.926, -195.389, 86.9655, -198.382, 134.266, -113.961, 97.7427, -15.7679, -50.7438, -25.9464, -58.5273, -99.5909, -14.8196, -168.446 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -14.8196, -168.446, -58.5273, -99.5909, -43.559, -145.694 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 63.508, 96.0024, -31.5952, 149.498, -12.6826, 86.276, 64.5887, 62.5002 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -12.6826, 86.276, -80.7679, 111.132, -82.9293, 85.7356, -41.862, -14.2308 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -44.5638, -99.0672, -22.4091, -150.401, 48.378, -163.91, 58.6448, -98.5268, 49.4587, -72.5896, -48.8867, -24.4977 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -41.862, -14.2308, -48.8867, -24.4977, 49.4587, -72.5896, 56.4833, -44.4909, 64.5887, 62.5002 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 64.0484, -39.6277, 106.737, 41.9665, 64.5887, 62.5002, 56.4833, -44.4909 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 64.5887, 62.5002, -12.6826, 86.276, -41.862, -14.2308 )
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -28.8372, -49.8713, -19.3242, -88.1614, 31.5707, -89.8262, 28.2411, -0.403442, -18.8485, 2.45047 )
+
+[sub_resource type="ConvexPolygonShape2D" id=14]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 58.2073, 25.2818, 57.0181, 69.7553, 36.8029, 76.6523, -15.9946, 78.5549, -67.6029, 49.0644, -44.5338, 11.0122, -18.8485, 2.45047, 28.2411, -0.403442, 35.8516, -0.403442 )
+
+[sub_resource type="Animation" id=16]
+
+resource/name = "fromBubble"
+length = 1.0
+loop = false
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("actives/george/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.25, 0.5, 0.75, 1 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 3, 2, 1, 0 ]
+}
+
+[sub_resource type="Animation" id=15]
+
+resource/name = "toBubble"
+length = 1.0
+loop = false
+step = 0.25
+tracks/0/type = "value"
+tracks/0/path = NodePath("actives/george/Sprite:frame")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.25, 0.5, 0.75, 1 ),
+"transitions": FloatArray( 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4 ]
+}
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -1.33466, 601.94, -3.77817, 553.884, 1034.72, 554.699, 1029.83, 607.642 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="george" type="Area2D" parent="actives"]
+
+transform/pos = Vector2( 808.803, 352.68 )
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 4 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 5 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 6 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "George Patel"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/george"]
+
+build_mode = 0
+polygon = Vector2Array( -151.331, -10.978, -50.7438, -25.9464, -58.5273, -99.5909, -43.559, -145.694, -84.8717, -165.452, -14.8196, -168.446, 10.926, -195.389, 86.9655, -198.382, 134.266, -113.961, 97.7427, -15.7679, 158.814, 215.943, -82.4768, 87.2147 )
+shape_range = Vector2( 0, 3 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/george"]
+
+texture = ExtResource( 3 )
+vframes = 5
+
+[node name="angroin" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 226.804, 267.681 )
+input/pickable = true
+shapes/0/shape = SubResource( 7 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 8 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 9 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 10 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 11 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 12 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Bar Keeper Angroin"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/angroin"]
+
+build_mode = 0
+polygon = Vector2Array( -31.5952, 149.498, 63.508, 96.0024, 64.5887, 62.5002, 106.737, 41.9665, 64.0484, -39.6277, 56.4833, -44.4909, 49.4587, -72.5896, 58.6448, -98.5268, 48.378, -163.91, -22.4091, -150.401, -44.5638, -99.0672, -48.8867, -24.4977, -41.862, -14.2308, -82.9293, 85.7356, -80.7679, 111.132, -12.6826, 86.276 )
+shape_range = Vector2( 0, 5 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/angroin"]
+
+texture = ExtResource( 4 )
+
+[node name="lmao" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 523.577, 254.025 )
+input/pickable = true
+shapes/0/shape = SubResource( 13 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 14 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Weed Dude"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/lmao"]
+
+build_mode = 0
+polygon = Vector2Array( -67.6029, 49.0644, -15.9946, 78.5549, 36.8029, 76.6523, 57.0181, 69.7553, 58.2073, 25.2818, 35.8516, -0.403442, 28.2411, -0.403442, 31.5707, -89.8262, -19.3242, -88.1614, -28.8372, -49.8713, -18.8485, 2.45047, -44.5338, 11.0122 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/lmao"]
+
+texture = ExtResource( 5 )
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="animation" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/fromBubble = SubResource( 16 )
+anims/toBubble = SubResource( 15 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+

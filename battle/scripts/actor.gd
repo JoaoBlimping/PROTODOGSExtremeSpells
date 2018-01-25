@@ -39,6 +39,7 @@ func _process(delta):
 			call(routines.front())
 			finished = false
 		else:
+			die()
 			queue_free()
 
 	#move
@@ -74,9 +75,6 @@ func shootFrom(bullet,angle,location,speed=null):
 	return ib
 
 
-# this is basically pointless, but the idea is that subclasses like player use it for stuff
-# actually, player is likely to be the only subclass that will use it and even then it's not really
-# that necessary these days. Whatever.
 func die():
 	if (target): global.enterAdventure(global.area)
 
@@ -87,7 +85,6 @@ func hit(body):
 		if (randi() % 5 > 3): bullets.addPowerup(body.get_pos())
 		body.queue_free()
 		health -= 1
-		if (health == 0): die()
 		return true
 	return false
 

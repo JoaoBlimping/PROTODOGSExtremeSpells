@@ -144,6 +144,8 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+N_FIENDS = 400
+title = "agara"
 
 [node name="ground" type="Sprite" parent="."]
 
@@ -295,6 +297,7 @@ transform/rot = 91.0284
 texture = ExtResource( 6 )
 script/script = ExtResource( 7 )
 destination = "res://adventure/scenes/room.tscn"
+driving = true
 
 [node name="hitbox" type="Area2D" parent="portals/kempsey"]
 

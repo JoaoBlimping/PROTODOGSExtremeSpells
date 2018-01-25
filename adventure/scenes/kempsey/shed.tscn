@@ -1,0 +1,186 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://adventure/pics/kempsey/shed.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/pics/kempsey/lock.png" type="Texture" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func derro():
+	say(\"my house is all broke\")
+
+func lock():
+	if (s(\"shed key\")):
+		yield(say(\"awww yeah unlcoking shed\"),S)
+		s(\"shedUnlocked\",true)
+		getActive(\"lock\").queue_free()
+	else:
+		say(\"this shed seems to be locked\")
+
+func shed():
+	global.enterAdventure(\"kempsey/insideShed\")
+
+func house():
+	say(\"nice looking house, it's made 100% from linoleum from the 70s\")
+
+func exit():
+	global.enterAdventure(\"kempsey/map\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 12.2234, 306.981, 91.6657, 301.817, 103.979, 385.629, 19.7704, 386.424 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -56.2811, -13.685, -37.7516, -36.3322, 35.4841, -39.8616, 43.1312, -28.6851, 56.3666, 59.2566, -44.8105, 63.6684 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 753.427, 222.561, 581.435, 220.972, 581.832, 181.251, 654.522, 158.61 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 804.27, 197.139, 753.427, 222.561, 654.522, 158.61, 651.742, 131.997, 762.563, 119.683, 804.667, 124.052 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="shed" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/shed"]
+
+build_mode = 0
+polygon = Vector2Array( 12.2234, 306.981, 91.6657, 301.817, 103.979, 385.629, 19.7704, 386.424 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="lock" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 57.4017, 329.717 )
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Shed"
+pointer = "use"
+birthSwitch = null
+deathSwitch = "shedUnlocked"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/lock"]
+
+build_mode = 0
+polygon = Vector2Array( -56.2811, -13.685, -37.7516, -36.3322, 35.4841, -39.8616, 43.1312, -28.6851, 56.3666, 59.2566, -44.8105, 63.6684 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/lock"]
+
+texture = ExtResource( 3 )
+offset = Vector2( 0, 13 )
+
+[node name="house" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 6 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Aini"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/house"]
+
+build_mode = 0
+polygon = Vector2Array( 581.435, 220.972, 753.427, 222.561, 804.27, 197.139, 804.667, 124.052, 762.563, 119.683, 651.742, 131.997, 654.522, 158.61, 581.832, 181.251 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

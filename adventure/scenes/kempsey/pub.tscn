@@ -1,0 +1,179 @@
+[gd_scene load_steps=14 format=1]
+
+[ext_resource path="res://adventure/pics/kempsey/pub.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/scripts/item.gd" type="Script" id=3]
+[ext_resource path="res://adventure/pics/key.png" type="Texture" id=4]
+[ext_resource path="res://adventure/pics/barkeep.png" type="Texture" id=5]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func exit():
+	global.enterAdventure(\"kempsey/map\")
+
+func phm():
+	say(\"I am going to drink a beer and that is all there is to it\")
+
+func publican():
+	say(\"security told me not to serve you sorry\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -8.6651, 4.27558, 3.10746, -9.49755, 7.95498, -3.18807, -0.585892, 1.96723 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 0.106609, 9.81561, -8.6651, 4.27558, -0.585892, 1.96723, 1.87634, 5.19892 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 49.6613, -37.137, 69.467, -6.32818, 64.1855, 103.703, -70.9332, 103.703, -70.0529, -4.12755, -58.1695, -11.1696, 34.2569, -35.3765 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 34.2569, -35.3765, -58.1695, -11.1696, -52.0078, -28.3345, -17.2378, -62.6643, 9.16972, -60.4637 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 12.6907, -92.5929, 9.16972, -60.4637, -17.2378, -62.6643, -21.6391, -87.3113, 3.00797, -104.476 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="key" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 32.4335, 473.791 )
+input/pickable = true
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 7 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 3 )
+__meta__ = {
+"_edit_group_": true
+}
+realName = "shed key"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/key"]
+
+build_mode = 0
+polygon = Vector2Array( -8.6651, 4.27558, 0.106609, 9.81561, 1.87634, 5.19892, -0.585892, 1.96723, 7.95498, -3.18807, 3.10746, -9.49755 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/key"]
+
+texture = ExtResource( 4 )
+
+[node name="publican" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 654.632, 259.487 )
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 4 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 5 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
+realName = "Publican"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/publican"]
+
+build_mode = 0
+polygon = Vector2Array( -70.9332, 103.703, 64.1855, 103.703, 69.467, -6.32818, 49.6613, -37.137, 34.2569, -35.3765, 9.16972, -60.4637, 12.6907, -92.5929, 3.00797, -104.476, -21.6391, -87.3113, -17.2378, -62.6643, -52.0078, -28.3345, -58.1695, -11.1696, -70.0529, -4.12755 )
+shape_range = Vector2( 0, 2 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/publican"]
+
+texture = ExtResource( 5 )
+
+[node name="phm" parent="actives" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 351.369, 173.964 )
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

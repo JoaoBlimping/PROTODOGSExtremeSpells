@@ -1,34 +1,111 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://adventure/pics/dogRooms/2.png" type="Texture" id=1]
 [ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
-[ext_resource path="res://adventure/pics/dogCheif.png" type="Texture" id=3]
-[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=4]
-[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=5]
+[ext_resource path="res://adventure/objects/travarsom.tscn" type="PackedScene" id=3]
+[ext_resource path="res://adventure/pics/dogCheif.png" type="Texture" id=4]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=5]
+[ext_resource path="res://adventure/objects/travongle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=7]
 
 [sub_resource type="GDScript" id=1]
 
 script/source = "extends \"../../scripts/room.gd\"
 
+func start():
+	if (s(\"firstRobotBattle\") && !s(\"adventureBegins\")):
+		yield(say(\"What did you see\",\"chief\"),S)
+		yield(say(\"There was some gross stuff coming out of a kind of hole in the ground\",\"aini\"),S)
+		yield(say(\"\"\"It was trogs and there was a whole heap of them. And yeah,
+		they were coming out of the ground
+		~
+		Oh yeah, and we also come into contact with some kind of militarised research robot.
+		We destroyed it, but they said that they coming back on wednesday to 'fuck us all to death'.\"\"\",\"phm\"),S)
+		yield(say(\"So I let outsiders into my camp for nothing but an hour and we're already on the brink of destruction?\",\"chief\"),S)
+		yield(say(\"Yeah\",\"phm\"),S)
+		yield(say(\"\"\"Shut your mouth you fool. If we had a little more time we could
+		move our camp but three days is not enough time to pack ourselves up and move a sufficient distance\"\"\",\"chief\"),S)
+		yield(say(\"\"\"Well if we could stop this robot, the armoured version couldn't be too much
+		harder. We can try and stop it\"\"\",\"aini\",ANGRY),S)
+		yield(say(\"I highly doubt it, but watching you die first might make me feel a little better\",\"chief\"),S)
+		yield(say(\"\"\"Admittedly our chances aren't exactly great, but it seems a but stupid to resign yourself
+		to death so easily. Don't you have some kind of magic Alain technology or something that can
+		help us?\"\"\",\"phm\"),S)
+		yield(say(\"No, we don't\",\"chief\"),S)
+		yield(say(\"Hey dad, what about the spells?\",\"travarsom\"),S)
+		yield(say(\"We don't exactly have those anymore, do we?\",\"chief\"),S)
+		yield(say(\"What are those?\",\"aini\"),S)
+		yield(say(\"\"\"They're three spells created and used by our ancestors the
+		protodogs. A harp, a keyboard, and a hammer with a melodious peal. If you play
+		them just right you can enter a powerful state of being in which your entire being
+		is distilled into a single desire or ideal. Maybe with that you can pierce through the
+		reinforced armour.\"\"\",\"travarsom\"),S)
+		yield(say(\"Well except they don't work and we sold them to antique shops\",\"chief\"),S)
+		yield(say(\"I knew that was a stupid idea\",\"travarsom\",ANGRY),S)
+		yield(say(\"Well you didn't say anything to me at the time so it's too bad at this point\",\"chief\"),S)
+		yield(say(\"Why don't we just go to the antique shop and see if we can track them down?\",\"phm\"),S)
+		yield(say(\"\"\"Hmmm, well at least that will keep you out of my face for a while. We sold them
+		in three different towns to maximise our profits.
+		~
+		Kempsey, Snake Parade and Orange Town.
+		~
+		You're going to need to be able to get them all for it to be any use, and
+		even then I'm pretty sure it will be pointless, however, we have little other choice now\"\"\",\"chief\"),S)
+		yield(say(\"So we're going on a road trip now? Fuck Yeah\",\"aini\"),S)
+		yield(say(\"Can I come too?\",\"travarsom\"),S)
+		yield(say(\"Yeah sure.~Travongle, you stay behind and do something productive\",\"phm\"),S)
+		yield(say(\"Like what?\",\"travongle\"),S)
+		yield(say(\"\"\"I really don't give a shit.~Kempsey's due north from here, right?
+		We can book into the seabreeze hotel for the night and check out the antique shop on
+		monday.\"\"\",\"phm\"),S)
+		yield(say(\"Seabreeze hotels are fucking revolting. Does it have to be that one?\",\"aini\",ANGRY),S)
+		yield(say(\"\"\"Yeah, I have a national subscription because I'm technically homeless. You guys
+		just have to pretend to be my children and we're all good.\"\"\",\"phm\"),S)
+		yield(say(\"uh, ok lets go\",\"travarsom\"),S)
+		s(\"adventureBegins\",true)
+
+
 func exit():
 	global.enterAdventure(\"dogCamp/1\")
+	
+
+func travarsom():
+	say(\"uh, ok lets go\")
+
 
 func chief():
-	yield(say(\"hey Aini, can you speak to him please?\",\"phm\"),S)
-	yield(say(\"Hello\",\"aini\"),S)
-	yield(say(\"\"\"You've put us all in a lot of danger by coming here like this.
-	We know something is going on here in the bush. At the very least you could tell us what it is.\"\"\"),S)
-	yield(say(\"\"\"Something's happening?
-	Well we noticed that all the police withdrew from in town, so it could be related to that.\"\"\",\"aini\"),S)
-	yield(say(\"\"\"Oh, I guess so, we know nothing about that though. Well
-	you know since you're putting us out on a limb by coming out here, I think
-	you can check it out for us.
-	I sense it coming from the ?south?.\"\"\"),S)
-	yield(say(\"\"\"There's a fire trail you can follow down
-	to about the right spot.
-	See you then\"\"\"),S)
-	yield(say(\"Righto\",\"aini\"),S)
-	global.enterAdventure(\"dogCamp/crater\")"
+	if (s(\"spokeToCheif\")): yield(say(\"see you\"),S)
+	else:
+		yield(say(\"hey Aini, can you speak to him please?\",\"phm\"),S)
+		yield(say(\"Hello\",\"aini\"),S)
+		yield(say(\"\"\"You've put us all in a lot of danger by coming here like this.
+		We know something is going on here in the bush. At the very least you could tell us what it is.\"\"\",\"chief\"),S)
+		yield(say(\"\"\"Something's happening?
+		Well we noticed that all the police withdrew from in town, so it could be related to that.\"\"\",\"aini\"),S)
+		yield(say(\"\"\"Oh, I guess so, we know nothing about that though. Well
+		you know since you're putting us out on a limb by coming out here, I think
+		you can check it out for us.
+		I sense it coming from the north west.\"\"\",\"chief\"),S)
+		yield(say(\"\"\"There's a fire trail you can follow up
+		to about the right spot. It's north a little and then west.
+		~
+		See you then\"\"\",\"chief\"),S)
+		yield(say(\"Righto\",\"aini\"),S)
+		s(\"spokeToCheif\",true)
+
+
+func phm():
+	if (s(\"spokeToCheif\")): yield(say(\"OK, lets go\"),S)
+	else: yield(say(\"ok, uh who's going to talk to this dude?\"),S)
+
+
+func aini():
+	if (s(\"spokeToCheif\")): yield(say(\"he's kinda rude, anyway lets go I guess\"),S)
+	else: yield(say(\"Should we say something?\"),S)
+
+
+func travongle():
+	say(\"bro I'm going toh hahahah going to smoke weed hahahahaHAHA\")"
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
@@ -87,7 +164,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 2 )
 realName = "Inanimate Object"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
@@ -98,6 +174,11 @@ build_mode = 0
 polygon = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 1026.54, 602.595 )
 shape_range = Vector2( 0, 0 )
 trigger = false
+
+[node name="travarsom" parent="actives" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 379.476, 264.516 )
+birthSwitch = "firstRobotBattle"
 
 [node name="chief" type="Area2D" parent="actives"]
 
@@ -123,14 +204,13 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 2 )
 realName = "Cheif Keabebabfeba"
-autorun = false
 pointer = "talk"
 birthSwitch = null
 deathSwitch = null
 
 [node name="Sprite" type="Sprite" parent="actives/chief"]
 
-texture = ExtResource( 3 )
+texture = ExtResource( 4 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/chief"]
 
@@ -139,11 +219,15 @@ polygon = Vector2Array( 82.0782, 192.76, 25.4905, 197.162, -8.4621, 165.095, -66
 shape_range = Vector2( 0, 3 )
 trigger = false
 
-[node name="phm" parent="actives" instance=ExtResource( 4 )]
+[node name="phm" parent="actives" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 14.9641, 371.382 )
 
-[node name="aini" parent="actives" instance=ExtResource( 5 )]
+[node name="travongle" parent="actives" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 864, 361 )
+
+[node name="aini" parent="actives" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 980.83, 368.661 )
 

@@ -1,29 +1,50 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://adventure/pics/dogRooms/crater.png" type="Texture" id=1]
 [ext_resource path="res://adventure/scripts/trog.gd" type="Script" id=2]
 [ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=3]
-[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=4]
-[ext_resource path="res://battle/pics/robot.png" type="Texture" id=5]
+[ext_resource path="res://adventure/objects/travongle.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=5]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=6]
+[ext_resource path="res://battle/pics/robot.png" type="Texture" id=7]
 
 [sub_resource type="GDScript" id=1]
 
 script/source = "extends \"../../scripts/room.gd\"
 
-onready var anim = get_node(\"animation\")
-
-# ok I've gotta make this whole system asynchronous for it to work
-# should be not too bad
+func start():
+	var anim = createAnimator()
+	if (global.battled(\"firstRobotBattle\")):
+		yield(anim.r(\"robotBreak\"),A)
+		yield(say(\"\"\"Shit! TEH pipes are all fucked up.
+		~
+		Yeah well the joke is on you Scumbags because we know about the Alain Village,
+		and we're coming back on wednesday with a FB-2 Heavy Police Vehicle to fuck you all
+		to death.\"\"\",\"robot\"),S)
+		yield(anim.r(\"robotExit\"),A)
+		yield(say(\"lol~We should probably get back now\",\"phm\"),S)
+	else:
+		yield(say(\"What the fuck is this?\",\"phm\"),S)
+		yield(say(\"Man, I can hear the cops coming\",\"travongle\"),S)
+		yield(say(\"I thought you were sober lol\",\"aini\"),S)
+		yield(say(\"Oh wait I can actually hear something big coming up the road\",\"phm\"),S)
+		yield(anim.r(\"enterRobot\"),A)
+		yield(say(\"This is hereby a restricted area. Kneel on the ground with your hands in the air\",\"robot\"),S)
+		yield(say(\"Wait a second... these are the terrorists from the Cicada incident\",\"robot\"),S)
+		global.battle(\"firstRobotBattle\")
 
 
 func phm():
-	if (global.battled(\"firstRobotBattle\")):
-		yield(say(\"nice\"),S)
-	else:
-		yield(say(\"uhuho the robot is coming\"),S)
-		yield(createAnimator().r(\"enterRobot\"),A)
-		yield(say(\"weeeoeooe\"),S)
-		global.battle(\"firstRobotBattle\")"
+	say(\"yeah ok lets get back\")
+
+func aini():
+	say(\"that was kinda fucked\")
+
+func travongle():
+	say(\"dude weed\")
+
+func exit():
+	global.drive(\"nature\",\"crater\")"
 
 [sub_resource type="Animation" id=2]
 
@@ -39,10 +60,74 @@ tracks/0/keys = {
 "times": FloatArray( 0, 1 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 0,
-"values": [ Vector2( 1115.59, 261.289 ), Vector2( 788.411, 397.614 ) ]
+"values": [ Vector2( 1187.59, 254.289 ), Vector2( 788.411, 397.614 ) ]
 }
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="Animation" id=3]
+
+resource/name = "robotBreak"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("animated crap/robo:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0 ),
+"transitions": FloatArray( 1 ),
+"update": 0,
+"values": [ Vector2( 816.589, 301.289 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("animated crap/robo:transform/rot")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, -142.649 ]
+}
+
+[sub_resource type="Animation" id=4]
+
+resource/name = "robotExit"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("animated crap/robo:transform/pos")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 816.589, 301.289 ), Vector2( 1198.59, 310.289 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("animated crap/robo:transform/rot")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 1 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ -142.649, -6.69915 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("animated crap/robo:flip_h")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0, 0.5 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
 
 custom_solver_bias = 0.0
 points = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 1026.54, 602.595 )
@@ -61,6 +146,8 @@ playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/enterRobot = SubResource( 2 )
+anims/robotBreak = SubResource( 3 )
+anims/robotExit = SubResource( 4 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -121,15 +208,15 @@ transform/pos = Vector2( -14.44, -20.7575 )
 
 [node name="actives" type="Node2D" parent="."]
 
-editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }
 
 [node name="exit" type="Area2D" parent="actives"]
 
+editor/display_folded = true
 input/pickable = true
-shapes/0/shape = SubResource( 3 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -149,17 +236,31 @@ polygon = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 1
 shape_range = Vector2( 0, 0 )
 trigger = false
 
-[node name="phm" parent="actives" instance=ExtResource( 4 )]
+[node name="travongle" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 59.5652, 329.413 )
+
+[node name="aini" parent="actives" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 125.448, 343.853 )
+
+[node name="phm" parent="actives" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 203.921, 347.42 )
+
+[node name="robot" parent="actives" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 1317.13, 231.011 )
+realName = "FB-1 Research Robot"
 
 [node name="animated crap" type="Node2D" parent="."]
 
 [node name="robo" type="Sprite" parent="animated crap"]
 
-transform/pos = Vector2( 1115.59, 261.289 )
+transform/pos = Vector2( 1187.59, 254.289 )
+transform/rot = -6.69915
 transform/scale = Vector2( 2, 2 )
-texture = ExtResource( 5 )
+texture = ExtResource( 7 )
 flip_h = true
 
 [node name="gui" type="Node2D" parent="."]

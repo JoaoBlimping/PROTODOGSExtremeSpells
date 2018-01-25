@@ -1,7 +1,11 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=8 format=1]
 
-[ext_resource path="res://adventure/pics/cicada.png" type="Texture" id=1]
-[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/pics/factory.png" type="Texture" id=1]
+[ext_resource path="res://adventure/pics/benaiah.png" type="Texture" id=2]
+[ext_resource path="res://adventure/pics/dave.png" type="Texture" id=3]
+[ext_resource path="res://adventure/pics/notVeryGoodPicture.png" type="Texture" id=4]
+[ext_resource path="res://adventure/pics/snake/bean.png" type="Texture" id=5]
+[ext_resource path="res://adventure/pics/orange/orangeMan.png" type="Texture" id=6]
 
 [sub_resource type="GDScript" id=1]
 
@@ -25,17 +29,13 @@ func runner():
 	say(\"\"\"Anyway, see you. You're about to wake up.\"\"\");yield()
 	global.enterAdventure(\"room\")"
 
-[sub_resource type="ConvexPolygonShape2D" id=2]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -74.0359, -53.3749, 59.751, -51.1696, 66.3669, 59.8295, -45.3673, 63.505 )
-
 [node name="room" type="Node2D"]
 
 script/script = SubResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
+music = "ambience"
 
 [node name="background" type="Sprite" parent="."]
 
@@ -51,22 +51,30 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="runner" type="Area2D" parent="actives"]
+[node name="Sprite" type="Sprite" parent="actives"]
 
-transform/pos = Vector2( 841.774, 148.647 )
-input/pickable = true
-shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 2 )
-realName = "Cicada"
-autorun = true
-birthSwitch = null
-deathSwitch = null
+transform/pos = Vector2( 844.74, 170.047 )
+texture = ExtResource( 2 )
+
+[node name="Sprite 2" type="Sprite" parent="actives"]
+
+transform/pos = Vector2( 677.597, 319.91 )
+texture = ExtResource( 3 )
+
+[node name="Sprite 3" type="Sprite" parent="actives"]
+
+transform/pos = Vector2( 219.487, 298.155 )
+texture = ExtResource( 4 )
+
+[node name="Sprite 4" type="Sprite" parent="actives"]
+
+transform/pos = Vector2( 506.478, 260.958 )
+texture = ExtResource( 5 )
+
+[node name="Sprite 5" type="Sprite" parent="actives"]
+
+transform/pos = Vector2( 922.838, 273.675 )
+texture = ExtResource( 6 )
 
 [node name="gui" type="Node2D" parent="."]
 

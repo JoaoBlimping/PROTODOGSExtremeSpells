@@ -5,7 +5,7 @@ onready var global = get_node("/root/global")
 
 
 export var realName = "AIIIIIIEEEEEEEEE"
-export var pointer = "move"
+export(String, "move", "talk", "use") var pointer = "move"
 export (String) var birthSwitch = null
 export (String) var deathSwitch = null
 var poised = false

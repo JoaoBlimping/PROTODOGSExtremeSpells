@@ -26,7 +26,7 @@ func _ready():
 
 func stream():
 	health = 70
-	var timer1 = createTimer(0.15)
+	var timer1 = createTimer(0.2)
 	
 	while (true):
 		yield(timer1.r(),T)

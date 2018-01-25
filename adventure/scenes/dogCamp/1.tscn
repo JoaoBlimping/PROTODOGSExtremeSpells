@@ -1,15 +1,43 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://adventure/pics/dogRooms/1.png" type="Texture" id=1]
 [ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/objects/travongle.tscn" type="PackedScene" id=3]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=5]
 
 [sub_resource type="GDScript" id=1]
 
 script/source = "extends \"../../scripts/room.gd\"
 
-
 func start():
-	yield(say(\"nice\",\"door\"),S)
+	if (s(\"spokeToCheif\") && !s(\"askedSmonk\")):
+		s(\"askedSmonk\",true)
+		yield(say(\"\"\"Ey before we go lets have a joint. I haven't been able
+		to smonk for like a week because that mongoloid school kept
+		reporting me.\"\"\",\"travongle\"),S)
+		yield(say(\"Can I have some?\",\"aini\",ANGRY),S)
+		yield(say(\"Uhhh, shouldn't we do that after?\",\"phm\"),S)
+		yield(ask(\"smonk?\",\"He'll yeah bro\",\"no, we're busy right now\",\"travongle\"),S)
+		if (value == \"a\"):
+			s(\"smonk\",true)
+			yield(say(\"He'll yeah bro\",\"travongle\"),S)
+			global.enterAdventure(\"dogCamp/smonk\")
+		else:
+			s(\"smonk\",false)
+			yield(say(\"ok go, I'm staying here\",\"travongle\"),S)
+
+func aini():
+	say(\"this is a cool spot\")
+
+func travongle():
+	say(\"weed bro\")
+
+func phm():
+	if (s(\"adventureBegins\")): say(\"Kempsey is due north from here I beleive\")
+	elif (s(\"spokeToCheif\")): say(\"ok, we've gotta take a left turn and then another left turn I think\")
+	else: say(\"hmmm\")
+	
 
 func door():
 	global.enterAdventure(\"dogCamp/2\")
@@ -93,6 +121,21 @@ build_mode = 0
 polygon = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 1026.54, 602.595 )
 shape_range = Vector2( 0, 0 )
 trigger = false
+
+[node name="travongle" parent="actives" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 195.713, 342.746 )
+transform/scale = Vector2( 0.650889, 0.62321 )
+
+[node name="aini" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 304.856, 339.908 )
+transform/scale = Vector2( 0.549073, 0.559972 )
+
+[node name="phm" parent="actives" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 240.569, 381.028 )
+transform/scale = Vector2( 0.598151, 0.648664 )
 
 [node name="gui" type="Node2D" parent="."]
 

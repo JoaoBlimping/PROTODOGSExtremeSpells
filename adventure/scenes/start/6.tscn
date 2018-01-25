@@ -12,8 +12,7 @@ func backDoor():
 
 func over():
 	if (global.getSwitch(\"Rug\")):
-		say(\"You use the rug to climb over the pointy fence, and now it is wrecked.\")
-		yield()
+		yield(say(\"You use the rug to climb over the pointy fence, and now it is wrecked.\"),S)
 		global.setSwitch(\"Rug\",false)
 		global.enterAdventure(\"start/7\")
 	else:
@@ -37,6 +36,7 @@ points = Vector2Array( -0.801239, 598.358, 0.52562, 574.474, 1022.86, 582.435, 1
 [node name="room" type="Node2D"]
 
 script/script = SubResource( 1 )
+music = "ambience"
 
 [node name="background" type="Sprite" parent="."]
 
@@ -68,8 +68,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 monitoring = false
 script/script = ExtResource( 2 )
-realName = "Inanimate Object"
-autorun = false
+realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
@@ -94,8 +93,7 @@ linear_damp = 0.1
 angular_damp = 1.0
 monitoring = false
 script/script = ExtResource( 2 )
-realName = "Inanimate Object"
-autorun = false
+realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null

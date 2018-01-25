@@ -1,0 +1,86 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://adventure/pics/kempsey/alarm.png" type="Texture" id=1]
+[ext_resource path="res://adventure/pics/kempsey/light.png" type="Texture" id=2]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+
+func start():
+	yield(say(\"\"\"Ok, to operate this thing you need to use the movement keys to
+	control the spark and activate the nodes. Watch out though because there
+	are electronic police I beleive.
+	~
+	Once all lights are lit we are in.\"\"\",\"phm\"),S)
+	for i in range(3):
+		var succ = yield(puzzle(\"kempsey/circuits/%d\" % (randi() % 3 + 1)),S)
+		if (succ): get_node(\"background/light%d\" % (i + 1)).set_frame(1)
+		else:
+			yield(say(\"ughhh\",\"phm\"),S)
+			global.enterAdventure(\"kempsey/lres\")
+			return
+	yield(say(\"...~We're in!\",\"phm\"),S)
+	s(\"unlockedLres\",true)
+	global.enterAdventure(\"kempsey/map\")
+	
+	
+
+func exit():
+	global.enterAdventure(\"kempsey/lres\")"
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "bopcorn"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="light1" type="Sprite" parent="background"]
+
+transform/pos = Vector2( 967.471, 89.3467 )
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="light2" type="Sprite" parent="background"]
+
+transform/pos = Vector2( 980.044, 211.488 )
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="light3" type="Sprite" parent="background"]
+
+transform/pos = Vector2( 978.248, 274.953 )
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="actives" type="Node2D" parent="."]
+
+editor/display_folded = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="phm" parent="actives" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( -170.654, 110.495 )
+
+[node name="puzzle" type="Node2D" parent="."]
+
+transform/pos = Vector2( 439.526, 320.436 )
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

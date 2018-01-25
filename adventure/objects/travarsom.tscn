@@ -1,0 +1,104 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=1]
+[ext_resource path="res://adventure/pics/travarson.png" type="Texture" id=2]
+
+[sub_resource type="ConvexPolygonShape2D" id=1]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 34.7173, 133.635, 56.394, 147.547, 34.3938, 157.9, 11.7465, 140.429 )
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 34.7173, 133.635, 11.7465, 140.429, 30.8349, 110.341, 62.5412, 101.282 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 27.2761, -1.60179, -27.0775, 2.28061, -79.4898, 3.25121, -50.0483, -51.7494, -20.9303, -61.7789, 12.07, -60.8083, 44.0998, -52.72 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 44.0998, -52.72, 71.2766, -3.54298, 27.2761, -1.60179 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -21.2539, 170.518, -42.2835, 169.547, -32.254, 150.459, -7.66548, 150.135 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -16.7244, 114.223, -7.66548, 150.135, -32.254, 150.459, -42.2835, 117.135, -40.6658, 57.9283 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 25.6584, 34.3104, 62.5412, 101.282, 30.8349, 110.341, 3.01109, 83.4874 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 25.6584, 34.3104, 3.01109, 83.4874, -16.7244, 114.223, -40.6658, 57.9283, -27.0775, 2.28061, 27.2761, -1.60179 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 12.07, -101.25, 12.07, -60.8083, -20.9303, -61.7789, -18.6656, -102.221 )
+
+[node name="travarsom" type="Area2D"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 2 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 3 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 4 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 5 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 6 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+shapes/6/shape = SubResource( 7 )
+shapes/6/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/6/trigger = false
+shapes/7/shape = SubResource( 8 )
+shapes/7/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/7/trigger = false
+shapes/8/shape = SubResource( 9 )
+shapes/8/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/8/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 1 )
+realName = "Travarsom"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+build_mode = 0
+polygon = Vector2Array( -42.2835, 169.547, -21.2539, 170.518, -7.66548, 150.135, -16.7244, 114.223, 3.01109, 83.4874, 30.8349, 110.341, 11.7465, 140.429, 34.3938, 157.9, 56.394, 147.547, 34.7173, 133.635, 62.5412, 101.282, 25.6584, 34.3104, 27.2761, -1.60179, 71.2766, -3.54298, 44.0998, -52.72, 12.07, -60.8083, 12.07, -101.25, -18.6656, -102.221, -20.9303, -61.7789, -50.0483, -51.7494, -79.4898, 3.25121, -27.0775, 2.28061, -40.6658, 57.9283, -42.2835, 117.135, -32.254, 150.459 )
+shape_range = Vector2( 0, 8 )
+trigger = false
+
+[node name="sprite" type="Sprite" parent="."]
+
+texture = ExtResource( 2 )
+offset = Vector2( 0, 16 )
+hframes = 2
+
+

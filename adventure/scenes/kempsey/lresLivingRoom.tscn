@@ -1,0 +1,176 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://adventure/pics/kempsey/livingRoom.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/objects/fat.tscn" type="PackedScene" id=3]
+[ext_resource path="res://adventure/pics/snake/hippie2.png" type="Texture" id=4]
+[ext_resource path="res://adventure/pics/snake/hippie1.png" type="Texture" id=5]
+[ext_resource path="res://adventure/pics/snake/hippie3.png" type="Texture" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func start():
+	if (s(\"harp\") && !global.battled(\"test\")):
+		yield(say(\"Hey! What are you doing in my house?~You're trying to steal my vintage wines aren't you!\",\"fat\"),S)
+		global.battle(\"test\")
+
+func kitchen():
+	global.enterAdventure(\"kempsey/lresKitchen\")
+
+func book():
+	global.enterAdventure(\"kempsey/lresBooks\")
+
+func exit():
+	global.enterAdventure(\"kempsey/lres\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 984.311, 643.466, 841.377, 501.639, 875.725, 500.531 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 1041.93, -148.769, 984.311, 643.466, 875.725, 500.531, 911.182, -3.6187 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 911.182, -3.6187, 907.858, -68.9919, 1041.93, -148.769 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 348.307, 135.992, 618.664, 203.581, 517.834, 359.812, 335.011, 352.056 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="kitchen" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 4 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 5 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/kitchen"]
+
+build_mode = 0
+polygon = Vector2Array( 911.182, -3.6187, 875.725, 500.531, 841.377, 501.639, 984.311, 643.466, 1041.93, -148.769, 907.858, -68.9919 )
+shape_range = Vector2( 0, 2 )
+trigger = false
+
+[node name="book" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 6 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/book"]
+
+build_mode = 0
+polygon = Vector2Array( 348.307, 135.992, 618.664, 203.581, 517.834, 359.812, 335.011, 352.056 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="fat" parent="actives" instance=ExtResource( 3 )]
+
+birthSwitch = "harp"
+deathSwitch = "test"
+
+[node name="Sprite" type="Sprite" parent="actives"]
+
+transform/pos = Vector2( 396.672, 332.406 )
+texture = ExtResource( 4 )
+
+[node name="Sprite1" type="Sprite" parent="actives"]
+
+transform/pos = Vector2( 576.285, 431.296 )
+texture = ExtResource( 5 )
+
+[node name="Sprite2" type="Sprite" parent="actives"]
+
+transform/pos = Vector2( 251.378, 421.74 )
+texture = ExtResource( 6 )
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

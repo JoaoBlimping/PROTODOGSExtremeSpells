@@ -6,9 +6,11 @@ onready var question = preload("res://adventure/objects/question.tscn")
 onready var inventory = preload("res://adventure/objects/inventory.tscn")
 onready var guiNode = get_node("gui")
 onready var global = get_node("/root/global")
+onready var g = global
 
 const NORMAL = 0
 const ANGRY = 1
+const EXCITED = 2
 
 export var music = "ambience"
 
@@ -40,7 +42,8 @@ func _input(event):
 
 func run(code,owner):
 	caller = owner
-	call(code)
+	if (has_method(code)): call(code)
+	else: print("uhoh missing function %s" % code)
 
 
 func getActive(name):
@@ -51,6 +54,10 @@ func getActive(name):
 ##########################################################################################
 ######################## Functions for using in script ###################################
 ##########################################################################################
+func s(name,change=null):
+	if (change == null): return global.getSwitch(name)
+	global.setSwitch(name,change)
+
 func pose(n,name = null):
 	var owner = getActive(name)
 	if (owner != null): owner.get_node("sprite").set_frame(n)
@@ -60,11 +67,15 @@ func give(item):
 	get_node("/root/global").setSwitch(item,true)
 	say("Got %s!" % item)
 
-func say(text,name = null):
+func say(text,name = null,face = null):
 	var ib = textbox.instance()
 	var active = getActive(name)
 	if (active == null): return ib
 	ib.get_node("name").set_text(active.realName)
+	
+	if (face != null):
+		ib.setFace(active.get_node("sprite"))
+		active.get_node("sprite").set_frame(face)
 	
 	#make he text nicer
 	text = text.replace("\n"," ")
@@ -82,7 +93,7 @@ func battle(name):
 	global.battle(name)
 
 
-func ask(text,a1,a2,a3 = null,a4 = null,name = null):
+func ask(text,a1,a2,name = null,a3 = null,a4 = null):
 	var ib = question.instance()
 	ib.get_node("name").set_text(getActive(name).realName)
 	ib.get_node("text").set_text(text)
@@ -95,6 +106,17 @@ func ask(text,a1,a2,a3 = null,a4 = null,name = null):
 	else: ib.get_node("d").set_text(a4)
 	guiNode.add_child(ib)
 	gui = true
+	return ib
+
+func puzzle(filename):
+	var puzzle = load("res://adventure/scenes/%s.tscn" % filename).instance()
+	var holder = get_node("puzzle")
+	if (holder == null):
+		print("you're meant to add a puzzle node to set where it'll appear idiota")
+		return
+	get_node("puzzle").add_child(puzzle)
+	gui = true
+	return puzzle
 
 func createAnimator():
 	return animator.new(self)

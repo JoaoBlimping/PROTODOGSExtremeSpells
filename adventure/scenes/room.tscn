@@ -83,6 +83,7 @@ points = Vector2Array( -74.0359, -53.3749, 59.751, -51.1696, 66.3669, 59.8295, -
 [node name="room" type="Node2D"]
 
 script/script = SubResource( 1 )
+music = "ambience"
 
 [node name="background" type="Sprite" parent="."]
 
@@ -119,7 +120,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 3 )
 realName = "Inanimate Object"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
@@ -145,7 +145,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 3 )
 realName = "Door"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
@@ -176,7 +175,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 5 )
 realName = "Extreme Key"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
@@ -206,7 +204,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 3 )
 realName = "Window"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null

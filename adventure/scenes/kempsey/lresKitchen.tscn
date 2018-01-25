@@ -1,0 +1,159 @@
+[gd_scene load_steps=10 format=1]
+
+[ext_resource path="res://adventure/pics/kempsey/kitchen.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/pics/kempsey/cLock.png" type="Texture" id=3]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/objects/travarsom.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func aini():
+	if (s(\"phoneUnlocked\")): say(\"hell yeah, this is going to be my spell\")
+	else: say(\"is there any way we can figure out this lady's phone pin?~I can't beleive we're doing this haha\")
+
+func travarsom():
+	say(\"I can sense the spell in that cabinet under the sink\")
+
+func kitchen():
+	global.enterAdventure(\"kempsey/lresKitchen\")
+
+func lock():
+	say(\"C Company Watch Dog tm Activated. Unlock phone to open\")
+
+func hole():
+	s(\"harp\",true)
+	say(\"Got Harp Spell!~Hell yeah\")
+
+func exit():
+	global.enterAdventure(\"kempsey/lresLivingRoom\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 388.867, 391.823, 503.225, 351.109, 512.206, 458.881, 397.25, 513.964 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 297.316, 487.27, 384.609, 382.421, 518.718, 333.654, 575.288, 392.662, 518.718, 464.837, 390.461, 533.599, 296.828, 509.215 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="hole" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "YEAH NICE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/hole"]
+
+build_mode = 0
+polygon = Vector2Array( 388.867, 391.823, 503.225, 351.109, 512.206, 458.881, 397.25, 513.964 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="lock" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "use"
+birthSwitch = null
+deathSwitch = "phoneUnlocked"
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/lock"]
+
+build_mode = 0
+polygon = Vector2Array( 297.316, 487.27, 384.609, 382.421, 518.718, 333.654, 575.288, 392.662, 518.718, 464.837, 390.461, 533.599, 296.828, 509.215 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/lock"]
+
+texture = ExtResource( 3 )
+centered = false
+
+[node name="aini" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 762.992, 259.997 )
+
+[node name="travarsom" parent="actives" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 933.101, 319.47 )
+transform/scale = Vector2( 1.22222, 1.20396 )
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

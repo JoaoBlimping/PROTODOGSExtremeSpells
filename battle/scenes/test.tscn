@@ -62,8 +62,6 @@ autoplay = ""
 
 [node name="actors" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="fat" parent="actors" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 490.452, 92.8683 )

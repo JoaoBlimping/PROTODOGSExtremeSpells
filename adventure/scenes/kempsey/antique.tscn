@@ -1,0 +1,208 @@
+[gd_scene load_steps=18 format=1]
+
+[ext_resource path="res://adventure/pics/kempsey/antique.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/pics/kempsey/antiqueMan.png" type="Texture" id=3]
+[ext_resource path="res://adventure/objects/travarsom.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+
+
+func exit():
+	global.enterAdventure(\"kempsey/map\")
+
+func janet():
+	if (!s(\"mentionedSheryl\")):
+		yield(say(\"Hello, this is Kempsey Antiques are you guys sure you're in the right shop?\"),S)
+		yield(say(\"Yep, we're looking for something specific\",\"aini\"),S)
+		yield(say(\"uhhhh ok well don't touch anything. What do you want?\"),S)
+		yield(say(\"It's a harp, and it's made of glass\",\"travarsom\"),S)
+		yield(say(\"I gave that away\"),S)
+		yield(say(\"What? for free? Why?\",\"aini\"),S)
+		yield(say(\"\"\"Well Sheryl bought an antique chair, but she decided it must have been no good
+		because it broke when she sat in it.
+		~
+		She came back in the next day and made such a scene I decided to just give it to her
+		and shut her up before she scared the other customers\"\"\"),S)
+		yield(say(\"Sheryl who?\",\"aini\"),S)
+		yield(say(\"I really shouldn't be telling you this. Quite honestly it's none of your business\"),S)
+		s(\"mentionedSheryl\",true)
+	else:
+		yield(say(\"this is really none of your business but do feel free to buy something\"),S)
+		"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -46.0267, -49.3491, -50.7326, -80.5256, -26.3207, -113.173, 38.6794, -107.29, 97.209, -11.7019, 29.5617, -6.99603, -36.9091, -8.17249 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -10.1443, 103.887, -14.2619, 129.769, -34.5561, 123.298, -27.7914, 108.592 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 59.5618, 127.416, 51.3265, 142.71, 22.2088, 120.945, 43.3853, 112.71 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 50.4441, 68.2983, 43.3853, 112.71, 22.2088, 120.945, 18.0912, 77.7101, 23.0912, 29.4746 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 23.0912, 29.4746, 18.0912, 77.7101, 2.20871, 55.3571 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -17.4972, 81.8278, -10.1443, 103.887, -27.7914, 108.592, -43.6738, 80.3571 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -17.4972, 81.8278, -43.6738, 80.3571, -27.4972, 29.4747, 2.20871, 55.3571 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 29.5617, -6.99603, 23.0912, 29.4746, 2.20871, 55.3571, -27.4972, 29.4747, -36.9091, -8.17249 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -72.2032, 9.47464, -45.1444, 53.8865, -73.968, 70.6513, -97.2033, 58.0042, -88.0857, 5.35699 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -72.2032, 9.47464, -88.0857, 5.35699, -46.0267, -49.3491, -36.9091, -8.17249 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -4.90155, 544.543, 1033.1, 540.543, 1033.1, 615.543, -32.9015, 609.543 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="janet" type="Area2D" parent="actives"]
+
+transform/pos = Vector2( 365.845, 295.23 )
+transform/scale = Vector2( 1.1, 1.1 )
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 4 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 5 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 6 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 7 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 8 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+shapes/6/shape = SubResource( 9 )
+shapes/6/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/6/trigger = false
+shapes/7/shape = SubResource( 10 )
+shapes/7/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/7/trigger = false
+shapes/8/shape = SubResource( 11 )
+shapes/8/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/8/trigger = false
+shapes/9/shape = SubResource( 12 )
+shapes/9/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/9/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Janet Monkbook"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/janet"]
+
+visibility/visible = false
+build_mode = 0
+polygon = Vector2Array( 22.2088, 120.945, 51.3265, 142.71, 59.5618, 127.416, 43.3853, 112.71, 50.4441, 68.2983, 23.0912, 29.4746, 29.5617, -6.99603, 97.209, -11.7019, 38.6794, -107.29, -26.3207, -113.173, -50.7326, -80.5256, -46.0267, -49.3491, -88.0857, 5.35699, -97.2033, 58.0042, -73.968, 70.6513, -45.1444, 53.8865, -72.2032, 9.47464, -36.9091, -8.17249, -27.4972, 29.4747, -43.6738, 80.3571, -27.7914, 108.592, -34.5561, 123.298, -14.2619, 129.769, -10.1443, 103.887, -17.4972, 81.8278, 2.20871, 55.3571, 18.0912, 77.7101 )
+shape_range = Vector2( 0, 9 )
+trigger = false
+
+[node name="Sprite" type="Sprite" parent="actives/janet"]
+
+texture = ExtResource( 3 )
+offset = Vector2( 0, 13 )
+
+[node name="travarsom" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 629.939, 372.729 )
+
+[node name="aini" parent="actives" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 740.589, 433.027 )
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+
