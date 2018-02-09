@@ -1,0 +1,141 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://adventure/pics/snake/shed.jpg" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/scripts/item.gd" type="Script" id=3]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func exit():
+	move(\"snake/antiqueMainRoom\")
+
+func lift():
+	move(\"snake/antiqueLiftRoom\")
+
+func shed():
+	move(\"snake/antiqueShed\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 0.329254, 554.735, 645.412, 558.808, 1045.33, 575.912, 1030.67, 623.968, -38.7667, 630.484 )
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 3.71857, -16.3979, 8.43878, -12.5518, 8.08917, 9.8255, -8.69385, 15.7695, -16.5609, 11.7486, -20.7567, -2.93655, -17.0853, -7.13232, -5.37219, -13.4259 )
+
+[sub_resource type="ConvexPolygonShape2D" id=14]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -5.37219, -13.4259, -17.0853, -7.13232, -17.0853, -13.7756, -9.56793, -16.9224 )
+
+[sub_resource type="ConvexPolygonShape2D" id=15]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -48.99, -29.6863, -36.0776, -37.0648, -17.8949, -39.4364, 11.6191, -35.2202, 38.7614, -20.4632, 35.8627, -12.5576, 18.4705, -4.38861, 3.7135, -4.38861, -21.8477, -9.1319, -40.0304, -14.1387, -45.5643, -20.7267 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 12 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( 0.329254, 554.735, 645.412, 558.808, 1045.33, 575.912, 1030.67, 623.968, -38.7667, 630.484 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="grease" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 847.342, 318.979 )
+input/pickable = true
+shapes/0/shape = SubResource( 13 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 14 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 3 )
+realName = "grease"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/grease"]
+
+build_mode = 0
+polygon = Vector2Array( -16.5609, 11.7486, -20.7567, -2.93655, -17.0853, -7.13232, -17.0853, -13.7756, -9.56793, -16.9224, -5.37219, -13.4259, 3.71857, -16.3979, 8.43878, -12.5518, 8.08917, 9.8255, -8.69385, 15.7695 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="key" type="Area2D" parent="actives"]
+
+transform/pos = Vector2( 720.797, 512.201 )
+input/pickable = true
+shapes/0/shape = SubResource( 15 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 3 )
+realName = "snakeKey"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/key"]
+
+build_mode = 0
+polygon = Vector2Array( -48.99, -29.6863, -36.0776, -37.0648, -17.8949, -39.4364, 11.6191, -35.2202, 38.7614, -20.4632, 35.8627, -12.5576, 18.4705, -4.38861, 3.7135, -4.38861, -21.8477, -9.1319, -40.0304, -14.1387, -45.5643, -20.7267 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+

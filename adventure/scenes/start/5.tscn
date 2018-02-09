@@ -59,6 +59,8 @@ realName = "Inanimate Object"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/rubbish"]
 
@@ -83,6 +85,8 @@ realName = "Inanimate Object"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/backDoor"]
 

@@ -16,7 +16,7 @@ func trash():
 	if (s(\"foundTrash\")): say(\"you search through the trash and find nothing except trash. It's nice trash though.\")
 	else: 
 		say(\"you search through the trash and find a tunneling device!!\")
-		global.addToInvetory(\"tunneler\")
+		global.addToInventory(\"tunneler\")
 		s(\"foundTrash\",true)
 
 func exit():
@@ -133,6 +133,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
 
@@ -160,6 +162,8 @@ realName = "Water Weird"
 pointer = "talk"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/weird"]
 
@@ -184,6 +188,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "use"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/trash"]
 
@@ -231,6 +237,8 @@ realName = "Derreck Corduroy"
 pointer = "talk"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/derro"]
 
@@ -247,6 +255,8 @@ offset = Vector2( 0, 13 )
 [node name="phm" parent="actives" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 935.993, 344.998 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="gui" type="Node2D" parent="."]
 

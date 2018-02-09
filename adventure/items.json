@@ -1,0 +1,10 @@
+{
+	"rug":{"description":"a thick rug from Travarsom's floor","dispose":true},
+	"kempseyKey":{"description":"A key that can be used in Kempsey","dispose":true},
+	"snakeKey":{"description":"A key that can be used in Snake Parade","dispose":true},
+	"tunneler":{"description":"Some kind of tunnel digging device","use":true},
+	"grease":{"description":"a bottle of grease from the shed","dispose":true},
+	"cranberry":{"description":"A delicious berry from the creamberry field in Snake Parade","dispose":true},
+	"save":{"description":"save the game","use":true},
+	"exit":{"description":"exit to the menu","use":true}
+}

@@ -1,6 +1,6 @@
 extends "head.gd"
 
-onready var player = get_node("/root/level/actors/player")
+onready var player = get_node("../../../../actors/player")
 
 
 func power():

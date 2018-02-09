@@ -59,10 +59,11 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 3 )
 realName = "Inanimate Object"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/door"]
 

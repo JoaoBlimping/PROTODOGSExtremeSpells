@@ -9,7 +9,7 @@ script/source = "extends \"../scripts/actor.gd\"
 
 onready var redBullet = preload(\"res://battle/objects/redBullet.tscn\")
 onready var yellowBullet = preload(\"res://battle/objects/yellowBullet.tscn\")
-onready var player = get_node(\"/root/level/actors/player\")
+onready var player = get_node(\"../player\")
 
 const STAND = 0
 const JUMP = 1
@@ -53,8 +53,8 @@ func drum():
 	var tick1 = createTimer(0.2)
 	var tick2 = createTimer(0.8)
 	set_frame(JUMP)
-	get_node(\"/root/level/overBackground/animation\").play(\"dissapear\")
-	yield(createMover().r(get_node(\"/root/level/clammyOrigin\")),M)
+	get_node(\"../../overBackground/animation\").play(\"dissapear\")
+	yield(createMover().r(get_node(\"../../clammyOrigin\")),M)
 	set_frame(STAND)
 	while (true):
 		var bullets = []

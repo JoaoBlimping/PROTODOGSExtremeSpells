@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://adventure/pics/tunnel/tunnel2.png" type="Texture" id=1]
 [ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
@@ -10,13 +10,29 @@ script/source = "extends \"../../scripts/room.gd\"
 onready var anim = get_node(\"animation\")
 
 
-func phm():
-	global.enterAdventure(\"tunnel/2\")"
+func kempsey():
+	global.enterAdventure(\"kempsey/map\")
+
+func snake():
+	global.enterAdventure(\"snake/map\")
+
+func orange():
+	global.enterAdventure(\"orange/map\")"
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
 points = Vector2Array( 11.8331, 228.348, 268.898, 212.835, 273.33, 396.769, -0.355339, 380.149 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 389.52, 222.111, 619.727, 222.774, 615.083, 374.034, 376.251, 389.957 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 741.134, 208.179, 1012.47, 228.081, 1011.81, 380.005, 729.856, 386.639 )
 
 [node name="room" type="Node2D"]
 
@@ -42,6 +58,7 @@ __meta__ = {
 
 [node name="kempsey" type="Area2D" parent="actives"]
 
+editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 14.0001, 12 )
@@ -52,16 +69,69 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 2 )
 realName = "Inanimate Object"
-autorun = false
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/kempsey"]
 
 transform/pos = Vector2( 14.0001, 12 )
 build_mode = 0
 polygon = Vector2Array( 11.8331, 228.348, 268.898, 212.835, 273.33, 396.769, -0.355339, 380.149 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="snake" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 3 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 14.0001, 12 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/snake"]
+
+transform/pos = Vector2( 14.0001, 12 )
+build_mode = 0
+polygon = Vector2Array( 389.52, 222.111, 619.727, 222.774, 615.083, 374.034, 376.251, 389.957 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="orange" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 14.0001, 12 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Inanimate Object"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/orange"]
+
+transform/pos = Vector2( 14.0001, 12 )
+build_mode = 0
+polygon = Vector2Array( 741.134, 208.179, 1012.47, 228.081, 1011.81, 380.005, 729.856, 386.639 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 

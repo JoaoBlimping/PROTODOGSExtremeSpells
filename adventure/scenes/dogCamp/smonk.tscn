@@ -10,9 +10,9 @@
 script/source = "extends \"../../scripts/room.gd\"
 
 func start():
-	yield(createAnimator().r(\"spin\"),A)
+	yield(animate(\"spin\"),A)
 	yield(say(\"ok lets goiiieei\",\"phm\"),S)
-	yield(createAnimator().r(\"spin\"),A)
+	yield(animate(\"spin\"),A)
 	global.drive(\"nature\",\"alain\")
 	"
 
@@ -92,6 +92,8 @@ __meta__ = {
 transform/pos = Vector2( 50.2811, 17.9916 )
 transform/rot = -132.316
 transform/scale = Vector2( 3.52079, 1.84495 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="phm" parent="actives" instance=ExtResource( 3 )]
 
@@ -99,11 +101,15 @@ transform/pos = Vector2( 820.313, 168.213 )
 transform/rot = 32.4195
 transform/scale = Vector2( 3.41642, 1.73835 )
 realName = "Purple Rat Man"
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="travongle" parent="actives" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 342.979, 524.196 )
 transform/scale = Vector2( 5.59826, 2.61031 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="gui" type="Node2D" parent="."]
 

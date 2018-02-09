@@ -1,0 +1,231 @@
+[gd_scene load_steps=18 format=1]
+
+[ext_resource path="res://adventure/pics/snake/cranberryMap.jpg" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func exit():
+	move(\"snake/map\")
+
+func hippie():
+	move(\"snake/hippieHouse\")
+
+func berries():
+	var succ = yield(puzzle(\"snake/cranberryGame\"),S)
+	if (succ):
+		global.addToInventory(\"cranberry\")
+		say(\"hell yeah got a cranberry\")
+	else:
+		say(\"you got no cranberry this time and it is your own fault\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 1017.58, 292.471, 958.903, 321.809, 962.496, 306.841 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 960.7, 270.318, 1017.58, 292.471, 962.496, 306.841, 961.298, 287.083 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 900.227, 326, 887.654, 272.114, 961.298, 287.083, 962.496, 306.841 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 444.153, 452.477, 463.718, 401.725, 475.34, 390.683, 485.801, 413.154, 485.607, 434.656, 477.084, 462.55, 446.478, 472.429 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 451.127, 404.437, 458.875, 396.495, 463.718, 401.725, 444.153, 452.477 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 429.625, 407.343, 433.886, 400.563, 451.127, 404.437, 434.274, 421.29 )
+
+[sub_resource type="ConvexPolygonShape2D" id=8]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 434.661, 461.388, 435.049, 455.77, 444.153, 452.477, 446.478, 472.429 )
+
+[sub_resource type="ConvexPolygonShape2D" id=9]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 485.607, 434.656, 493.937, 438.53, 494.13, 448.99, 477.084, 462.55 )
+
+[sub_resource type="ConvexPolygonShape2D" id=10]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 434.274, 421.29, 451.127, 404.437, 444.153, 452.477, 434.661, 451.315, 430.206, 445.891 )
+
+[sub_resource type="ConvexPolygonShape2D" id=11]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 416.259, 425.939, 434.274, 421.29, 430.206, 445.891, 423.426, 443.373, 414.515, 429.813 )
+
+[sub_resource type="ConvexPolygonShape2D" id=12]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 422.252, 223.048, 493.579, 218.725, 476.288, 234.395 )
+
+[sub_resource type="ConvexPolygonShape2D" id=13]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 470.884, 248.985, 473.586, 273.841, 422.252, 223.048 )
+
+[sub_resource type="ConvexPolygonShape2D" id=14]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 470.884, 248.985, 422.252, 223.048, 476.288, 234.395, 555.72, 290.052 )
+
+[sub_resource type="ConvexPolygonShape2D" id=15]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 476.288, 234.395, 583.278, 233.314, 555.72, 290.052 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 4 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Purple Hat Fellow"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( 887.654, 272.114, 900.227, 326, 962.496, 306.841, 958.903, 321.809, 1017.58, 292.471, 960.7, 270.318, 961.298, 287.083 )
+shape_range = Vector2( 0, 2 )
+trigger = false
+
+[node name="hippie" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 6 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 7 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 8 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 9 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+shapes/5/shape = SubResource( 10 )
+shapes/5/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/5/trigger = false
+shapes/6/shape = SubResource( 11 )
+shapes/6/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/6/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Purple Hat Fellow"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/hippie"]
+
+build_mode = 0
+polygon = Vector2Array( 446.478, 472.429, 434.661, 461.388, 435.049, 455.77, 444.153, 452.477, 434.661, 451.315, 430.206, 445.891, 423.426, 443.373, 414.515, 429.813, 416.259, 425.939, 434.274, 421.29, 429.625, 407.343, 433.886, 400.563, 451.127, 404.437, 458.875, 396.495, 463.718, 401.725, 475.34, 390.683, 485.801, 413.154, 485.607, 434.656, 493.937, 438.53, 494.13, 448.99, 477.084, 462.55 )
+shape_range = Vector2( 0, 6 )
+trigger = false
+
+[node name="berries" type="Area2D" parent="actives"]
+
+input/pickable = true
+shapes/0/shape = SubResource( 12 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 13 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 14 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 15 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Purple Hat Fellow"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/berries"]
+
+build_mode = 0
+polygon = Vector2Array( 422.252, 223.048, 473.586, 273.841, 470.884, 248.985, 555.72, 290.052, 583.278, 233.314, 476.288, 234.395, 493.579, 218.725 )
+shape_range = Vector2( 0, 3 )
+trigger = false
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="puzzle" type="Node2D" parent="."]
+
+transform/pos = Vector2( 507.238, 325.546 )
+
+

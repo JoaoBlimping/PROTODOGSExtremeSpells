@@ -3,14 +3,13 @@ extends Sprite
 export var limit = 5
 export var portraitFrame = 0
 
-onready var sound = get_node("/root/level/hud/sound")
-onready var portrait = get_node("/root/level/hud/leftPanel/portrait")
-onready var particles = get_node("/root/level/actors/player/particles")
+onready var sound = get_node("../../../sound")
+onready var portrait = get_node("../../../leftPanel/portrait")
+onready var particles = get_node("../../../../actors/player/particles")
 
 var power = 0
 
 func _ready():
-	var hud = get_node("/root/level/hud")
 	var hitbox = get_node("hitbox")
 	hitbox.connect("body_enter",self,"hit")
 

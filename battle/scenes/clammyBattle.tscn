@@ -45,7 +45,7 @@ tracks/0/keys = {
 [node name="level" type="Node2D"]
 
 script/script = ExtResource( 1 )
-song = "clammel"
+song = "battle"
 
 [node name="background" type="Sprite" parent="."]
 

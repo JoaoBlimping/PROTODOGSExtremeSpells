@@ -1,0 +1,142 @@
+[gd_scene load_steps=9 format=1]
+
+[ext_resource path="res://adventure/pics/snake/seabreeze.png" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/objects/clammy.tscn" type="PackedScene" id=3]
+[ext_resource path="res://adventure/objects/travarsom.tscn" type="PackedScene" id=4]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=5]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=6]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+
+
+
+func start():
+	if (!s(\"secondSleep\")):
+		yield(say(\"\"\"Ok, today was pretty good, we got some good stuff done\"\"\",\"phm\"),S)
+		yield(say(\"\"\"Aini, what is the plan for tomorrow?\"\"\",\"travarsom\"),S)
+		yield(say(\"\"\"I wouldn't know, ask Purple Hat Man\"\"\",\"aini\"),S)
+		yield(say(\"\"\"I thought you were the leader of the group,
+		you always seem to do the talking.\"\"\",\"travarsom\"),S)
+		yield(say(\"\"\"No, John and Purple Hat Man just don't like talking to strangers.\"\"\",\"aini\"),S)
+		yield(say(\"\"\"Ok, what's the plan then?\"\"\",\"travarsom\"),S)
+		yield(say(\"\"\"Well now I come to think of it, I heard the only antique shop in Snake Parade
+		is closed down, so maybe we should just hit up the pub and see if anybody knows anything
+		~
+		Anyway, goodnight.\"\"\",\"phm\"),S)
+		yield(say(\"\"\"Goodnight\"\"\",\"aini\"),S)
+		s(\"secondSleep\",true)
+		fade(\"snake/apartment\")
+	elif (!ss(\"woke\")):
+		fadeIn()
+		ss(\"woke\",true)
+		yield(say(\"WAKE UP JOHN FOGLE\",\"aini\"),S)
+		yield(say(\"Do you really have to do that?\",\"travarsom\"),S)
+		yield(say(\"yes\",\"aini\"),S)
+		yield(say(\"Ok, time to go to the pub\",\"phm\"),S)
+	elif (!s(\"thirdSleep\")):
+		yield(say(\"\"\"Ok what is the plan for tomorrow?\"\"\",\"clammy\"),S)
+		yield(say(\"\"\"We've gotta get this mystikk keyboard from orange man, and then
+		drive to agar and destroy an armoured robot.
+		~
+		Huh I guess I have to share a bed now. Goodnight.\"\"\",\"aini\"),S)
+		s(\"thirdSleep\",true)
+		fade(\"snake/factory\")
+	elif (!ss(\"wokeAgain\")):
+		fadeIn()
+		ss(\"wokeAgain\",true)
+		yield(say(\"WAKE UP JOHN FOGLE\",\"aini\"),S)
+	
+
+
+
+
+
+
+
+func exit():
+	global.enterAdventure(\"snake/map\")"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -26.349, 555.628, 1093.86, 550.087, 1057.3, 629.865, -90.6143, 633.189 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -26.349, 555.628, 1093.86, 550.087, 1057.3, 629.865, -90.6143, 633.189 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="clammy" parent="actives" instance=ExtResource( 3 )]
+
+transform/pos = Vector2( 387.589, 410.571 )
+birthSwitch = "hammer"
+
+[node name="travarsom" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 273.56, 237.389 )
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="aini" parent="actives" instance=ExtResource( 5 )]
+
+transform/pos = Vector2( 190.839, 360.318 )
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="phm" parent="actives" instance=ExtResource( 6 )]
+
+transform/pos = Vector2( 267.033, 371.187 )
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

@@ -1,8 +1,8 @@
 extends "head.gd"
 
 onready var eel = load("res://battle/objects/eel.tscn")
-onready var player = get_node("/root/level/actors/player")
-onready var actors = get_node("/root/level/actors")
+onready var player = get_node("../../../../actors/player")
+onready var actors = get_node("../../../../actors")
 
 
 func power():

@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://adventure/scripts/puzzle.gd"
 
 export var song = "battle"
 

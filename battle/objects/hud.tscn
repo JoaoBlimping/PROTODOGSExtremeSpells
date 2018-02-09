@@ -51,6 +51,7 @@ script/script = ExtResource( 2 )
 
 [node name="leftPanel" type="Sprite" parent="."]
 
+editor/display_folded = true
 transform/pos = Vector2( -768, 0 )
 texture = ExtResource( 1 )
 centered = false
@@ -115,6 +116,7 @@ texture = ExtResource( 5 )
 
 [node name="heads" type="Node2D" parent="friends"]
 
+editor/display_folded = true
 __meta__ = {
 "_edit_lock_": true
 }

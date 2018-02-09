@@ -8,7 +8,7 @@ signal cleared
 
 func _ready():
 	set_process(true)
-	var lifezone = get_node("/root/level/lifezone")
+	var lifezone = get_node("../../lifezone")
 	lifeRect = Rect2(lifezone.get_pos(),lifezone.get_node("corner").get_pos())
 	
 func _process(delta):

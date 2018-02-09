@@ -24,7 +24,7 @@ func start():
 			return
 	yield(say(\"...~We're in!\",\"phm\"),S)
 	s(\"unlockedLres\",true)
-	global.enterAdventure(\"kempsey/map\")
+	global.enterAdventure(\"kempsey/lres\")
 	
 	
 
@@ -72,6 +72,8 @@ __meta__ = {
 [node name="phm" parent="actives" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( -170.654, 110.495 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="puzzle" type="Node2D" parent="."]
 

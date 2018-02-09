@@ -167,6 +167,8 @@ realName = "Inanimate Object"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
 
@@ -179,6 +181,8 @@ trigger = false
 
 transform/pos = Vector2( 379.476, 264.516 )
 birthSwitch = "firstRobotBattle"
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="chief" type="Area2D" parent="actives"]
 
@@ -207,6 +211,8 @@ realName = "Cheif Keabebabfeba"
 pointer = "talk"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="Sprite" type="Sprite" parent="actives/chief"]
 
@@ -222,14 +228,20 @@ trigger = false
 [node name="phm" parent="actives" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 14.9641, 371.382 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="travongle" parent="actives" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 864, 361 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="aini" parent="actives" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 980.83, 368.661 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="gui" type="Node2D" parent="."]
 

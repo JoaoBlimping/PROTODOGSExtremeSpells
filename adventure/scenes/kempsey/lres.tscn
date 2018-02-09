@@ -74,6 +74,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
 
@@ -98,6 +100,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "use"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/alarm"]
 
@@ -122,6 +126,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/door"]
 
@@ -133,14 +139,20 @@ trigger = false
 [node name="travarsom" parent="actives" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 86.0052, 294.77 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="aini" parent="actives" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 152.898, 325.644 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="phm" parent="actives" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 224.852, 345.819 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="gui" type="Node2D" parent="."]
 

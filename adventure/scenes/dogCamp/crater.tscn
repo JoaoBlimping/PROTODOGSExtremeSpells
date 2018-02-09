@@ -1,12 +1,13 @@
-[gd_scene load_steps=13 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://adventure/pics/dogRooms/crater.png" type="Texture" id=1]
-[ext_resource path="res://adventure/scripts/trog.gd" type="Script" id=2]
-[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=3]
-[ext_resource path="res://adventure/objects/travongle.tscn" type="PackedScene" id=4]
-[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=5]
-[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=6]
-[ext_resource path="res://battle/pics/robot.png" type="Texture" id=7]
+[ext_resource path="res://adventure/objects/trog.tscn" type="PackedScene" id=2]
+[ext_resource path="res://adventure/scripts/trog.gd" type="Script" id=3]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=4]
+[ext_resource path="res://adventure/objects/travongle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://adventure/objects/aini.tscn" type="PackedScene" id=6]
+[ext_resource path="res://adventure/objects/phm.tscn" type="PackedScene" id=7]
+[ext_resource path="res://battle/pics/robot.png" type="Texture" id=8]
 
 [sub_resource type="GDScript" id=1]
 
@@ -14,7 +15,17 @@ script/source = "extends \"../../scripts/room.gd\"
 
 func start():
 	var anim = createAnimator()
-	if (global.battled(\"firstRobotBattle\")):
+	if (!s(\"firstRobotBattle\")):
+		yield(say(\"What the fuck is this?\",\"phm\"),S)
+		yield(say(\"Man, I can hear the cops coming\",\"travongle\"),S)
+		yield(say(\"I thought you were sober lol\",\"aini\"),S)
+		yield(say(\"Oh wait I can actually hear something big coming up the road\",\"phm\"),S)
+		yield(anim.r(\"enterRobot\"),A)
+		yield(say(\"This is hereby a restricted area. Kneel on the ground with your hands in the air\",\"robot\"),S)
+		yield(say(\"Wait a second... these are the terrorists from the Cicada incident\",\"robot\"),S)
+		yield(battle(\"firstRobotBattle\"),S)
+		s(\"firstRobotBattle\",true)
+		
 		yield(anim.r(\"robotBreak\"),A)
 		yield(say(\"\"\"Shit! TEH pipes are all fucked up.
 		~
@@ -23,15 +34,6 @@ func start():
 		to death.\"\"\",\"robot\"),S)
 		yield(anim.r(\"robotExit\"),A)
 		yield(say(\"lol~We should probably get back now\",\"phm\"),S)
-	else:
-		yield(say(\"What the fuck is this?\",\"phm\"),S)
-		yield(say(\"Man, I can hear the cops coming\",\"travongle\"),S)
-		yield(say(\"I thought you were sober lol\",\"aini\"),S)
-		yield(say(\"Oh wait I can actually hear something big coming up the road\",\"phm\"),S)
-		yield(anim.r(\"enterRobot\"),A)
-		yield(say(\"This is hereby a restricted area. Kneel on the ground with your hands in the air\",\"robot\"),S)
-		yield(say(\"Wait a second... these are the terrorists from the Cicada incident\",\"robot\"),S)
-		global.battle(\"firstRobotBattle\")
 
 
 func phm():
@@ -155,52 +157,48 @@ autoplay = ""
 
 [node name="background" type="Sprite" parent="."]
 
-editor/display_folded = true
 texture = ExtResource( 1 )
 centered = false
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="trog" type="Position2D" parent="background"]
-
-transform/pos = Vector2( 525.456, 289.073 )
-script/script = ExtResource( 2 )
+[node name="trog" parent="background" instance=ExtResource( 2 )]
 
 [node name="trog1" type="Position2D" parent="background"]
 
 transform/pos = Vector2( 561.028, 265.608 )
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 
 [node name="trog2" type="Position2D" parent="background"]
 
 transform/pos = Vector2( 477.826, 302.975 )
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 
 [node name="trog3" type="Position2D" parent="background"]
 
 transform/pos = Vector2( 480.841, 266.799 )
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 
 [node name="trog4" type="Position2D" parent="background"]
 
 transform/pos = Vector2( 596.906, 268.306 )
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 
 [node name="trog5" type="Position2D" parent="background"]
 
 transform/pos = Vector2( 542.642, 325.585 )
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 
 [node name="trog6" type="Position2D" parent="background"]
 
 transform/pos = Vector2( 581.007, 312.076 )
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 
 [node name="trog7" type="Position2D" parent="background"]
 
 transform/pos = Vector2( 575.063, 233.184 )
-script/script = ExtResource( 2 )
+script/script = ExtResource( 3 )
 
 [node name="offset" type="Position2D" parent="background"]
 
@@ -223,11 +221,13 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 3 )
+script/script = ExtResource( 4 )
 realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
 
@@ -236,22 +236,31 @@ polygon = Vector2Array( 2.61172, 597.685, -2.29922, 568.219, 1025.32, 566.991, 1
 shape_range = Vector2( 0, 0 )
 trigger = false
 
-[node name="travongle" parent="actives" instance=ExtResource( 4 )]
+[node name="travongle" parent="actives" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 59.5652, 329.413 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
-[node name="aini" parent="actives" instance=ExtResource( 5 )]
+[node name="aini" parent="actives" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 125.448, 343.853 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
-[node name="phm" parent="actives" instance=ExtResource( 6 )]
+[node name="phm" parent="actives" instance=ExtResource( 7 )]
 
 transform/pos = Vector2( 203.921, 347.42 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
-[node name="robot" parent="actives" instance=ExtResource( 5 )]
+[node name="robot" parent="actives" instance=ExtResource( 6 )]
 
 transform/pos = Vector2( 1317.13, 231.011 )
 realName = "FB-1 Research Robot"
+deathSwitch = "firstRobotBattle"
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="animated crap" type="Node2D" parent="."]
 
@@ -260,7 +269,7 @@ realName = "FB-1 Research Robot"
 transform/pos = Vector2( 1187.59, 254.289 )
 transform/rot = -6.69915
 transform/scale = Vector2( 2, 2 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 flip_h = true
 
 [node name="gui" type="Node2D" parent="."]

@@ -4,7 +4,7 @@ onready var bullet = preload("res://battle/objects/fatBullet.tscn")
 onready var bullet2 = preload("res://battle/objects/fatBullet2.tscn")
 onready var jamBullet = preload("res://battle/objects/jamBullet.tscn")
 onready var jam = preload("res://battle/objects/jam.tscn")
-onready var player = get_node("/root/level/actors/player")
+onready var player = get_node("../player")
 
 func _ready():
 	addRoutine("flirt1")
@@ -44,10 +44,10 @@ func donut():
 
 func discs():
 	var tick = createTimer(0.4)
-	yield(createMover().r(get_node("/root/level/fatOrigin")),M)
+	yield(createMover().r(get_node("../../fatOrigin")),M)
 	yield(createSoundWaiter(sound).r("piadina"),S)
 	animation.play("press")
-	get_node("/root/level/overBackground/animation").play("dissapear")
+	get_node("../../overBackground/animation").play("dissapear")
 	health = 100
 	while (true):
 		var niceBullets = []

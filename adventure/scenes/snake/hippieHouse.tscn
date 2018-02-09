@@ -1,0 +1,286 @@
+[gd_scene load_steps=13 format=1]
+
+[ext_resource path="res://adventure/pics/snake/hippieHouse.jpg" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/pics/snake/hippie2.png" type="Texture" id=3]
+[ext_resource path="res://adventure/pics/snake/hippie1.png" type="Texture" id=4]
+[ext_resource path="res://adventure/pics/snake/hippie3.png" type="Texture" id=5]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+var ad = false
+var bd = false
+var cd = false
+
+func exit():
+	move(\"snake/cranberry\")
+
+func hippie1():
+	if (ad): say(\"mhmhmhmhmhhhhm I'm trying to eat\")
+	else:
+		if (!ss(\"gave\")): say(\"Yeah sorry, I don't really think we can let you into the antique shop right now\")
+		else: say(\"Don't touch anything in the shop, it's worth a lot of money\")
+
+func hippie2():
+	if (bd):
+		say(\"mmmaregerpahhhm this is a nice cranberry, leave me be to digest please\")
+	else:
+		if (!ss(\"gave\")):
+			yield(say(\"I don't really think we can let you into the antique shop right now\"),S)
+			yield(say(\"\"\"Maybe if you are such a gentleman as to bring me a cranberry from the field
+			I'll change my mind ;)~I'm reeeally hungry.\"\"\"),S)
+		else:
+			say(\"You'd better be real fucking careful with my antique shop\")
+
+func hippie3():
+	if (cd):
+		say(\"mmhmhmphmhpm\")
+	else:
+		if (!ss(\"gave\")):
+			yield(say(\"Well actually, killing the beans in the antique shop would be rather helpful\"),S)
+			if (bd):
+				yield(say(\"mhhmhphm\",\"hippie2\"),S)
+				if (ad):
+					yield(say(\"hmmmhmhmhmhpmpmh\",\"hippie1\"),S)
+					yield(say(\"Here's the key right now! I'm really glad you're doing this thankyou\"),S)
+					global.addToInventory(\"snakeKey\")
+					ss(\"gave\",true)
+				else:
+					yield(say(\"Hey I really don't think that is a good idea, Danika\",\"hippie1\"),S) 
+			else:
+				yield(say(\"I don't really think so right now\",\"hippie2\"),S)
+		else:
+			say(\"thankyou\")
+
+
+func hippie1_cranberry():
+	say(\"thanks\")
+	caller.get_node(\"sprite\").set_frame(1)
+	ad = true
+
+func hippie2_cranberry():
+	say(\"thanks, come talk to me later, I'm trying to eat here.\")
+	caller.get_node(\"sprite\").set_frame(1)
+	bd = true
+
+func hippie3_cranberry():
+	say(\"yum! thankyou\")
+	caller.get_node(\"sprite\").set_frame(1)
+	cd = true"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -11.023, 111.337, -45.1834, 127.623, -49.1555, 111.734, -38.4308, 103.79, 48.1618, 55.727 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 48.1618, 55.727, 83.1166, 89.4902, 69.2141, 109.351, 28.6983, 126.828, 10.0293, 123.651, -11.023, 111.337 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -38.4308, 103.79, -79.3437, 98.2289, -86.8908, 84.3264, -81.727, 70.4239, -63.4552, 54.9326, 48.1618, 55.727 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 33.4649, -60.6565, 47.7646, -52.315, 64.0503, 6.47255, 48.1618, 55.727, -63.4552, 54.9326, -65.8385, 44.2078, -51.1416, -38.8098, -40.4168, -60.2593, -14.5979, -65.0259 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 25.5206, -127.786, 40.2175, -111.5, 33.4649, -60.6565, -14.5979, -65.0259, -19.3645, -90.8448, -14.9951, -113.486, 0.49617, -128.58 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -13.466, 574.754, 49.5338, 549.754, 964.532, 558.754, 1066.53, 587.754, 951.532, 729.753, 146.534, 680.753, -46.466, 596.754 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hippie1" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 522.999, 345.999 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 4 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 5 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 6 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Amy Brushe"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/hippie1"]
+
+build_mode = 0
+polygon = Vector2Array( -86.8908, 84.3264, -79.3437, 98.2289, -38.4308, 103.79, -49.1555, 111.734, -45.1834, 127.623, -11.023, 111.337, 10.0293, 123.651, 28.6983, 126.828, 69.2141, 109.351, 83.1166, 89.4902, 48.1618, 55.727, 64.0503, 6.47255, 47.7646, -52.315, 33.4649, -60.6565, 40.2175, -111.5, 25.5206, -127.786, 0.49617, -128.58, -14.9951, -113.486, -19.3645, -90.8448, -14.5979, -65.0259, -40.4168, -60.2593, -51.1416, -38.8098, -65.8385, 44.2078, -63.4552, 54.9326, -81.727, 70.4239 )
+shape_range = Vector2( 0, 4 )
+trigger = false
+
+[node name="sprite" type="Sprite" parent="actives/hippie1"]
+
+texture = ExtResource( 3 )
+hframes = 2
+
+[node name="hippie3" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 342.999, 409.999 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 4 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 5 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 6 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Danika Brushe"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/hippie3"]
+
+build_mode = 0
+polygon = Vector2Array( -86.8908, 84.3264, -79.3437, 98.2289, -38.4308, 103.79, -49.1555, 111.734, -45.1834, 127.623, -11.023, 111.337, 10.0293, 123.651, 28.6983, 126.828, 69.2141, 109.351, 83.1166, 89.4902, 48.1618, 55.727, 64.0503, 6.47255, 47.7646, -52.315, 33.4649, -60.6565, 40.2175, -111.5, 25.5206, -127.786, 0.49617, -128.58, -14.9951, -113.486, -19.3645, -90.8448, -14.5979, -65.0259, -40.4168, -60.2593, -51.1416, -38.8098, -65.8385, 44.2078, -63.4552, 54.9326, -81.727, 70.4239 )
+shape_range = Vector2( 0, 4 )
+trigger = false
+
+[node name="sprite" type="Sprite" parent="actives/hippie3"]
+
+texture = ExtResource( 4 )
+hframes = 2
+
+[node name="hippie2" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+transform/pos = Vector2( 649.999, 420.999 )
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 4 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+shapes/3/shape = SubResource( 5 )
+shapes/3/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/3/trigger = false
+shapes/4/shape = SubResource( 6 )
+shapes/4/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/4/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Samantha Brush"
+pointer = "talk"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/hippie2"]
+
+build_mode = 0
+polygon = Vector2Array( -86.8908, 84.3264, -79.3437, 98.2289, -38.4308, 103.79, -49.1555, 111.734, -45.1834, 127.623, -11.023, 111.337, 10.0293, 123.651, 28.6983, 126.828, 69.2141, 109.351, 83.1166, 89.4902, 48.1618, 55.727, 64.0503, 6.47255, 47.7646, -52.315, 33.4649, -60.6565, 40.2175, -111.5, 25.5206, -127.786, 0.49617, -128.58, -14.9951, -113.486, -19.3645, -90.8448, -14.5979, -65.0259, -40.4168, -60.2593, -51.1416, -38.8098, -65.8385, 44.2078, -63.4552, 54.9326, -81.727, 70.4239 )
+shape_range = Vector2( 0, 4 )
+trigger = false
+
+[node name="sprite" type="Sprite" parent="actives/hippie2"]
+
+texture = ExtResource( 5 )
+hframes = 2
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 7 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "Purple Hat Fellow"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( -13.466, 574.754, 49.5338, 549.754, 964.532, 558.754, 1066.53, 587.754, 951.532, 729.753, 146.534, 680.753, -46.466, 596.754 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="gui" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+

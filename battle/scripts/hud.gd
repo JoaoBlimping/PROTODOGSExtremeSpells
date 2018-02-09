@@ -12,7 +12,7 @@ func _ready():
 	healthDimensions = health.get_texture().get_size()
 
 func _process(delta):
-	if (player == null): player = get_node("/root/level/actors/player")
+	if (player == null): player = get_node("../actors/player")
 	
 	health.set_region_rect(Rect2(0,0,healthDimensions.x * player.health,healthDimensions.y))
 	

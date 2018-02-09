@@ -10,7 +10,7 @@
 script/source = "extends \"../scripts/actor.gd\"
 
 onready var bullet = preload(\"res://battle/objects/lightBullet.tscn\")
-onready var player = get_node(\"/root/level/actors/player\")
+onready var player = get_node(\"../player\")
 onready var particles = get_node(\"particles\")
 
 

@@ -1,0 +1,70 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://adventure/pics/snake/net.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Sprite
+
+onready var berries = get_node(\"../berries\")
+
+func _ready():
+	set_process(true)
+
+func _process(delta):
+	var angle = get_global_pos().angle_to_point(get_global_mouse_pos())
+	set_rot(angle)
+
+
+func hit(area):
+	if (area.get_parent().get_parent() != berries): return
+	get_node(\"..\").finish(true)"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 7.0704, 5.2334, -4.14604, 5.2334, -3.17072, -222.022, 9.02109, -236.652 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -53.8886, -296.148, 12.9225, -302.975, 42.1828, -261.523, 9.02109, -236.652, -55.3516, -251.77 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 9.02109, -236.652, -3.17072, -222.022, -55.3516, -251.77 )
+
+[node name="net" type="Sprite"]
+
+texture = ExtResource( 1 )
+offset = Vector2( -10.4483, -146.138 )
+script/script = SubResource( 1 )
+
+[node name="area" type="Area2D" parent="."]
+
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 4 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/2/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="area"]
+
+build_mode = 0
+polygon = Vector2Array( -4.14604, 5.2334, 7.0704, 5.2334, 9.02109, -236.652, 42.1828, -261.523, 12.9225, -302.975, -53.8886, -296.148, -55.3516, -251.77, -3.17072, -222.022 )
+shape_range = Vector2( 0, 2 )
+trigger = false
+
+[connection signal="area_enter" from="area" to="." method="hit"]
+
+

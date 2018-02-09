@@ -8,16 +8,12 @@
 
 script/source = "extends \"../../scripts/room.gd\"
 
-func derro():
-	say(\"my house is all broke\")
-
 func lock():
-	if (s(\"shed key\")):
-		yield(say(\"awww yeah unlcoking shed\"),S)
-		s(\"shedUnlocked\",true)
-		getActive(\"lock\").queue_free()
-	else:
-		say(\"this shed seems to be locked\")
+	say(\"this shed seems to be locked\")
+
+func lock_kempseyKey():
+	ss(\"opened\",true)
+	get_node(\"actives/lock\").queue_free()
 
 func shed():
 	global.enterAdventure(\"kempsey/insideShed\")
@@ -88,6 +84,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
 
@@ -112,6 +110,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/shed"]
 
@@ -136,7 +136,9 @@ script/script = ExtResource( 2 )
 realName = "Shed"
 pointer = "use"
 birthSwitch = null
-deathSwitch = "shedUnlocked"
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = "opened"
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/lock"]
 
@@ -169,6 +171,8 @@ realName = "Aini"
 pointer = "talk"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/house"]
 

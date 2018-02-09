@@ -1,9 +1,9 @@
 extends Node
 
-onready var transition = preload("res://adventure/objects/transition.tscn")
 onready var musicPlayer = get_node("/root/musicPlayer")
 
 var mice = {}
+var items = {}
 var inventory = []
 var switches = {}
 var town = null
@@ -14,11 +14,18 @@ var filename
 func _enter_tree():
 	preloadMice()
 	preloadSongs()
+	preloadItems()
 
 func restart():
 	switches.clear()
 	town = null
 	area = null
+
+func preloadItems():
+	var file = File.new()
+	file.open("res://adventure/items.json",File.READ)
+	items.parse_json(file.get_as_text())
+	for k in items.keys(): items[k].texture = load("res://adventure/pics/items/%s.png" % k)
 
 	
 func setSwitch(name,value):
@@ -31,12 +38,23 @@ func getSwitch(name):
 func hasSwitch(name):
 	return switches.has(name)
 
-func addToInvetory(name):
+func addToInventory(name):
 	inventory.push_back(name)
 
 func inInventory(name):
 	return inventory.count(name) > 0
-	
+
+func removeFromInventory(name):
+	for i in range(inventory.size()):
+		if (inventory[i] == name):
+			inventory.remove(i)
+			return
+
+func itemProperty(item,property):
+	var properties = items[item]
+	if (properties.has(property)): return properties[property]
+	else: return false
+
 func drive(map,from=null):
 	town = from
 	get_tree().change_scene("res://overworld/scenes/%s.tscn" % map)
@@ -44,20 +62,6 @@ func drive(map,from=null):
 func driveFile(file,from):
 	town = from
 	get_tree().change_scene(file)
-
-func battle(map):
-	setSwitch(map,true)
-	var ib = transition.instance()
-	var scene = load("res://battle/scenes/%s.tscn" % map)
-	get_node("/root/room/gui").add_child(ib)
-	playSong("%s" % scene.get_state().get_node_property_value(0,1))
-	ib.get_node("anim").connect("finished",get_tree(),"change_scene_to",[scene])
-
-func battled(map):
-	return getSwitch(map)
-
-func finishBattle():
-	get_tree().change_scene("res://adventure/scenes/%s.tscn" % area)
 
 func enterAdventure(map):
 	area = map
@@ -149,6 +153,3 @@ func loadGame():
 	switches.parse_json(file.get_line())
 	inventory = splitArray(file.get_line())
 	file.close()
-	
-	
-	

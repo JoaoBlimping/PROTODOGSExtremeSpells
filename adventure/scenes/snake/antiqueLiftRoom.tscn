@@ -1,0 +1,173 @@
+[gd_scene load_steps=12 format=1]
+
+[ext_resource path="res://adventure/pics/snake/antiqueLift.jpg" type="Texture" id=1]
+[ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
+[ext_resource path="res://adventure/scripts/item.gd" type="Script" id=3]
+[ext_resource path="res://adventure/objects/clammy.tscn" type="PackedScene" id=4]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends \"../../scripts/room.gd\"
+
+func exit():
+	move(\"snake/antiqueMainRoom\")
+
+func lift():
+	if (ss(\"fought\")):
+		if (ss(\"greased\")): move(\"snake/beanRoom\")
+		else: say(\"the lift needs grease to work it is rusty as shit\")
+
+func lift_grease():
+	ss(\"greased\",true)
+	say(\"hell yeah nice and greasy now woweeee hell yeah \")
+
+func clammy():
+	yield(say(\"Sorry, but you stop here\"),S)
+	yield(battle(\"clammyBattle\"),S)
+	caller.queue_free()
+	ss(\"fought\",true)
+	"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 479.573, 107.916, 470.017, 57.9302, 795.659, 71.1617, 776.547, 532.795 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 479.573, 107.916, 776.547, 532.795, 434.733, 514.418 )
+
+[sub_resource type="ConvexPolygonShape2D" id=4]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 430.514, 489.156, -10.4157, 472.945, -6.08731, 465.662, 194.799, 474.713 )
+
+[sub_resource type="ConvexPolygonShape2D" id=5]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 196.565, 463.697, 435.917, 470.243, 430.514, 489.156, 194.799, 474.713 )
+
+[sub_resource type="ConvexPolygonShape2D" id=6]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 191.879, 464.202, 194.799, 474.713, -6.08731, 465.662 )
+
+[sub_resource type="ConvexPolygonShape2D" id=7]
+
+custom_solver_bias = 0.0
+points = Vector2Array( 0.329254, 554.735, 645.412, 558.808, 1045.33, 575.912, 1030.67, 623.968, -38.7667, 630.484 )
+
+[node name="room" type="Node2D"]
+
+script/script = SubResource( 1 )
+music = "town"
+
+[node name="background" type="Sprite" parent="."]
+
+texture = ExtResource( 1 )
+centered = false
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="actives" type="Node2D" parent="."]
+
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="lift" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/lift"]
+
+build_mode = 0
+polygon = Vector2Array( 470.017, 57.9302, 795.659, 71.1617, 776.547, 532.795, 434.733, 514.418, 479.573, 107.916 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+[node name="key" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 2.99377, 0.540344 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 5 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 2.99377, 0.540344 )
+shapes/1/trigger = false
+shapes/2/shape = SubResource( 6 )
+shapes/2/transform = Matrix32( 1, 0, 0, 1, 2.99377, 0.540344 )
+shapes/2/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 3 )
+realName = "snakeKey"
+pointer = "use"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/key"]
+
+transform/pos = Vector2( 2.99377, 0.540344 )
+build_mode = 0
+polygon = Vector2Array( 194.799, 474.713, 196.565, 463.697, 435.917, 470.243, 430.514, 489.156, -10.4157, 472.945, -6.08731, 465.662, 191.879, 464.202 )
+shape_range = Vector2( 0, 2 )
+trigger = false
+
+[node name="exit" type="Area2D" parent="actives"]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 7 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+script/script = ExtResource( 2 )
+realName = "AIIIIIIEEEEEEEEE"
+pointer = "move"
+birthSwitch = null
+deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
+
+build_mode = 0
+polygon = Vector2Array( 0.329254, 554.735, 645.412, 558.808, 1045.33, 575.912, 1030.67, 623.968, -38.7667, 630.484 )
+shape_range = Vector2( 0, 0 )
+trigger = false
+
+[node name="clammy" parent="actives" instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 593.662, 426.983 )
+deathSelfSwitch = "fought"
+
+

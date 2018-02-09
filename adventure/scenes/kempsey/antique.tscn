@@ -125,6 +125,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
 
@@ -177,6 +179,8 @@ realName = "Janet Monkbook"
 pointer = "talk"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/janet"]
 
@@ -194,10 +198,14 @@ offset = Vector2( 0, 13 )
 [node name="travarsom" parent="actives" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 629.939, 372.729 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="aini" parent="actives" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 740.589, 433.027 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="gui" type="Node2D" parent="."]
 

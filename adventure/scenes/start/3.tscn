@@ -60,6 +60,8 @@ realName = "Inanimate Object"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/backDoor"]
 
@@ -83,10 +85,12 @@ angular_damp = 1.0
 priority = 1.0
 monitoring = false
 script/script = ExtResource( 3 )
-realName = "Rug"
+realName = "rug"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/rug"]
 

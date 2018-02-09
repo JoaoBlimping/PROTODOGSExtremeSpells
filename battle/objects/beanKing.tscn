@@ -12,7 +12,7 @@ script/source = "extends \"../scripts/actor.gd\"
 onready var greenBullet = preload(\"res://battle/objects/greenBullet.tscn\")
 onready var yellowBullet = preload(\"res://battle/objects/yellowBullet.tscn\")
 onready var grass = preload(\"res://battle/objects/grassBullet.tscn\")
-onready var player = get_node(\"/root/level/actors/player\")
+onready var player = get_node(\"../player\")
 onready var particles = get_node(\"particles\")
 
 
@@ -158,7 +158,6 @@ func death():
 	var tick = createTimer(0.3)
 	for i in range(20):
 		set_scale(Vector2(1,1) / i)
-		particles.set_global_scale(Vector2(1,1))
 		yield(tick.r(),T)
 	done()"
 

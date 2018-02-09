@@ -11,29 +11,28 @@
 script/source = "extends \"../../scripts/room.gd\"
 
 func start():
-	if (global.battled(\"seccoBattle\")):
-		yield(say(\"\"\"Alright, lets go.
-		It's pretty easy to drive, just use your arrows to
-		steer, and use your main button to activate the blade\"\"\",\"phm\"),S)
-		yield(say(\"What.\\nWhy is there a blade\",\"aini\"),S)
-		yield(say(\"There's a lotta snakes on the road these days\",\"phm\"),S)
-		global.drive(\"agara\")
-	else:
-		yield(say(\"A bus??\",\"aini\"),S)
-		yield(say(\"Hahaha that's twice as good\",\"phm\"),S)
-		yield(say(\"very true\",\"aini\"),S)
-		global.stopSong()
-		yield(say(\"OI\",\"secco\"),S)
-		yield(say(\"\"\"You're tresspassing.\\nI've already called the cops,
-		now just stay right where you are and I'll detail you
-		until they get here\"\"\",\"secco\"),S)
-		yield(say(\"FUUUUUUUCK\",\"travongle\"),S)
-		yield(say(\"\"\"no you won't you fat cunt.
-		~
-		Use your movement keys to move,
-		one button to shoot and the other to go slow and see your
-		hit box.\"\"\",\"phm\"),S)
-		battle(\"seccoBattle\")"
+	yield(say(\"A bus??\",\"aini\"),S)
+	yield(say(\"Hahaha that's twice as good\",\"phm\"),S)
+	yield(say(\"very true\",\"aini\"),S)
+	global.stopSong()
+	yield(say(\"OI\",\"secco\"),S)
+	yield(say(\"\"\"You're tresspassing.\\nI've already called the cops,
+	now just stay right where you are and I'll detail you
+	until they get here\"\"\",\"secco\"),S)
+	yield(say(\"FUUUUUUUCK\",\"travongle\"),S)
+	yield(say(\"\"\"no you won't you fat cunt.
+	~
+	Use your movement keys to move,
+	one button to shoot and the other to go slow and see your
+	hit box.\"\"\",\"phm\"),S)
+	yield(battle(\"seccoBattle\"),S)
+	
+	yield(say(\"\"\"Alright, lets go.
+	It's pretty easy to drive, just use your arrows to
+	steer, and use your main button to activate the blade\"\"\",\"phm\"),S)
+	yield(say(\"What.\\nWhy is there a blade\",\"aini\"),S)
+	yield(say(\"There's a lotta snakes on the road these days\",\"phm\"),S)
+	global.drive(\"agara\")"
 
 [node name="room" type="Node2D"]
 
@@ -57,14 +56,20 @@ __meta__ = {
 [node name="aini" parent="actives" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 265.807, 348.759 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="travongle" parent="actives" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 1010.11, 427.796 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="phm" parent="actives" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 392.324, 394.217 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="secco" type="Area2D" parent="actives"]
 
@@ -78,6 +83,8 @@ realName = "Security Guard"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="gui" type="Node2D" parent="."]
 

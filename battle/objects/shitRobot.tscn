@@ -14,7 +14,7 @@ script/source = "extends \"../scripts/actor.gd\"
 
 onready var bullet = preload(\"res://battle/objects/cBullet.tscn\")
 onready var smallBullet = preload(\"res://battle/objects/cSmallBullet.tscn\")
-onready var player = get_node(\"/root/level/actors/player\")
+onready var player = get_node(\"../player\")
 onready var particles = get_node(\"particles\")
 
 
@@ -74,7 +74,7 @@ func mine():
 	health = 80
 	var timer1 = createTimer(1)
 	var angle = 0
-	var guns = get_node(\"/root/level/guns\").get_children()
+	var guns = get_node(\"../../guns\").get_children()
 	
 	while (true):
 		angle += 1.8

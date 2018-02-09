@@ -12,6 +12,7 @@ script/source = "extends \"../../scripts/room.gd\"
 
 func start():
 	if (!global.hasSwitch(\"firstSpeak\")):
+		fadeIn()
 		yield(say(\"OI!\\nWake UP\",\"aini\"),S)
 		yield(say(\"\"\"it's time to get out of this hell hole, the cops have stopped
 		patrolling the streets for some reason.
@@ -78,15 +79,21 @@ __meta__ = {
 [node name="travongle" parent="actives" instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 440.623, 336.404 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="phm" parent="actives" instance=ExtResource( 3 )]
 
 transform/pos = Vector2( 687.199, 311.631 )
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="aini" parent="actives" instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 273.168, 351.579 )
 deathSwitch = "ainiGo"
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="door" type="Area2D" parent="actives"]
 
@@ -103,6 +110,8 @@ realName = "Inanimate Object"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/door"]
 

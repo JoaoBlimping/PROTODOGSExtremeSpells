@@ -3,18 +3,21 @@
 [ext_resource path="res://adventure/pics/kempsey/livingRoom.png" type="Texture" id=1]
 [ext_resource path="res://adventure/scripts/thing.gd" type="Script" id=2]
 [ext_resource path="res://adventure/objects/fat.tscn" type="PackedScene" id=3]
-[ext_resource path="res://adventure/pics/snake/hippie2.png" type="Texture" id=4]
-[ext_resource path="res://adventure/pics/snake/hippie1.png" type="Texture" id=5]
-[ext_resource path="res://adventure/pics/snake/hippie3.png" type="Texture" id=6]
+[ext_resource path="res://battle/sounds/donut.wav" type="Sample" id=4]
 
 [sub_resource type="GDScript" id=1]
 
 script/source = "extends \"../../scripts/room.gd\"
 
 func start():
-	if (s(\"harp\") && !global.battled(\"test\")):
+	if (s(\"harp\") && !s(\"fatBattled\")):
 		yield(say(\"Hey! What are you doing in my house?~You're trying to steal my vintage wines aren't you!\",\"fat\"),S)
-		global.battle(\"test\")
+		yield(battle(\"test\"),S)
+		s(\"fatBattled\",true)
+		yield(animate(\"flip\"),A)
+
+func fat():
+	yield(say(\"Help, I've fallen, and I can't get up\",\"fat\"),S)
 
 func kitchen():
 	global.enterAdventure(\"kempsey/lresKitchen\")
@@ -49,6 +52,52 @@ points = Vector2Array( 911.182, -3.6187, 907.858, -68.9919, 1041.93, -148.769 )
 
 custom_solver_bias = 0.0
 points = Vector2Array( 348.307, 135.992, 618.664, 203.581, 517.834, 359.812, 335.011, 352.056 )
+
+[sub_resource type="Animation" id=7]
+
+resource/name = "flip"
+length = 0.7
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("actives/fat:transform/rot")
+tracks/0/interp = 1
+tracks/0/imported = false
+tracks/0/keys = {
+"times": FloatArray( 0, 0.7 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0.0, 91.0924 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("actives/fat:transform/pos")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.7 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 393.348, 325.758 ), Vector2( 269.545, 416.981 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("animation/SamplePlayer:play/play")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 0.7 ),
+"transitions": FloatArray( 1 ),
+"update": 2,
+"values": [ "donut" ]
+}
+
+[sub_resource type="SampleLibrary" id=8]
+
+samples/donut = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
 
 [node name="room" type="Node2D"]
 
@@ -85,6 +134,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/exit"]
 
@@ -115,6 +166,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/kitchen"]
 
@@ -139,6 +192,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/book"]
 
@@ -149,28 +204,44 @@ trigger = false
 
 [node name="fat" parent="actives" instance=ExtResource( 3 )]
 
+pointer = "talk"
 birthSwitch = "harp"
-deathSwitch = "test"
-
-[node name="Sprite" type="Sprite" parent="actives"]
-
-transform/pos = Vector2( 396.672, 332.406 )
-texture = ExtResource( 4 )
-
-[node name="Sprite1" type="Sprite" parent="actives"]
-
-transform/pos = Vector2( 576.285, 431.296 )
-texture = ExtResource( 5 )
-
-[node name="Sprite2" type="Sprite" parent="actives"]
-
-transform/pos = Vector2( 251.378, 421.74 )
-texture = ExtResource( 6 )
+deathSwitch = "fatBattled"
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="gui" type="Node2D" parent="."]
 
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="animation" type="AnimationPlayer" parent="."]
+
+playback/process_mode = 1
+playback/default_blend_time = 0.0
+root/root = NodePath("..")
+anims/flip = SubResource( 7 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="SamplePlayer" type="SamplePlayer" parent="animation"]
+
+config/polyphony = 1
+config/samples = SubResource( 8 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 

@@ -17,8 +17,9 @@ func _ready():
 func newGame(file):
 	global.enterAdventure(\"start/1\")
 	global.filename = file
-	global.addToInvetory(\"save_machine\")
-	global.addToInvetory(\"tunneler\")
+	global.addToInventory(\"exit\")
+	global.addToInventory(\"save\")
+	global.addToInventory(\"tunneler\")
 
 
 func oldGame(file):

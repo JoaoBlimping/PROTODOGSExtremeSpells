@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://adventure/pics/items/cranberry.png" type="Texture" id=1]
+
+[sub_resource type="GDScript" id=1]
+
+script/source = "extends Sprite
+
+const SPEED = 405
+
+func _ready():
+	set_process(true)
+
+func _process(delta):
+	var pos = get_pos()
+	var angle = Vector2().angle_to_point(pos)
+	pos.x += sin(angle) * SPEED * delta
+	pos.y += cos(angle) * SPEED * delta
+	set_pos(pos)"
+
+[sub_resource type="ConvexPolygonShape2D" id=2]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -12.7962, 22.3426, -20.6445, 16.5717, -26.6462, 0.182552, -20.5676, -13.1288, 1.59245, -26.2864, 21.0594, -22.2083, 17.2122, -0.0482826, -5.33255, 22.5734 )
+
+[sub_resource type="ConvexPolygonShape2D" id=3]
+
+custom_solver_bias = 0.0
+points = Vector2Array( -5.33255, 22.5734, 17.2122, -0.0482826, 21.8288, 6.79978, 14.9038, 23.9584, -1.87005, 29.1137 )
+
+[node name="berry" type="Sprite"]
+
+texture = ExtResource( 1 )
+script/script = SubResource( 1 )
+
+[node name="area" type="Area2D" parent="."]
+
+editor/display_folded = true
+input/pickable = true
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+shapes/1/shape = SubResource( 3 )
+shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/1/trigger = false
+gravity_vec = Vector2( 0, 1 )
+gravity = 98.0
+linear_damp = 0.1
+angular_damp = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="area"]
+
+build_mode = 0
+polygon = Vector2Array( -12.7962, 22.3426, -5.33255, 22.5734, -1.87005, 29.1137, 14.9038, 23.9584, 21.8288, 6.79978, 17.2122, -0.0482826, 21.0594, -22.2083, 1.59245, -26.2864, -20.5676, -13.1288, -26.6462, 0.182552, -20.6445, 16.5717 )
+shape_range = Vector2( 0, 1 )
+trigger = false
+
+

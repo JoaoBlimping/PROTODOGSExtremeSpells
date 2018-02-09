@@ -5,8 +5,8 @@ onready var Mover = preload("res://battle/scripts/Mover.gd")
 onready var SoundWaiter = preload("res://battle/scripts/SoundWaiter.gd")
 onready var sound = get_node("sound")
 onready var animation = get_node("animation")
-onready var bullets = get_node("/root/level/bulletStuff/bullets")
-onready var bulletSounds = get_node("/root/level/bulletStuff/bulletSounds")
+onready var bullets = get_node("../../bulletStuff/bullets")
+onready var bulletSounds = get_node("../../bulletStuff/bulletSounds")
 
 const T = "timeout"
 const M = "moved"
@@ -76,7 +76,7 @@ func shootFrom(bullet,angle,location,speed=null):
 
 
 func die():
-	if (target): global.enterAdventure(global.area)
+	if (target): get_node("../..").finish(true)
 
 
 # This gets called when an actor is hit by a bullet or powerup which is a kind of bullet anyway

@@ -8,7 +8,8 @@
 script/source = "extends \"../../scripts/room.gd\"
 
 func antique():
-	global.enterAdventure(\"kempsey/antique\")
+	if (s(\"firstSleep\")): global.enterAdventure(\"kempsey/antique\")
+	else: say(\"we should sleep in the hotel first and look in the morning\")
 
 func cres():
 	global.enterAdventure(\"kempsey/cres\")
@@ -31,6 +32,9 @@ func shed():
 func highway():
 	if (s(\"harp\")): global.drive(\"highway\",\"kempsey\")
 	else: say(\"We need to get the harp spell from kempsey before we go to Snake Parade\")
+
+func hotel():
+	move(\"kempsey/seabreeze\")
 "
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
@@ -139,10 +143,12 @@ gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 2 )
-realName = "AIIIIIIEEEEEEEEE"
+realName = "the purple hat idiota"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/antique"]
 
@@ -153,6 +159,7 @@ trigger = false
 
 [node name="nature" type="Area2D" parent="actives"]
 
+editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -172,6 +179,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/nature"]
 
@@ -196,6 +205,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/pub"]
 
@@ -220,6 +231,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/cres"]
 
@@ -244,6 +257,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/lres"]
 
@@ -274,6 +289,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/plant"]
 
@@ -297,6 +314,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/shed"]
 
@@ -321,6 +340,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/hotel"]
 
@@ -351,6 +372,8 @@ realName = "Purple Hat Fellow"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/highway"]
 
@@ -358,11 +381,5 @@ build_mode = 0
 polygon = Vector2Array( 372.45, 30.7105, 420.92, 4.43151, 452.455, 37.7183, 427.344, 37.1343, 448.951, 75.3849, 385.881, 78.3047, 397.269, 36.8423 )
 shape_range = Vector2( 0, 2 )
 trigger = false
-
-[node name="gui" type="Node2D" parent="."]
-
-__meta__ = {
-"_edit_lock_": true
-}
 
 

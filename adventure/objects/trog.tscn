@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=1]
+
+[ext_resource path="res://adventure/scripts/trog.gd" type="Script" id=1]
+
+[node name="trog" type="Position2D"]
+
+transform/pos = Vector2( 525.456, 289.073 )
+script/script = ExtResource( 1 )
+
+

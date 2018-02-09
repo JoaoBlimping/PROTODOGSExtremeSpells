@@ -11,12 +11,11 @@ func backDoor():
 	global.enterAdventure(\"start/5\")
 
 func over():
-	if (global.getSwitch(\"Rug\")):
-		yield(say(\"You use the rug to climb over the pointy fence, and now it is wrecked.\"),S)
-		global.setSwitch(\"Rug\",false)
-		global.enterAdventure(\"start/7\")
-	else:
-		say(\"Mate, that fence looks sharp as fuck, I'm not going over that\")"
+	say(\"Mate, that fence looks sharp as fuck, I'm not going over that\")
+
+func over_rug():
+	yield(say(\"NOOOOO My BEAUTIFUL RUG!~It's made from real alpaca wool\"),S)
+	global.enterAdventure(\"start/7\")"
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
@@ -68,10 +67,12 @@ linear_damp = 0.1
 angular_damp = 1.0
 monitoring = false
 script/script = ExtResource( 2 )
-realName = "AIIIIIIEEEEEEEEE"
+realName = "Travongle"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/over"]
 
@@ -97,6 +98,8 @@ realName = "AIIIIIIEEEEEEEEE"
 pointer = "move"
 birthSwitch = null
 deathSwitch = null
+birthSelfSwitch = null
+deathSelfSwitch = null
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="actives/backDoor"]
 
